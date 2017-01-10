@@ -1,0 +1,56 @@
+<apex:page standardController="Contact" extensions="ConsumerPIIExtension">
+
+
+<apex:form id="PIIInformationForm">
+<apex:pageBlock tabStyle="Contact">
+<apex:pageBlockTable value="{!consumerPIIList}" var="consumerPII">
+    <apex:column headerValue="Id Type" style="width:30%">
+    <apex:outputField value="{!consumerPII.Id_Type__c}"/>
+    <apex:facet name="footer">
+        <apex:inputField value="{!consumerPIIObj.Id_Type__c}"/>
+    </apex:facet>
+    </apex:column>
+    <apex:column headerValue="Detailed Id Type" style="width:30%">
+    <apex:outputField value="{!consumerPII.Detailed_Id_Type__c }"/>
+    <apex:facet name="footer">
+        <apex:inputField value="{!consumerPIIObj.Detailed_Id_Type__c }"/>
+    </apex:facet>
+    </apex:column>
+    <apex:column headerValue="Id Value" style="width:30%">
+    <apex:outputField value="{!consumerPII.Id_Value__c}"/>
+    <apex:facet name="footer">
+        <apex:inputField value="{!consumerPIIObj.Id_Value__c}"/>
+    </apex:facet>
+    </apex:column>
+    <apex:column headerValue="Action" style="width:5%">
+    <apex:commandButton value="Edit" style="height:20px;" />
+    <apex:commandButton value="Delete" style="height:20px;" reRender="PIIInformationForm" status="actionstatuspanel"/>
+    <apex:commandButton value="Save" rendered="false"/> 
+    <apex:commandButton value="Cancel" rendered="false"/>
+    <apex:facet name="footer">
+    <apex:outputPanel >
+    <apex:commandButton value="Add" status="actionstatuspanel" reRender="PIIInformationForm"/>
+    <apex:commandButton value="Cancel" status="actionstatuspanel" reRender="PIIInformationForm"/>
+    </apex:outputPanel>
+    </apex:facet>
+    </apex:column>
+</apex:pageBlockTable>
+
+
+</apex:pageBlock>  
+
+<apex:outputpanel >
+        <apex:actionstatus id="actionstatuspanel">
+            <apex:facet name="start">
+                <div class="waitingSearchDiv" id="el_loading" style="background-color: #DCD6D6;
+                       height: 100%;opacity:0.65;width:100%;"> 
+                    <div class="waitingHolder" style="top: 74.2px; width: 70px;">
+                        <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                        <span class="waitingDescription">Processing...</span>
+                    </div>
+                </div>
+            </apex:facet>
+        </apex:actionstatus>
+    </apex:outputpanel>
+</apex:form>
+</apex:page>

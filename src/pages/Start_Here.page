@@ -1,0 +1,3 @@
+<apex:page controller="startHereController" action="{!initPageAction}" >
+  Test NGL Page.
+</apex:page>

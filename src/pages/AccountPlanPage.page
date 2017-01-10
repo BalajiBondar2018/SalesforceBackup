@@ -1,0 +1,100 @@
+<apex:page standardController="Account_Plan__c" extensions="AccountPlanExtesion" tabStyle="Account_Plan__tab">
+<apex:sectionHeader title="Account Plan" subtitle="Update Account,Contact & Opportunity Information"/>
+<apex:form id="accountplanForm">
+    <apex:image url="{!$Resource.AccountPlan}" rendered="{!showAccountPlanFlag}"/>
+    <apex:image url="{!$Resource.Objective}" rendered="{!showObjectiveFlag}"/>
+    <apex:image url="{!$Resource.Account}" rendered="{!showAccountFlag}"/>
+    <apex:image url="{!$Resource.Contact}" rendered="{!showContactFlag}"/>
+    <apex:image url="{!$Resource.Opportunity}" rendered="{!showOpportunityFlag}"/>
+    <apex:image url="{!$Resource.Submit}" rendered="{!showSubmitFlag}"/>
+    
+    <br/><br/>
+    <apex:commandLink value="<<back to {!accountObj.Name}" action="{!BackToAccountBtnClick}" immediate="true"/>
+    <apex:pageBlock >
+        <apex:pageBlockButtons >
+            <apex:commandButton value="Quick Save" Rerender="accountplanForm" status="processingStatus" disabled="{!NOT(!showSubmitFlag)}"/>
+            <apex:commandButton value="Previous" action="{!PreviousBtnClick}" Rerender="accountplanForm" status="processingStatus" disabled="{!NOT(!showAccountPlanFlag)}"/>
+            <apex:commandButton value="Save & Continue" action="{!NextBtnClick}" Rerender="accountplanForm" status="processingStatus" disabled="{!NOT(!showSubmitFlag)}"/>
+            <apex:commandButton value="Submit" action="{!SubmitforApprovalBtnClick}" Rerender="accountplanForm" status="processingStatus" rendered="{!showSubmitFlag}" disabled="{!IsSubmittedforApproval}"/>
+            <apex:commandButton value="Account Plan PDF"/>
+            <apex:image value="{!$Resource.RecordLockImage}" rendered="{!IsSubmittedforApproval}"/>
+            <apex:actionStatus id="processingStatus" startText="Processing..."/>
+        </apex:pageBlockButtons>
+        <apex:pageBlockSection title="Account Plan Information" rendered="{!showAccountPlanFlag}">
+         <apex:repeat value="{!$ObjectType.Account_Plan__c.FieldSets.Account_Plan_FieldSet}" var="f">  
+                <apex:inputfield value="{!AccountPlanObj[f]}"></apex:inputfield>
+            </apex:repeat>
+        </apex:pageBlockSection>
+        
+        <apex:pageBlockSection title="Objective Information" columns="1" rendered="{!showObjectiveFlag}">
+                <apex:repeat value="{!$ObjectType.Objective__c.FieldSets.Objective_Fieldset}" var="f">  
+                    <apex:inputfield value="{!ObjectiveObj[f]}"></apex:inputfield>
+                </apex:repeat>
+        </apex:pageBlockSection>
+        
+        <apex:pageBlockSection title="Account Information" rendered="{!showAccountFlag}">
+            <apex:repeat value="{!$ObjectType.Account_Clone__c.FieldSets.Ref_Account_FieldSet}" var="f" rendered="{!IsSubmittedforApproval}">  
+                <apex:outputfield value="{!AccountCloneObj[f]}"></apex:outputfield>
+            </apex:repeat>
+            <br/>
+            <apex:repeat value="{!$ObjectType.Account_Clone__c.FieldSets.Account_Clone_FieldSet}" var="f" rendered="{!IsSubmittedforApproval}">  
+                <apex:inputfield value="{!AccountCloneObj[f]}"></apex:inputfield>
+            </apex:repeat>
+        </apex:pageBlockSection>
+        
+        <apex:pageBlockSection title="Contact Information" rendered="{!showContactFlag}">
+            <apex:repeat value="{!ContactCloneObjList}" var="ConcloneObjlist" rendered="{!IsSubmittedforApproval}">
+                <apex:repeat value="{!$ObjectType.Contact_Clone__c.FieldSets.Ref_Contact_Fieldset}" var="f">  
+                    <apex:outputfield value="{!ConcloneObjlist[f]}"></apex:outputfield>
+                </apex:repeat>
+                <br/>
+                <apex:repeat value="{!$ObjectType.Contact_Clone__c.FieldSets.Contact_Clone_Fieldset}" var="f">  
+                    <apex:inputfield value="{!ConcloneObjlist[f]}"></apex:inputfield>
+                </apex:repeat>
+            </apex:repeat>
+           </apex:pageBlockSection>
+            
+           
+        <apex:pageBlockSection title="Opportunity Information" columns="1" rendered="{!showOpportunityFlag}">
+            <apex:pageBlockSection title="Pipeline(All Open Opps)" collapsible="false">
+                <apex:repeat value="{!openOpportunityCloneObjList}" var="openOppCloneObjlist" rendered="{!IsSubmittedforApproval}">
+                    <apex:repeat value="{!$ObjectType.Opportunity_Clone__c.FieldSets.Ref_Opportunity_FieldSet}" var="f">  
+                        <apex:outputfield value="{!openOppCloneObjlist[f]}"></apex:outputfield>
+                    </apex:repeat>
+                    <br/>
+                    <apex:repeat value="{!$ObjectType.Opportunity_Clone__c.FieldSets.Opportunity_Clone_FieldSet}" var="f">  
+                        <apex:inputfield value="{!openOppCloneObjlist[f]}"></apex:inputfield>
+                    </apex:repeat><br/>
+                </apex:repeat> 
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Closed Opps(Last 12 Months)" collapsible="false">
+                <apex:repeat value="{!closedOpportunityCloneObjList}" var="closedOppCloneObjlist" rendered="{!IsSubmittedforApproval}">
+                    <apex:repeat value="{!$ObjectType.Opportunity_Clone__c.FieldSets.Ref_Opportunity_FieldSet}" var="f">  
+                        <apex:outputfield value="{!closedOppCloneObjlist[f]}"></apex:outputfield>
+                    </apex:repeat>
+                    <br/>
+                    <apex:repeat value="{!$ObjectType.Opportunity_Clone__c.FieldSets.Opportunity_Clone_FieldSet}" var="f">  
+                        <apex:inputfield value="{!closedOppCloneObjlist[f]}"></apex:inputfield>
+                    </apex:repeat><br/>
+                </apex:repeat>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Performance Summary" collapsible="false">            
+                <apex:repeat value="{!$ObjectType.Account_Clone__c.FieldSets.Account_Peformance_Summary_FieldSet}" var="f">  
+                    <apex:outputfield value="{!AccountCloneObj[f]}"></apex:outputfield>
+                </apex:repeat>
+            </apex:pageBlockSection>
+        
+        </apex:pageBlockSection>
+    
+        <apex:pageBlockSection title="Submit for Approval" rendered="{!showSubmitFlag}" columns="1">
+        <apex:pageMessage strength="2" severity="INFO" title="Submit Action(s)">
+            1. The Acount Plan will be sent to Line Manager for approval.<br/>
+            2. Account plan will be locked for further changes once submitted.<br/>
+            3. You can download the Account Plan PDF by clicking on 'Account Plan PDF' button.<br/>
+            4. After Approval, changes will be commited to the Account.<br/>
+        </apex:pageMessage>
+        </apex:pageBlockSection>
+      
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

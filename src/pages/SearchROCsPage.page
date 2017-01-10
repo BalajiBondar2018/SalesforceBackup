@@ -1,0 +1,146 @@
+<apex:page standardController="ROC__c" extensions="SearchROCExtension" tabStyle="Search_ROC__tab">
+
+<apex:form id="SerachROCForm">
+<apex:sectionHeader title="Case 0023458978" subtitle="Search ROC Information"/>
+<apex:commandLink value="<< Back To Case 0023458978"/>
+<apex:pageBlock >
+<apex:pageBlockButtons location="Bottom" rendered="{!showConsumerSearchResultFlag}" >
+<apex:commandButton value="Select & Save" rerender="SerachROCForm" status="actionstatuspanel"/>
+<apex:commandButton value="Cancel" rerender="SerachROCForm" status="actionstatuspanel"/>
+</apex:pageBlockButtons>
+<apex:pageBlockSection title="ROC Search Criteria" collapsible="false" columns="2">
+
+
+
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Denial Number</apex:outputLabel>
+    <apex:inputField value="{!contactobj.FirstName}"/>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Check Number</apex:outputLabel>
+    <apex:inputField value="{!contactobj.FirstName}"/>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Check Amount</apex:outputLabel>
+    <apex:inputField value="{!contactobj.FirstName}"/>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Subscriber Id</apex:outputLabel>
+    <apex:inputField value="{!contactobj.FirstName}"/>
+</apex:pageBlockSectionItem>
+
+
+
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Consumer Id 1</apex:outputLabel>
+    <apex:outputPanel >
+        <apex:inputField value="{!contactobj.Id_Type_1__c}"/>&nbsp;
+        <apex:inputField value="{!contactobj.Detailed_Id_Type_1__c}"/>
+    </apex:outputPanel>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Consumer Id Value 1</apex:outputLabel>
+    <apex:inputField value="{!contactobj.Id_Value_1__c}"/>
+</apex:pageBlockSectionItem>
+
+
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Consumer Id 2</apex:outputLabel>
+    <apex:outputPanel >
+        <apex:inputField value="{!contactobj.Id_Type_2__c}"/>&nbsp;
+        <apex:inputField value="{!contactobj.Detailed_Id_Type_2__c}"/>
+    </apex:outputPanel>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Consumer Id Value 2</apex:outputLabel>
+    <apex:inputField value="{!contactobj.Id_Value_2__c}"/>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Consumer Id 3</apex:outputLabel>
+    <apex:outputPanel >
+        <apex:inputField value="{!contactobj.Id_Type_3__c}"/>&nbsp;
+        <apex:inputField value="{!contactobj.Detailed_Id_Type_3__c}"/>
+    </apex:outputPanel>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Consumer Id Value 3</apex:outputLabel>
+    <apex:inputField value="{!contactobj.Id_Value_3__c}"/>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Search From Date</apex:outputLabel>
+    <apex:inputField value="{!contactobj.Search_Begin_Date__c}"/>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Search To Date</apex:outputLabel>
+    <apex:inputField value="{!contactobj.Search_End_Date__c}"/>
+</apex:pageBlockSectionItem>
+
+
+
+<apex:outputPanel style="text-align:center;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+<apex:commandButton value="Search" immediate="true" action="{!SearchClick}" rerender="SerachROCForm" status="actionstatuspanel"/>
+<apex:commandButton value="Cancel" action="{!CancelClick}" rerender="SerachROCForm" status="actionstatuspanel"/>
+</apex:outputPanel>
+</apex:pageBlockSection>
+<apex:pageBlockSection title="ROC Search Result" columns="1" collapsible="false" rendered="{!showConsumerSearchResultFlag}" >
+<apex:pageBlockTable value="{!contactList}" var="contact">
+        <apex:column >
+            <apex:facet name="header">
+                <apex:inputCheckbox />
+            </apex:facet>
+            <apex:inputCheckbox />
+        </apex:column>
+        <apex:column headerValue="Subscriber" value="{!contact.FirstName}"/>
+        <apex:column headerValue="Date Time" value="{!contact.FirstName}"/>    
+        <apex:column headerValue="Amount" value="{!contact.FirstName}"/>
+        <apex:column headerValue="Final Action" value="{!contact.FirstName}"/>
+        <apex:column headerValue="Id Type 1" value="{!contact.FirstName}"/>
+        <apex:column headerValue="Id Detailed Type 1" value="{!contact.FirstName}"/>
+        <apex:column headerValue="Id Value 1" value="{!contact.FirstName}"/>
+        <apex:column headerValue="Id Type 2" value="{!contact.FirstName}"/>
+        <apex:column headerValue="Id Detailed Type 2" value="{!contact.FirstName}"/>
+        <apex:column headerValue="Id Value 2" value="{!contact.FirstName}"/>
+        <apex:column headerValue="Result Flag" value="{!contact.FirstName}"/>
+        <apex:column headerValue="TTID" value="{!contact.FirstName}"/>
+
+
+</apex:pageBlockTable>
+</apex:pageBlockSection>
+</apex:PageBlock>
+</apex:form>
+
+<apex:outputpanel >
+    <apex:actionstatus id="actionstatuspanel">
+        <apex:facet name="start">
+            <div class="waitingSearchDiv" id="el_loading" style="background-color: #DCD6D6;
+                   height: 100%;opacity:0.65;width:100%;"> 
+                <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+                    <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                    <span class="waitingDescription">Loading...</span>
+                </div>
+            </div>
+        </apex:facet>
+    </apex:actionstatus>
+</apex:outputpanel>
+
+</apex:page>

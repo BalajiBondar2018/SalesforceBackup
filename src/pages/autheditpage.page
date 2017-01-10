@@ -1,0 +1,322 @@
+<apex:page standardController="Auth__c" extensions="AuthEditExtension" tabStyle="Search_Auth__tab">
+<apex:form >
+ 
+ 
+<apex:sectionHeader title="Case 0013245" subtitle="Edit Auth Information"/>
+<apex:commandLink value="<< Back To Case#0023458978"/>
+<apex:pageBlock title="Auth Information">
+<apex:pageBlockButtons location="bottom">
+<apex:commandButton value="Save & Sync"/>
+<apex:commandButton value="Cancel"/>
+
+</apex:pageBlockButtons>
+
+
+
+
+<apex:pageBlock >
+
+<apex:pageBlockSection title="Linked Information" columns="1">
+    <apex:outputPanel layout="block" style="overflow:scroll;height:150px;">
+        <apex:pageBlockTable value="{!accountList }" var="accountobj" >
+            <apex:column headerValue="Id Type" value="{!accountobj.Name}"/>
+            <apex:column headerValue="Id Search Key" value="{!accountobj.Name}"/>
+            <apex:column headerValue="Transaction Count" value="{!accountobj.Name}"/>
+            <apex:column headerValue="Transaction Amount" value="{!accountobj.Name}"/>
+            <apex:column headerValue="First Seen Date" value="{!accountobj.CreatedDate}"/>
+            <apex:column headerValue="Last Seen Date" value="{!accountobj.CreatedDate}"/>
+        </apex:pageBlockTable>
+   </apex:outputPanel>
+</apex:pageBlockSection>
+
+<apex:pageBlockSection title="Linked Information Details" columns="1">
+<apex:outputPanel layout="block" style="overflow:scroll;height:300px;">
+    <apex:pageBlockTable value="{!accountList }" var="accountobj">
+        <apex:column headerValue="Active">
+            <apex:selectList size="1">
+                <apex:selectOption itemLabel="Yes" itemValue="Yes"/>
+                <apex:selectOption itemLabel="No" itemValue="No"/>
+            </apex:selectList>
+        </apex:column>
+        <apex:column headerValue="Id Information" value="{!accountobj.Name}"/>
+        <apex:column headerValue="Id Type 1" value="{!accountobj.Name}"/>
+        <apex:column headerValue="Id Search Key 1" value="{!accountobj.Name}"/>
+        <apex:column headerValue="Id Type 2" value="{!accountobj.Name}"/>
+        <apex:column headerValue="Id Search Key 2" value="{!accountobj.Name}"/>
+        <apex:column headerValue="Transaction Count" value="{!accountobj.Name}"/>
+        <apex:column headerValue="Transaction Amount" value="{!accountobj.Name}"/>
+        <apex:column headerValue="First Seen Date" value="{!accountobj.CreatedDate}"/>
+        <apex:column headerValue="Last Seen Date" value="{!accountobj.CreatedDate}"/>
+        <apex:column headerValue="Changed By" value="{!accountobj.Name}"/>
+        <apex:column headerValue="Last Seen Date" value="{!accountobj.CreatedDate}"/>
+        
+    </apex:pageBlockTable>
+</apex:outputPanel>
+</apex:pageBlockSection>
+
+<apex:pageBlockSection title="Summary Information" columns="2">
+<apex:pageBlockSectionItem >
+<apex:outputLabel >Consumer Full Name 1</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >
+<apex:outputLabel >Consumer Full Name 2</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >
+<apex:outputLabel >Consumer Address 1</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >
+<apex:outputLabel >Consumer Address 2</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+<apex:outputLabel >City</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >
+<apex:outputLabel >State</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+<apex:outputLabel >Zip</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >
+<apex:outputLabel ></apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+<apex:outputLabel >Phone Type 1</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >
+<apex:outputLabel >Phone Value 1</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+<apex:outputLabel >Phone Type 2</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >
+<apex:outputLabel >Phone Value 2</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+
+
+
+
+<apex:pageBlockSectionItem >
+<apex:outputLabel >First Seen Date</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >
+<apex:outputLabel >Last Seen Date</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+<apex:outputLabel >Profile Source</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >
+<apex:outputLabel ></apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+<apex:outputLabel >Transaction Count</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >
+<apex:outputLabel >Transaction Amount</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+
+
+<apex:pageBlockSectionItem >
+<apex:outputLabel >Global Preferred</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >
+<apex:outputLabel >Global Blocked</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+<apex:outputLabel >Risk PNC</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >
+<apex:outputLabel ></apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+<apex:outputLabel >Total Approved Count 24 Hrs</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >
+<apex:outputLabel >Total Approved Amount 24 Hrs</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+
+
+
+<apex:pageBlockSectionItem >
+<apex:outputLabel >Total Approved Count 7 Days</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >
+<apex:outputLabel >Total Approved Amount 7 Days</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+<apex:outputLabel >Total Approved Count 30 Days</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >
+<apex:outputLabel >Total Approved Amount 30 Days</apex:outputLabel>
+<apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+
+
+
+</apex:pageBlockSection>
+
+
+
+<apex:pageBlockSection columns="2">
+    <apex:pageBlockSectionItem >
+        <apex:outputPanel >
+            <div style="color:white;background-color:#85A898;height:18px;padding-top:5px;padding-left:5px">
+                <b>Ids with Negative Information</b>
+            </div>
+        <apex:outputPanel layout="block" style="overflow:scroll;height:150px;">
+        <apex:pageBlockTable value="{!accountList }" var="accountobj">
+            <apex:column headerValue="Id Type" value="{!accountobj.Name}"/>
+            <apex:column headerValue="Id Value" value="{!accountobj.Name}"/>
+        </apex:pageBlockTable>
+        </apex:outputPanel>
+        </apex:outputPanel>
+        
+</apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+      <apex:outputPanel >
+            <div style="color:white;background-color:#85A898;height:18px;padding-top:5px;padding-left:5px">
+                <b>Ids Linked with this Id (First Degree)</b>
+            </div>
+        <apex:outputPanel layout="block" style="overflow:scroll;height:150px;">
+        <apex:pageBlockTable value="{!accountList }" var="accountobj">
+            <apex:column headerValue="Id Type" value="{!accountobj.Name}"/>
+            <apex:column headerValue="Id Value" value="{!accountobj.Name}"/>
+        </apex:pageBlockTable>
+        </apex:outputPanel>
+        </apex:outputPanel>
+    </apex:pageBlockSectionItem>
+</apex:pageBlockSection>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+
+
+ <apex:commandButton value="Rest PNC"/>
+
+
+<apex:pageBlockSection title="Negative Information" columns="1">
+<apex:outputPanel layout="block" style="overflow:scroll;height:150px;">
+<apex:pageBlockTable value="{!accountList }" var="accountobj">
+    <apex:column headerValue="Dispute Status" value="{!accountobj.Name}"/>
+    <apex:column headerValue="Debt Type" value="{!accountobj.Name}"/>
+    <apex:column headerValue="Reason" value="{!accountobj.Name}"/>
+    <apex:column headerValue="Subscriber" value="{!accountobj.Name}"/>
+    <apex:column headerValue="Debt Date" value="{!accountobj.CreatedDate}"/>
+    <apex:column headerValue="Amount" value="{!accountobj.Name}"/>
+    <apex:column headerValue="Call Log/Debt Code" value="{!accountobj.Name}"/>
+    <apex:column headerValue="Edit Date" value="{!accountobj.CreatedDate}"/>
+    <apex:column headerValue="Edit By" value="{!accountobj.Name}"/>
+</apex:pageBlockTable>
+</apex:outputPanel>
+</apex:pageBlockSection>
+
+<apex:pageBlockSection title="Action">
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Low Check Number</apex:outputLabel>
+    <apex:inputText ></apex:inputText>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >High Check Number</apex:outputLabel>
+    <apex:inputText ></apex:inputText>
+</apex:pageBlockSectionItem>
+
+</apex:pageBlockSection>
+
+<apex:pageBlockSection title="Remark" columns="1">
+
+<apex:pageBlockTable value="{!accountRemarkList}" var="accountobj">
+    <apex:column headerValue="Remark">
+        <apex:outputtext value="{!accountobj.Name}"></apex:outputtext>
+        <apex:facet name="footer">
+            <apex:inputTextarea cols="50" rows="2"/>
+        </apex:facet>
+    </apex:column>
+    
+    <apex:column headerValue="User">
+        <apex:outputtext value="{!accountobj.Name}"></apex:outputtext>
+        <apex:facet name="footer">
+            <apex:outputLabel >Balaji Bondar</apex:outputLabel>
+        </apex:facet>
+    </apex:column>
+    
+    
+    
+    <apex:column headerValue="Date">
+        <apex:outputLabel >07/06/2015</apex:outputLabel>
+        <apex:facet name="footer">
+            <apex:outputLabel >07/06/2015</apex:outputLabel>
+        </apex:facet>
+    </apex:column>
+    
+    <apex:column headerValue="Action" style="width:10px;">
+    <apex:commandButton value="Delete"/>
+    <apex:facet name="footer">
+            <apex:outputPanel >
+            <apex:commandButton value="Add & Sync"/>
+            <apex:commandButton value="Cancel"/>
+            </apex:outputPanel>
+        </apex:facet>
+    </apex:column>
+</apex:pageBlockTable>
+</apex:pageBlockSection>
+
+
+</apex:pageBlock>
+
+
+</apex:pageBlock>
+
+
+
+ 
+</apex:form>
+</apex:page>

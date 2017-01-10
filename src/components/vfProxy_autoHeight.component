@@ -1,0 +1,21 @@
+<apex:component >
+<script>
+    //build the command string to send to the component
+    var command = 'document.getElementById("'+window.name+'").style.height = "'+getDocHeight()+'px"';
+
+    //create the postMessageData object to send with the command, and no callback
+    var setWindowHeight = new vfProxy.postMessageData(command,null);
+
+    //send the command to the proxy.
+    vfProxy.postMessage(setWindowHeight); 
+        
+    function getDocHeight() {
+        var D = document;
+        return Math.max(
+            D.body.scrollHeight, D.documentElement.scrollHeight,
+            D.body.offsetHeight, D.documentElement.offsetHeight,
+            D.body.clientHeight, D.documentElement.clientHeight
+        );
+    }   
+</script>
+</apex:component>

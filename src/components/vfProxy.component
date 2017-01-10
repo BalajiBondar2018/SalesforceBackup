@@ -1,0 +1,30 @@
+<apex:component >
+    <script>
+        var vfProxy = new Object();
+
+    
+        vfProxy.postMessageData = function(command, callback)
+        {
+             this.command = command;
+             this.callback = callback;   
+        }        
+        
+        vfProxy.receiveMessage = function(event)
+        {
+            if(event.data.callback != null)
+            {
+                window.vfProxy[event.data.callback](event);
+            }        
+        }
+   
+        
+        //actually send command to parent window. Does not return anything. Data from call is returned to function
+        //specified in callback param.
+        vfProxy.postMessage = function(postMessageData)
+        {
+            parent.postMessage(postMessageData,"*");  //  `*` on any domain
+        }
+        
+        window.addEventListener("message",vfProxy.receiveMessage, false);
+    </script>
+</apex:component>

@@ -1,0 +1,4 @@
+<apex:page controller="MultiSheetExcelGenerate" sidebar="false" showHeader="false" contentType="application/vnd.ms-excel#Quote.xls" cache="true">
+<!--<apex:page controller="MultiSheetExcelGenerate">-->
+<c:MultiSheetExcelComponent datamodel="{!dm}"/>
+</apex:page>

@@ -1,0 +1,83 @@
+<apex:page showHeader="true" sidebar="false" standardStylesheets="false" controller="SCCQuickCreateToolbar_Controller">
+    
+    <head>
+
+        <apex:includeScript value="/support/console/23.0/integration.js"/>
+    </head>
+
+    <style>
+    body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt;
+    margin: 2px;
+}
+
+select {
+    font-size: 8pt;
+}
+
+.moduleHeader {
+    background-color:#1797C0;
+    font-weight:bold;
+    color: #fff;
+    padding: 2px 5px;
+    border-radius:5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    -moz-box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
+    margin-top: 2px;
+}
+
+.btmlabel {
+    margin-right: 5px;
+    padding-top:8px;
+}
+
+.btmfield {
+    margin-right: 10px;
+}
+
+a,a:visited {
+    color: white;
+}
+    </style>
+    
+    
+    
+    <apex:form id="theForm" >
+        <div class="moduleHeader">
+            <span class="btmlabel">
+                Create Case:
+            </span>
+            <span class="btmfield">
+                <apex:selectList multiselect="false" size="1" id="createCase" onchange="QuickCase()">
+                    <apex:selectOptions value="{!caseRecordTypes}"/>
+                </apex:selectList>
+            </span>
+        </div>
+    </apex:form>
+
+    <script type="text/javascript">
+        var caseRecordTypeSelectField;
+        var caseRecordTypeId;
+
+        function QuickCase() {
+            // Grab the case record type selection field
+            caseRecordTypeSelectField = document.getElementById('{!$Component.theForm.createCase}');
+            // Get the record type id
+            caseRecordTypeId = caseRecordTypeSelectField.options[caseRecordTypeSelectField.selectedIndex].value;
+            // Open the New Case Page
+            sforce.console.getEnclosingPrimaryTabId(openCase);
+            // Reset the picklist
+            caseRecordTypeSelectField.selectedIndex=0;
+        }    
+
+        // Called from QuickCase() to open a new subtab
+        var openCase = function openCase (result) {
+            // open new case with record type in a new subtab
+            sforce.console.openSubtab(result.id ,'{!caseCreateURLPrefix}&RecordType='+caseRecordTypeId, true, '', null);
+        }
+    </script>    
+</apex:page>

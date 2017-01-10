@@ -1,0 +1,168 @@
+<apex:page sidebar="false" tabStyle="Account" standardController="Account" extensions="TransferAppointmentsController">
+<!-- CSS goes in the document HEAD or added to your external stylesheet -->
+<style type="text/css">
+table.eventtable {
+    font-family: verdana,arial,sans-serif;
+    font-size:11px;
+    border-width: 1px;
+    border-color: #C9CCD1;
+    border-collapse: collapse;
+    width:60%;
+}
+table.eventtable th {
+    font-family: verdana,arial,sans-serif;
+    font-size:10px;
+    padding: 5px;
+    background-color:#E6E7ED;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #B6B8BA;
+    text-align:center;
+}
+table.eventtable tr {
+    text-align:center;
+    vertical-align:middle;
+  }
+table.eventtable td {
+    padding: 4px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #C9CCD1;
+    
+}
+table.eventtable tr:hover {
+background-color: #E3EEFC;
+} 
+
+
+</style>
+<apex:form id="appointmentform">
+<apex:sectionHeader title="Copy/Transfer postcode Allocation" subtitle="{Employee Name}"/>
+    <apex:commandLink value="<<Back to {Employee}"/>
+    <apex:pageBlock >
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton value="Save"/>
+            <apex:commandButton value="Copy"/>
+            <apex:commandButton value="Transfer"/>
+            <apex:commandButton value="Cancel"/>
+
+             
+        </apex:pageBlockButtons>
+        <apex:pageBlockSection title="Employee Information" collapsible="false"></apex:pageBlockSection>
+            <table width="100%" style="background-color:#C8C9CC;" cellspacing="2" cellpadding="" border="0">
+                <tr>
+                    
+                    <td style="width:4%">
+                        <apex:outputLabel styleClass="labelCol">From</apex:outputLabel>&nbsp;
+                    </td>
+                    <td style="width:7%">
+                        <c:noDateLink >
+                            <apex:inputfield value="{!account.End_Date__c}"/>
+                        </c:noDateLink>
+                    </td>
+                    <td style="width:4%">
+                        <apex:outputLabel styleClass="labelCol">To</apex:outputLabel>&nbsp;
+                    </td>
+                    <td style="width:7%">
+                        <c:noDateLink >
+                            <apex:inputfield value="{!account.End_Date__c}"/>
+                        </c:noDateLink>
+                    </td>
+                    <td style="width:78%">
+                    <!--
+                        <apex:commandButton value="Copy" status="fetchstatus" reRender="appointmentform"/>
+                        <apex:commandButton value="Transfer" status="fetchstatus" reRender="appointmentform"/>
+                        <apex:actionStatus id="fetchstatus" startText="Processing..."></apex:actionStatus>
+                        -->
+                    </td>
+                </tr>
+            </table>
+        
+        <apex:pageBlockSection title="Postcode Allocation Information" collapsible="false"></apex:pageBlockSection>
+            <table class="eventtable"> 
+            
+            <tr>
+                <th>Postcode</th>        
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th>
+                <th>Sunday</th>
+            </tr>
+            
+            <tr>
+                <td>AB10 1AJ</td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+            </tr>
+            <tr>
+                <td>GB10 5AJ</td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+            </tr>
+            <tr>
+                <td>TB10 1FJ</td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+            </tr>
+            <tr>
+                <td>AB70 1EG</td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+            </tr>
+            <tr>
+                <td>TG10 1WO</td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+            </tr>
+            <tr>
+                <td>XR10 1IP</td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+            </tr>
+            <tr>
+                <td>RT56 1AJ</td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+            </tr>
+        </table>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

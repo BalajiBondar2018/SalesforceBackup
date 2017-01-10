@@ -1,0 +1,194 @@
+<apex:page controller="CITAdaptorController" showHeader="false">
+<apex:includeScript value="/support/api/33.0/interaction.js"/>
+<style>
+    body {background-color:white;}
+</style> 
+<script type="text/javascript">
+    //-----------------------------------------------isClickToDialEnabled ----------------------------------------------------
+    var isClickToDialEnabled = false; /* Variable that keeps track of click-to-dial state.
+                                       * If true, click-to-dial is enabled, false otherwise.
+                                       */
+    // Callback used with enableClickToDial API method.
+    var enableClickToDialCallback = function (response) {
+        isClickToDialEnabled = true;
+    };
+
+    // Callback used with disableClickToDial API method.
+    var disableClickToDialCallback = function (response) {
+        isClickToDialEnabled = false;
+    };
+
+    function toggleClickToDial() {
+        if (isClickToDialEnabled) {
+            // This function allows phone elements to be clickable on a Salesforce page.
+            sforce.interaction.cti.disableClickToDial(disableClickToDialCallback);
+        } else {
+            // Enable click-to-dial.
+            sforce.interaction.cti.enableClickToDial(enableClickToDialCallback);
+        }
+    }
+
+    //--------------------------------------- Callback for screenPop API method.--------------------------------------------
+    var screenPopCallback = function (response) {
+        if (response.result) {
+            alert('Screen pop was set successfully.');
+        } else {
+            alert('Screen pop failed.' + result.error);
+        }
+    };
+
+    /* This function will screenPop to a contact in your organization.
+     * When working on this sample code, please replace the contact Id with 
+     * a valid one from your organization.
+     */
+    function screenPop() {
+        var objectIdRelUrl = '/0039000001OyTYw'; // Replace the Id with a valid one from your organization.
+        sforce.interaction.screenPop(objectIdRelUrl, true, screenPopCallback);
+    }
+    // Callback for onClickToDial API method.
+    var onClickListener = function (response) {
+        if (response.result) {
+            alert("User clicked on a phone number. The data returned as JSON format is : " + response.result );
+        }
+    };
+
+    // Registers a callback function that will execute when a user clicks on a phone link.
+    sforce.interaction.cti.onClickToDial(onClickListener);
+    
+    
+    //------------------------------------- Callback of API method: getPageInfo--------------------------------------
+    var getPageInfoCallback = function (response) {
+        if (response.result) {
+            alert(response.result);
+        } else {
+            alert('Error occured while trying to get page info: ' +
+        response.error);
+        }
+    }
+        
+    // Invokes API method getPageInfo
+    function getPageInfo() {
+    sforce.interaction.getPageInfo(getPageInfoCallback);
+    }
+    
+
+    //------------------------------- Callback of API method: setSoftphoneHeight----------------------------------------
+    var setSoftphoneHeightCallback = function (response) {
+    // Returns true if SoftPhone height was set successfully, false otherwise.
+    if (response.result) {
+        alert('Setting SoftPhone height to 300px was successful.');
+    } else {
+        alert('Setting softphone height failed.');
+    }
+    };
+    // Invokes setSoftphoneHeight API method.
+    function setSoftphoneHeight() {
+        sforce.interaction.cti.setSoftphoneHeight(300,
+        setSoftphoneHeightCallback);
+    }
+    
+    //------------------------------------getCallCenterSettings-----------------------------------------------------------
+    var getCallCenterSettingsCallback = function (response) {
+    // Result returns call center settings as a JSON string.
+    if (response.result) {
+        alert(response.result);
+    } else {
+        alert('Error retrieving call center settings ' +
+    response.error);
+    }
+    };
+    // Invokes API method: getCallCenterSettings
+    function getCallCenterSettings() {
+        sforce.interaction.cti.getCallCenterSettings(getCallCenterSettingsCallback);
+    }
+    
+    //-----------------------------
+    
+    var isInConsoleCallback = function (response) {
+    // Returns true if method is executed in Salesforce console, false
+    if (response.result) {
+        alert('SoftPhone is in Salesforce console.');
+    } else {
+        alert('SoftPhone is not in Salesforce console.');
+    }
+    };
+    
+    // Invokes API method: isInConsole
+    function isInConsole() {
+        sforce.interaction.isInConsole(isInConsoleCallback);
+    }
+   
+   //------------------------------------------------------------------------
+    // Callback of API method: inboundCallDemo
+              var inboundCallDemoCallback = function (response) {
+                     // Result returns call center settings as a JSON string.
+                     if (response.result) {
+                            alert(response.result);
+                     } else {
+                            alert('Error retrieving data ' + response.error);
+                     }
+               };
+               // Invokes API method: inboundCallDemo
+               function inboundCallDemo() {
+                         sforce.interaction.searchAndScreenPop('(212) 842-5500','','inbound',inboundCallDemoCallback);
+               }             
+
+</script>
+    
+    <button onclick='toggleClickToDial();'>Toggle Click-to-Dial</button>
+    <button onclick='screenPop();'>Screen Pop</button>
+    <button onclick="setSoftphoneHeight();">setSoftphoneHeight(300)</button>
+    <button onclick="getPageInfo();">getPageInfo</button>
+    <button onclick="getCallCenterSettings();">getCallCenterSettings</button>
+    <button onclick="isInConsole();">isInConsole</button>
+    
+    <button onclick="inboundCallDemo();">(212) 842-5500</button>
+    <apex:form >
+        
+        <b>Inbound Call</b><br/>
+        Caller ID 2345678976543<br/>
+        Contact Name Nishad patel<br/>
+        Account Name TestAccount<br/>
+        Case # 00004354354<br/>  
+        <apex:commandButton value="End Call" style="Width:153px;"/><br/>
+        <apex:commandButton value="Accept" style="Width:50px;"/>
+        <apex:commandButton value="Pause" style="Width:50px;"/>
+        <apex:commandButton value="Reject" style="Width:50px;"/><br/><br/>
+        
+        
+        
+        <b>Outbound Call</b><br/>
+        <apex:selectList size="1">
+        <apex:selectOption itemLabel="On A Call" itemValue="OnACall"></apex:selectOption>
+        <apex:selectOption itemLabel="Working" itemValue="Working"></apex:selectOption>
+        </apex:selectList>
+        <br/>
+        <apex:inputText />
+        <apex:commandButton value="Call" style="Width:50px;"/>
+        <br/>
+        <apex:commandButton value="1" style="Width:50px;"/>
+        <apex:commandButton value="2" style="Width:50px;"/>
+        <apex:commandButton value="3" style="Width:50px;"/><br/>
+        <apex:commandButton value="4" style="Width:50px;"/>
+        <apex:commandButton value="5" style="Width:50px;"/>
+        <apex:commandButton value="6" style="Width:50px;"/><br/>
+        <apex:commandButton value="7" style="Width:50px;"/>
+        <apex:commandButton value="8" style="Width:50px;"/>
+        <apex:commandButton value="9" style="Width:50px;"/><br/>
+        <apex:commandButton value="*" style="Width:50px;"/>
+        <apex:commandButton value="0" style="Width:50px;"/>
+        <apex:commandButton value="#" style="Width:50px;"/><br/>
+        <apex:commandButton value="End Call" style="Width:153px;"/>
+        <br/>
+        
+        
+            <b>Current Call Log</b><br/>
+            Subject<apex:inputText /><br/>
+            Related ToCase#00001234<br/>
+            Comment<apex:inputTextarea cols="25" rows="3"/><br/>
+    </apex:form>
+    
+    
+    
+    
+</apex:page>

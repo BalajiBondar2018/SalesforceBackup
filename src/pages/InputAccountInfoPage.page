@@ -1,0 +1,16 @@
+<apex:page controller="InputAccountInfoController">
+<apex:form id="form1">
+<apex:pageblock title="Account Information">
+<apex:pageblockbuttons >
+<apex:commandButton value="Save" action="{!SaveBtnClick}" rerender="form1" status="processingStatus"/>
+<apex:actionStatus id="processingStatus" starttext="Processing..."></apex:actionStatus>
+
+</apex:pageblockbuttons>
+
+Name <apex:inputField value="{!accountObj.Name}"/>
+Phone<apex:inputField value="{!accountObj.Phone}"/>
+
+
+</apex:pageblock>
+</apex:form>
+</apex:page>

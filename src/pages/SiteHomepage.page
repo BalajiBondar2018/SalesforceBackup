@@ -1,0 +1,18 @@
+<apex:page controller="SiteHomePageController">
+<apex:form >
+    <apex:pageBlock title="Existing Accounts">
+    
+    <apex:pageBlockButtons location="top">
+        <Apex:commandButton value="Create Account" action="{!CreateAccount_Click}" />
+    </apex:pageBlockButtons>
+    
+    <apex:pageBlockTable value="{!accounts}" var="acc">
+        <apex:column headerValue="Account Id" value="{!acc.Id}"/>
+        <apex:column headerValue="Name" value="{!acc.Name}"/>
+        <apex:column headerValue="Account Owner" value="{!acc.Owner.Name}"/>
+        <apex:column headerValue="Created Date" value="{!acc.CreatedDate}"/>
+    </apex:pageBlockTable>
+    
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

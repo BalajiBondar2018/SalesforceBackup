@@ -1,0 +1,43 @@
+<apex:page tabStyle="Case" controller="ConsumerSearchpage1Controller">
+
+
+<apex:form >
+<apex:pageBlock >
+<apex:pageBlockSection title="Search Criteria">
+<apex:pageBlockSectionItem >
+<apex:outputLabel >FirstName</apex:outputLabel>
+<apex:inputField value="{!contactObj.FirstName}"/>
+</apex:pageBlockSectionItem>
+</apex:pageBlockSection>
+
+
+
+<apex:pageBlockSection title="Consumer Search Result"></apex:pageBlockSection>
+    
+
+<apex:pageBlockTable value="{!contactList}" var="cobj">
+<apex:column headerValue="Action">
+<apex:commandButton value="Select"/>
+</apex:column>
+
+<apex:column value="{!cobj.FirstName}"/>
+<apex:column value="{!cobj.FirstName}"/>
+<apex:column value="{!cobj.FirstName}"/>
+<apex:column value="{!cobj.FirstName}"/>
+<apex:column value="{!cobj.FirstName}"/>
+<apex:column value="{!cobj.FirstName}"/>
+<apex:column value="{!cobj.FirstName}"/>
+<apex:column value="{!cobj.FirstName}"/>
+<apex:column headerValue="Phone" width="15px">
+    <apex:commandLink ><apex:image url="{!$Resource.Transcript}"  width="25" height="25"/></apex:commandLink>
+</apex:column>
+<apex:column headerValue="Consumer Id" width="15px">
+    <apex:commandLink ><apex:image url="{!$Resource.Transcript}"  width="25" height="25"/></apex:commandLink>
+</apex:column>
+
+</apex:pageBlockTable>
+    
+</apex:pageBlock>
+</apex:form>
+
+</apex:page>

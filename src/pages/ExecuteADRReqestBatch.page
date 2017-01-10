@@ -1,0 +1,23 @@
+<apex:page controller="ExecuteADRReqestBatchController">
+  <apex:form >
+    <apex:pageBlock title="ADR Request(s) execution">
+          <apex:pageBlockButtons location="bottom">
+              <apex:commandButton action="{!ExecuteBtnClick}" value="Execute"/>
+          </apex:pageBlockButtons>
+      <b>Instructions</b><br/>    
+      1. This Action will execute the ADR Requests prior to ADR Process date of the current month.<br/>
+      2. This Action will execute all the ADR Request with status 'Approved' from the ADR Request process queue.<br/>
+      3. For lead, below information will be transferred to a new sales person:<br/>
+         &nbsp;&nbsp;&nbsp;&nbsp;- Lead<br/>
+         &nbsp;&nbsp;&nbsp;&nbsp;- Open Activities<br/>
+      4. For Account, below information will be transferred to a new sales person:<br/>
+         &nbsp;&nbsp;&nbsp;&nbsp;- Account<br/>
+         &nbsp;&nbsp;&nbsp;&nbsp;- Open Activities<br/>
+         &nbsp;&nbsp;&nbsp;&nbsp;- Contacts<br/>
+         &nbsp;&nbsp;&nbsp;&nbsp;- Contracts<br/>
+      5. All the ADR Requests with status 'In Progress' will remain in the ADR Process queue.<br/>
+      6. All the ADR Requests with status 'Approved' or 'Rejected' will be deleted from the ADR Process queue.
+  
+      </apex:pageBlock>
+  </apex:form>
+</apex:page>

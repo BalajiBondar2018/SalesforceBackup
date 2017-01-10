@@ -1,0 +1,175 @@
+<apex:page controller="AstrozonicaHomepageController" standardStylesheets="false" sidebar="false" showHeader="false">
+<!--
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Cognizant Interactive Tutorials</title>
+<link rel="stylesheet" href="css/normalize.css"/>
+<link rel="stylesheet" href="css/foundation.css" />
+<link rel="stylesheet" href="css/application.css" />
+<script src="js/vendor/custom.modernizr.js"></script>
+</head>
+-->
+
+<apex:stylesheet value="{!$Resource.normalize}"/>
+<apex:stylesheet value="{!$Resource.foundation}"/>
+<apex:stylesheet value="{!$Resource.application}"/>
+
+<apex:includeScript value="{!URLFOR($Resource.js, 'registration.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.js, 'vendor/custom.modernizr.js')}" />
+
+
+
+<body>
+<div id="wrapper" >
+  <!-- start of header -->
+  <header class="clear">
+    <div class="large-12 columns">
+        <!-- for logo -->
+        <div class="large-2 columns">
+            <div class="logo text-center"><a href="index.html">
+            <!--<img src="img/cognizant_logo.jpg" alt="Cognizant logo" >-->
+            <apex:image url="{!URLFOR($Resource.community_img,'community_img/cognizant_logo.jpg')}"/>
+            <!--</img>-->
+            </a></div>
+        </div>
+        <!-- end for logo -->
+        <!-- main title of the page -->
+        <div class="large-6 columns heading">
+            <h2 class="text-center">Interactive tutorials</h2>
+        </div>
+       
+        <div class="large-4 columns clear">
+            <!-- start of navigation -->
+            <nav class="clear">
+                <ul class="clear">
+                  <li ><a href="#">Subject</a></li>
+                  <li ><a href="#">Software</a></li>
+                  <li ><a href="#">Author</a></li>
+                </ul>
+            </nav>
+            <!-- end  of navigation -->
+            <!-- start of main search -->
+            <div class="mainSearch clear">
+                <form action="#" class="button round" >
+                    <input type="search" name="mainSearch " class="left"/>
+                    <input type="button" class="searchButton" value="&nbsp;" />
+                </form>
+            </div>
+            
+            <!-- end of main search -->
+        </div>
+    </div>
+    
+  </header>
+  <!-- end of header -->
+  
+  <!-- start of main content -->
+  <div class="mainContent clear">
+    <div class="large-12 columns forBorder" > 
+    <!-- start of left section -->
+        <div class="large-8 columns ">
+            <section class="mostPopular clear forBackground">
+              <h5>Most popular tutorials</h5>              
+                <div class="large-12 columns ">
+                    <div class="small-3 columns panel radius">
+                        <a href="#" class="playBtn"></a>
+                        <!--<img src="img/video_thumb.png" alt="title of tutorial" />-->
+                        <apex:image url="{!URLFOR($Resource.community_img,'community_img/video_thumb.png')}" alt="title of tutorial"/>
+
+                        
+                    </div>
+                    <div class="small-3 columns panel  radius">
+                        <!--<a href="#" class="playBtn"></a><img src="img/video_thumb.png" alt="title of tutorial"/>-->
+                        <apex:image url="{!URLFOR($Resource.community_img,'community_img/video_thumb.png')}" alt="title of tutorial"/>
+
+                    </div>
+                     <div class="small-3 columns panel  radius">
+                        <!--<a href="#" class="playBtn"></a><img src="img/video_thumb.png" alt="title of tutorial"/>-->
+                         <apex:image url="{!URLFOR($Resource.community_img,'community_img/video_thumb.png')}" alt="title of tutorial"/>
+
+                    </div>
+                     <div class="small-3 columns panel  radius">
+                        <!--<a href="#" class="playBtn"></a><img src="img/video_thumb.png" alt="title of tutorial"/>-->
+                        <apex:image url="{!URLFOR($Resource.community_img,'community_img/video_thumb.png')}" alt="title of tutorial"/>
+
+                    </div>
+                    
+                </div>  
+            </section>
+         
+        </div>
+        <!-- end of left section --> 
+        
+        <!-- start of right section -->
+        <div class="large-4 columns ">  
+            <section class="loginForm ">
+                <h5>Login</h5>
+                <form id="member_login_form" method="post" action="login.php">
+                  <fieldset>
+                    <label for="username">Username:</label>
+                    <input type="text" class="medium input-text"  name="username" id="username"/>
+                    <label>Password:
+                      <input type="password" class="medium input-text"  name="password" id="password"/>
+                    </label>
+                  </fieldset>
+                  <p class="text-center">
+                    <button type="submit" class="button small " id="loginBtn">Log In</button>
+                    <a href="registration.html" class="register">Register</a><br/>
+                    <a href="#" class="forgotPwd">Forgot Password</a></p>
+                </form>
+            </section>
+        </div>  
+        <!-- end of right section --> 
+    </div>
+    <div class="large-12 columns"> 
+    <!-- start of left section -->
+        <div class="large-4 columns">
+            <section class=" intro forBackground ">
+                <h4>Tell me and I forget. Teach me and I remember. Involve me and I learn.</h4>
+                <p class="introBrief">
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                </p>
+            </section>
+        </div>
+        <!-- end of left section --> 
+        
+        <!-- start of right section -->
+        <div class="large-8 columns ">  
+            <div class="introVideo forBackground">
+                <p><!--<img src="img/frank_ved.png" alt="title of tutorial" class="left"/>-->
+                <apex:image url="{!URLFOR($Resource.community_img,'community_img/frank_ved.png')}" alt="title of tutorial"/>
+
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+            </div>
+        </div>  
+        <!-- end of right section --> 
+    </div>
+  </div>  
+  <!-- end of main content -->
+  
+</div>
+<!-- end of wrapper --> 
+ 
+<!-- start of footer -->
+<footer class="clear text-center">
+    <div class="large-12 columns">
+      <p class="copyright">© Copyright 2013 <a href="#"><em>Cognizant Technologies &amp; Solutons.</em></a> All rights reserved. <a href="#">Terms of Service</a>.</p>
+    </div>
+</footer>
+<!-- end of footer -->
+ 
+<script>
+  document.write('<script src=' +
+  ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
+  '.js><\/script>')
+  </script> 
+<script src="js/foundation.min.js"></script> 
+<script src="js/registration.js"></script> 
+<script>
+    $(document).foundation();
+  </script>
+</body>
+
+
+</apex:page>

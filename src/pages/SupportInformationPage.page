@@ -1,0 +1,43 @@
+<apex:page standardController="Case" extensions="SupportInformationExtension">
+<apex:form >
+    <apex:commandLink value="<< back to Case# 2332432"/>
+    
+    <apex:pageBlock >
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton value="Submit"/>
+            <apex:commandButton value="Cancel"/>
+        </apex:pageBlockButtons>
+        
+        <apex:pageBlockSection title="SAP Customer Rating Information" columns="2">
+            <apex:outputfield label="CRUD Rating" value="{!caseobj.Rating_Graphics__c}"/>
+            <apex:outputfield label="MRP Rating" value="{!caseobj.Priority_Graphics__c}"/>
+            <apex:outputfield label="Agent Feedback" value="{!caseobj.Rating_Graphics__c}"/>
+            <apex:outputfield label="RTA Feedback" value="{!caseobj.Rating_Graphics__c}"/>    
+        
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Agent Customer Rating Information" columns="1">
+            <apex:pageBlockTable value="{!CustomerRatingList}" var="customerrating">
+                <apex:column headerValue="Question">
+                    <apex:outputField value="{!customerrating.Question__c}"/>
+                </apex:column>
+                
+                <apex:column headerValue="Very Good">
+                    <apex:inputField value="{!customerrating.very_good__c}"/>
+                </apex:column>
+                <apex:column headerValue="Good">
+                    <apex:inputField value="{!customerrating.good__c}"/>
+                </apex:column>
+                <apex:column headerValue="Bad">
+                    <apex:inputField value="{!customerrating.Bad__c}"/>
+                </apex:column>
+                <apex:column headerValue="Comment" width="30%">
+                    <apex:inputField value="{!customerrating.Comment__c}"/>
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Call Center Agent Information" columns="1">
+        <apex:outputField value="{!caseObj.OwnerId}" />
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:form> 
+</apex:page>

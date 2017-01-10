@@ -1,0 +1,16 @@
+<apex:page controller="testcon">
+    <apex:form >
+        <apex:pageBlock >
+        <apex:commandButton value="<<"/>&nbsp;
+        <apex:commandButton value="< Previous" disabled="true"/>&nbsp;
+        <apex:commandButton value="Next >"/>&nbsp;
+        <apex:commandButton value=">>"/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <apex:commandButton value="<<" disabled="true"/>&nbsp;
+        <apex:commandButton value="< Previous" disabled="true"/>&nbsp;
+        <apex:commandButton value="Next >" disabled="true"/>&nbsp;
+        <apex:commandButton value=">>" disabled="true"/>
+
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

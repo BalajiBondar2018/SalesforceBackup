@@ -1,0 +1,202 @@
+<apex:page standardController="Case" extensions="MSAMenuPageExtension">
+
+<apex:includeScript value="/support/console/22.0/integration.js"/>
+
+<script type="text/javascript">
+    // While opening a new tab witha visualforce page we need to provide 
+    // a full page URL like https://c.na9.visual.force.com/apex/YourPagename 
+    var sfdcUrlName = window.location.protocol + '//' + window.location.host; 
+
+    //---------------------------------------Call Summary Tab-----------------------------------------------------
+    function OpenSubtab_CallSummarySearch() {
+        //alert('OpenSubtab_CallSummarySearch is called.');
+        //First find the ID of the primary tab to put the new subtab in
+        sforce.console.getEnclosingPrimaryTabId(openSubtabCallSummarySearch);
+    }
+
+    var openSubtabCallSummarySearch = function openSubtabCallSummarySearch(result) {
+        //alert('openSubtabis called.');
+        //Now that we have the primary tab ID, we can open a new subtab in it
+        var primaryTabId = result.id;
+        //alert('openSubtabCustomerSearch called. primaryTabId  ' +primaryTabId );
+        //alert('sfdcUrlName  '+sfdcUrlName );
+        //alert('{!caseId}');
+        sforce.console.openSubtab(primaryTabId , sfdcUrlName + '/apex/CallSummarySearchPage?tid=' + result.id, true, 'Call Summary Search', null);     
+    };
+
+    //---------------------------------------CollectionInfo Search Tab-----------------------------------------------------    
+    function OpenSubtab_CollectionInfoSearch() {
+        //alert('OpenSubtab_CollectionInfoSearch is called.');
+        //First find the ID of the primary tab to put the new subtab in
+        sforce.console.getEnclosingPrimaryTabId(openSubtabCollectionInfoSearch);
+    }
+
+    var openSubtabCollectionInfoSearch = function openSubtabCollectionInfoSearch(result) {
+        //alert('openSubtabCollectionInfoSearch is called.');
+        //Now that we have the primary tab ID, we can open a new subtab in it
+        var primaryTabId = result.id;
+        //alert('openSubtabCollectionInfoSearch called. primaryTabId  ' +primaryTabId );
+        //alert('sfdcUrlName  '+sfdcUrlName );
+        //alert('{!caseId}');
+        sforce.console.openSubtab(primaryTabId , sfdcUrlName + '/apex/CollectionInformationSearchPage?tid=' + result.id, true, 'Collection Info Search', null);     
+    };
+    
+    
+    //---------------------------------------Add Attachment Tab-----------------------------------------------------        
+        function OpenSubtab_AddAttachment() {
+        //alert('OpenSubtab_AddAttachment is called.');
+        //First find the ID of the primary tab to put the new subtab in
+        sforce.console.getEnclosingPrimaryTabId(openAddAttachment);
+    }
+
+    var openAddAttachment = function openAddAttachment (result) {
+        //alert('openSubtab AddAttachment is called.');
+        //Now that we have the primary tab ID, we can open a new subtab in it
+        var primaryTabId = result.id;
+        //alert('openSubtabAddAttachment called. primaryTabId  ' +primaryTabId );
+        //alert('sfdcUrlName  '+sfdcUrlName );
+        //alert('{!caseId}');
+        sforce.console.openSubtab(primaryTabId , sfdcUrlName + '/apex/AddCaseAttachmentPage?tid=' + result.id, true, 'Add Attachment', null);     
+    };
+
+//---------------------------------------Invoice Tab-----------------------------------------------------        
+        function OpenSubtab_Invoice() {
+        //alert('OpenSubtab_Invoice  is called.');
+        //First find the ID of the primary tab to put the new subtab in
+        sforce.console.getEnclosingPrimaryTabId(openInvoice);
+    }
+
+    var openInvoice  = function openSubtabInvoice (result) {
+        //alert('openSubtabis called.');
+        //Now that we have the primary tab ID, we can open a new subtab in it
+        var primaryTabId = result.id;
+        //alert('openSubtabCustomerSearch called. primaryTabId  ' +primaryTabId );
+        //alert('sfdcUrlName  '+sfdcUrlName );
+        //alert('{!caseId}');
+        sforce.console.openSubtab(primaryTabId , sfdcUrlName + '/apex/InvoicePage?tid=' + result.id, true, 'Invoice', null);     
+    };
+
+
+//---------------------------------------Financial Information Tab-----------------------------------------------------        
+        function OpenSubtab_FinancialInformation() {
+        //alert('OpenSubtab_Invoice  is called.');
+        //First find the ID of the primary tab to put the new subtab in
+        sforce.console.getEnclosingPrimaryTabId(openFinancialInformation);
+    }
+
+    var openFinancialInformation  = function openSubtabFinancialInformation (result) {
+        //alert('openSubtab is called.');
+        //Now that we have the primary tab ID, we can open a new subtab in it
+        var primaryTabId = result.id;
+        //alert('openSubtabCustomerSearch called. primaryTabId  ' +primaryTabId );
+        //alert('sfdcUrlName  '+sfdcUrlName );
+        //alert('{!caseId}');
+        sforce.console.openSubtab(primaryTabId , sfdcUrlName + '/apex/FinancialInformationPage?tid=' + result.id, true, 'Financial Information', null);     
+    };
+
+//---------------------------------------Subscriber Search Tab-----------------------------------------------------        
+        function OpenSubtab_SubscriberSearch() {
+        //alert('OpenSubtab_SubscriberSearch  is called.');
+        //First find the ID of the primary tab to put the new subtab in
+        sforce.console.getEnclosingPrimaryTabId(openSubscriberSearch);
+    }
+
+    var openSubscriberSearch  = function openSubtabSubscriberSearch (result) {
+        //alert('openSubtab SubscriberSearch is called.');
+        //Now that we have the primary tab ID, we can open a new subtab in it
+        var primaryTabId = result.id;
+        //alert('openSubtabSubscriberSearch called. primaryTabId  ' +primaryTabId );
+        //alert('sfdcUrlName  '+sfdcUrlName );
+        //alert('{!caseId}');
+        sforce.console.openSubtab(primaryTabId , sfdcUrlName + '/apex/SubscriberSearchPage?tid=' + result.id, true, 'Subscriber Search', null);     
+    };
+
+
+
+//---------------------------------------------------------------------------------------------------
+    var openSuccess = function openSuccess(result) {
+        //Report whether we succeeded in opening the subtab
+        if (result.success == true) {
+            //alert('subtab successfully opened');
+        } else {
+            alert('subtab cannot be opened');
+        }
+    };
+</script>
+    
+    
+    
+    
+    <!--{!caseId}-->
+    <table  width="100%" style="border-color: white;text-align:center;">
+    <tr>
+    <td>
+    <apex:image url="{!$Resource.FirstDataLogo}"  width="125" height="45"/><br/>
+    </td>
+    </tr>
+    
+    </table>
+    
+    <table  width="100%" border="0"  cellspacing="5" cellpadding="5" style="border-color: white;text-align:center;"> 
+        <tr >
+            <td width="25%">
+            <apex:image onClick="OpenSubtab_CallSummarySearch();return false" url="{!$Resource.Transcript}" width="25" height="25"/><br/>
+            <b>Call Summary Search</b>
+            </td>
+            <td width="25%">
+            
+            <apex:image onClick="OpenSubtab_CollectionInfoSearch();return false" url="{!$Resource.CallerIdentification}" width="25" height="25"/><br/>
+            <b>Collection Info Search</b>
+
+            </td>
+            </tr>
+        <tr >
+            <td width="25%">
+             <apex:image onClick="OpenSubtab_AddAttachment();return false"  url="{!$Resource.box}" width="25" height="25"/><br/>
+            <b>Add Attachment</b>
+            
+            
+            </td>
+            <td width="25%">
+            <apex:image onClick="OpenSubtab_FinancialInformation();return false"    url="{!$Resource.FinancialInfo}" width="25" height="25"/><br/>
+            <b>Financial Information</b>
+            
+            </td>
+        </tr>
+         <tr >
+            <td width="25%">
+            <apex:image url="{!$Resource.Search}" onClick="OpenSubtab_SubscriberSearch();return false"  width="25" height="25"/><br/>
+            <b>Subscriber Search</b>
+            </td>
+            <td width="25%">
+            <apex:image onClick="OpenSubtab_Invoice();return false" url="{!$Resource.Invoice}" width="25" height="25"/><br/>
+            <b>Statements</b>
+            </td>
+        </tr>
+         <tr >
+            <td width="25%">
+            <apex:image url="{!$Resource.MSA}" width="25" height="25"/><br/>
+            <b>Knowledge Management</b>
+            </td>
+            <td width="25%">
+            <apex:image url="{!$Resource.Snapshot}" width="25" height="25"/><br/>
+            <b>Yearly Snapshot</b>
+            </td>
+        </tr>
+         
+          <tr >
+
+             <td width="25%">
+            <apex:image url="{!$Resource.Hierarchy}" width="25" height="25"/><br/>
+            <b>Hierarchy</b>
+            </td>
+            <td width="25%">
+            &nbsp;
+            <b>&nbsp;</b>
+            </td>
+        </tr>
+         
+    </table>
+    
+    
+</apex:page>

@@ -1,0 +1,68 @@
+<apex:page standardController="Contact" sidebar="false">
+    <script type="text/javascript" src="{!URLFOR($Resource.autocompletejs)}" />
+    <apex:stylesheet value="{!$Resource.autocompletecss}"/> 
+
+<script>
+
+        //This is a small workaround for getting the component to work with the enter key
+        //I'll include this behavior as part of the component in a next release
+        function noenter(e){
+ 
+             var key;    
+             if(window.event)
+                  key = window.event.keyCode; //IE
+             else
+                  key = e.which; //firefox    
+        
+             return (key != 13);    
+
+        }
+        
+        function disableautocomplete() {
+          var forms = document.getElementsByTagName('form');
+          
+          for (var i = 0; i < forms.length; ++i) {
+            if (forms[i].setAttribute) {
+              forms[i].setAttribute('autocomplete', 'off')
+            } else {
+              forms[i].autocomplete = 'off'
+            }
+          }
+        }
+        
+        if (window.addEventListener) {
+          window.addEventListener('load', disableautocomplete, true)
+        } else if (window.attachEvent) {
+          window.attachEvent('onload', disableautocomplete)
+        } else {
+          window.onload = disableautocomplete
+        }
+       
+</script>
+
+        <apex:sectionHeader title="Contacts AC Sample Page" subtitle="Select Account" />
+
+        <apex:form id="VFformid" >  
+        
+
+        <apex:pageBlock title="Contact Edit">
+           
+         <apex:pageBlockButtons >
+                  <apex:commandButton action="{!save}" value="Save" />
+                  <apex:commandButton action="{!cancel}" value="Cancel"/>
+          </apex:pageBlockButtons>         
+          
+       <apex:pageBlockSection title="Information" columns="1">
+           <apex:inputfield onkeypress="return noenter(event)" value="{!Contact.lastname}" id="accname" Style="Width:200px;">
+            <c:AComplete Width="200" ClassName="autocomplete" InputId="{!$Component.accname}" AutoCompleteId="accACid" ObjectName="Account" />
+           </apex:inputField>
+           
+           
+
+       </apex:pageBlockSection> 
+
+ 
+    </apex:pageBlock>
+    </apex:form>
+
+</apex:page>

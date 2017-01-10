@@ -1,0 +1,9 @@
+<apex:page standardController="Account" extensions="QuickBookPageExtension" >
+{!Headers}
+{!Response}
+
+<br/>
+<br/>
+<a target="_blank" href="https://appcenter.intuit.com/Connect/Authorize?oauth_token=e81cc1d9b6d6bb440bbb0afb64f8c237ddd3&realmId=652983520">Connect to quickbooks</a>
+
+</apex:page>

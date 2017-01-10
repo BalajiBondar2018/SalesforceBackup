@@ -1,0 +1,252 @@
+<apex:page tabStyle="Search_Collection__tab" standardController="Collection__c" extensions="CollectionSearchExtension">
+
+<apex:form id="collectionsearchform">
+<apex:sectionHeader title="Case 0013245" subtitle="Search Collection Information"/>
+<apex:commandLink value="<< Back To Case#0023458978"/>
+<apex:pageBlock >
+<apex:pageBlockSection title="Collection Search Criteria" collapsible="false" columns="2">
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Collection Ref #</apex:outputLabel>
+    <apex:inputField value="{!contactobj.Id_Value_1__c}"/>
+</apex:pageBlockSectionItem>
+<apex:outputLabel ></apex:outputLabel>
+
+<apex:inputField value="{!contactobj.FirstName}"/>
+<apex:inputField value="{!contactobj.LastName}"/>
+
+
+
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Consumer Id 1</apex:outputLabel>
+    <apex:outputPanel >
+        <apex:inputField value="{!contactobj.Id_Type_1__c}"/>&nbsp;
+        <apex:inputField value="{!contactobj.Detailed_Id_Type_1__c}"/>
+    </apex:outputPanel>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Consumer Id Value 1</apex:outputLabel>
+    <apex:inputField value="{!contactobj.Id_Value_1__c}"/>
+</apex:pageBlockSectionItem>
+
+
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Consumer Id 2</apex:outputLabel>
+    <apex:outputPanel >
+        <apex:inputField value="{!contactobj.Id_Type_2__c}"/>&nbsp;
+        <apex:inputField value="{!contactobj.Detailed_Id_Type_2__c}"/>
+    </apex:outputPanel>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Consumer Id Value 2</apex:outputLabel>
+    <apex:inputField value="{!contactobj.Id_Value_2__c}"/>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Consumer Id 3</apex:outputLabel>
+    <apex:outputPanel >
+        <apex:inputField value="{!contactobj.Id_Type_3__c}"/>&nbsp;
+        <apex:inputField value="{!contactobj.Detailed_Id_Type_3__c}"/>
+    </apex:outputPanel>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Consumer Id Value 3</apex:outputLabel>
+    <apex:inputField value="{!contactobj.Id_Value_3__c}"/>
+</apex:pageBlockSectionItem>
+
+
+
+<apex:outputPanel style="text-align:center;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<apex:commandButton value="Search" action="{!SearchBtnClick}" immediate="true" reRender="collectionsearchform" status="actionstatuspanel"/>
+<apex:commandButton value="Cancel" action="{!CancelBtnClick}" immediate="true" reRender="collectionsearchform" status="actionstatuspanel"/>
+</apex:outputPanel>
+</apex:pageBlockSection>
+
+
+<apex:outputPanel rendered="{!showCollectionSearchResultFlag}">
+<table style="width:100%;" colspacing="0" colpadding="0">
+<apex:repeat value="{!accountList}" var="account">
+<tr>
+<td>
+<apex:pageBlock >
+
+    <div style="background-color:#A2AFA0;height:22px;vertical-align: middle;color:white;padding-top: 0px;">
+        <table width="100%" cellspacing="0" cellpadding="0">
+            <tr>
+                <td style="color:white;vertical-align: middle"><b>&nbsp;&nbsp;Collection Ref# {!account.Id}</b></td>
+                <td style="text-align:right;"><apex:commandButton value="Link To Case" style="height:20px;" reRender="collectionsearchform" status="actionstatuspanel" immediate="true"/></td>
+            </tr>
+        </table>
+    </div>
+
+
+
+<apex:pageBlockSection collapsible="false" columns="2" >
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel value="Check #"/>
+        <apex:outputField value="{!account.Name}"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel value="Check Date"/>
+        <apex:outputField value="{!account.Name}"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel value="Check Type"/>
+        <apex:outputField value="{!account.Name}"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel value="Check Amt"/>
+        <apex:outputField value="{!account.Name}"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel value="Reason Code"/>
+        <apex:outputField value="{!account.Name}"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel value="Debt Status"/>
+        <apex:outputField value="{!account.Name}"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel value="Subscriber Id"/>
+        <apex:outputField value="{!account.Name}"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel value="Subscriber Name"/>
+        <apex:outputField value="{!account.Name}"/>
+    </apex:pageBlockSectionItem>
+    
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel value="Collector"/>
+        <apex:outputField value="{!account.Name}"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel value="Category"/>
+        <apex:outputField value="{!account.Name}"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel value="Fee Amount"/>
+        <apex:outputField value="{!account.Name}"/>
+    </apex:pageBlockSectionItem>
+    
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel value="Fee Debt"/>
+        <apex:outputField value="{!account.Name}"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel value="Close Reason"/>
+        <apex:outputField value="{!account.Name}"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel value="Company Flag"/>
+        <apex:outputField value="{!account.Name}"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel value="Fwd Agency"/>
+        <apex:outputField value="{!account.Name}"/>
+    </apex:pageBlockSectionItem>
+    
+        <apex:pageBlockSectionItem >
+        <apex:outputLabel value="Fwd Date"/>
+        <apex:outputField value="{!account.Name}"/>
+    </apex:pageBlockSectionItem>
+    
+        <apex:pageBlockSectionItem >
+        <apex:outputLabel value="Bankrupatcy Chapter"/>
+        <apex:outputField value="{!account.Name}"/>
+    </apex:pageBlockSectionItem>
+    
+        <apex:pageBlockSectionItem >
+        <apex:outputLabel value="Bankrupatcy File Date"/>
+        <apex:outputField value="{!account.Name}"/>
+    </apex:pageBlockSectionItem>
+
+        <apex:pageBlockSectionItem >
+        <apex:outputLabel value="Bankrupatcy Case #"/>
+        <apex:outputField value="{!account.Name}"/>
+    </apex:pageBlockSectionItem>
+
+</apex:pageBlockSection>
+
+<apex:pageBlockSection title="Consumer Information" collapsible="false"></apex:pageBlockSection>
+<apex:pageBlockTable value="{!account.contacts}" var="con">
+
+<apex:column headerValue="Overwrite" width="10px;">
+<input type="radio" name="<strong>selectRadio</strong>"/>
+</apex:column>
+<apex:column headerValue="Full Name" value="{!con.FirstName}"/>
+<apex:column headerValue="First Name" value="{!con.FirstName}"/>
+<apex:column headerValue="Last Name" value="{!con.LastName}"/>
+<apex:column headerValue="Company Name" value="{!con.FirstName}"/>
+<apex:column headerValue="Address" value="{!con.MailingStreet}{!con.MailingState}{!con.MailingCountry}{!con.MailingPostalCode}"/>
+<apex:column headerValue="Id 1" value="{!con.Id_Type_1__c}-{!con.Detailed_Id_Type_1__c}"/>
+<apex:column headerValue="Value 1" value="{!con.Id_Value_1__c}"/>
+
+<apex:column headerValue="Id 2" value="{!con.Id_Type_2__c}-{!con.Detailed_Id_Type_2__c}"/>
+<apex:column headerValue="Value 2" value="{!con.Id_Value_2__c}"/>
+
+<apex:column headerValue="Id 3" value="{!con.Id_Type_3__c}-{!con.Detailed_Id_Type_3__c}"/>
+<apex:column headerValue="Value 3" value="{!con.Id_Value_3__c}"/>
+
+<apex:column headerValue="Id 4" value="{!con.Id_Type_4__c}-{!con.Detailed_Id_Type_4__c}"/>
+<apex:column headerValue="Value 4" value="{!con.Id_Value_4__c}"/>
+
+<apex:column headerValue="Id 5" value="{!con.Id_Type_2__c}-{!con.Detailed_Id_Type_2__c}"/>
+<apex:column headerValue="Value 5" value="{!con.Id_Value_2__c}"/>
+
+
+</apex:pageBlockTable>
+</apex:pageBlock>
+</td>
+</tr>
+
+</apex:repeat>
+</table>
+</apex:outputPanel>
+</apex:pageBlock>
+
+</apex:form>
+
+
+<apex:outputpanel >
+    <apex:actionstatus id="actionstatuspanel">
+        <apex:facet name="start">
+            <div class="waitingSearchDiv" id="el_loading" style="background-color: #DCD6D6;
+                   height: 100%;opacity:0.65;width:100%;"> 
+                <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+                    <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                    <span class="waitingDescription">Loading...</span>
+                </div>
+            </div>
+        </apex:facet>
+    </apex:actionstatus>
+</apex:outputpanel>
+
+</apex:page>

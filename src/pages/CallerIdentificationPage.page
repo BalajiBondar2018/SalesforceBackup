@@ -1,0 +1,119 @@
+<apex:page standardController="Case" extensions="CallerIdentificationExtension">
+<br/>
+<apex:includeScript value="/support/console/25.0/integration.js"/>
+
+<apex:form id="form">
+
+<apex:commandLink value="<< back to Case# {!caseObj.CaseNumber}"/>
+    <apex:pageBlock >
+        <apex:pageBlockButtons location="bottom" id="pbButtons">
+            <apex:commandButton value="Pass"/>
+            <apex:commandButton value="Security & Holds"/>
+            <apex:commandButton value="Fail"/>
+            <apex:commandButton value="Cancel"/>
+            <apex:commandButton value="Help"/>
+        </apex:pageBlockButtons>
+        <apex:pageBlockSection title="Step#1 Contact Person Selection" collapsible="false" columns="2" id="selectContactPersonPBSection">
+            <apex:outputPanel >
+                <apex:actionRegion >         
+                    <apex:selectList id="CustomerContactPersonSelectList" size="1" value="{!selectedContactId}">
+                        <apex:actionSupport event="onchange" action="{!SelectContactPersonClick}"  reRender="selectContactPersonPBSection" status="ContactPersonSelectionStatus"/>
+                            <apex:selectOptions value="{!CustomerContactOptions}"/>
+                    </apex:selectList>&nbsp;
+                    <apex:actionStatus id="ContactPersonSelectionStatus" startText="Processing..."></apex:actionStatus>
+                </apex:actionRegion>
+            </apex:outputPanel>
+            <apex:outputLabel >&nbsp;</apex:outputLabel>                
+ 
+                
+                <apex:inputField value="{!contactObj.FirstName}" rendered="{!showContactSectionFlag}"/>
+                <apex:inputField value="{!contactObj.LastName}" rendered="{!showContactSectionFlag}"/>
+                <apex:inputField value="{!contactObj.Title}" rendered="{!showContactSectionFlag}"/>
+                <apex:inputField value="{!contactObj.Email}" rendered="{!showContactSectionFlag}"/>
+                <apex:inputField value="{!contactObj.Phone}" rendered="{!showContactSectionFlag}"/>
+                <apex:inputhidden rendered="{!showContactSectionFlag}"/>
+                <apex:inputhidden rendered="{!showContactSectionFlag}"/>
+                <apex:outputPanel rendered="{!showContactSectionFlag}">
+                    <apex:commandButton value="Create" action="{!CreateContactClick}" reRender="form" status="ContactStatus"/>
+                    <apex:commandButton value="Cancel" action="{!CancelClick}" reRender="form" immediate="true" status="ContactStatus"/>
+                    <apex:actionStatus id="ContactStatus" startText="Processing..."></apex:actionStatus>
+                </apex:outputPanel>
+        
+        
+        </apex:pageBlockSection>
+        
+        <apex:pageBlockSection title="Step#2 Verify the MID & DBA Address" collapsible="false" columns="1">
+        <apex:pageBlockTable value="{!accountList}" var="acc">
+           <apex:column headerValue="Matching Criteria">
+           <b>{!acc.Matching_Criteria__c}</b>
+           </apex:column>
+            <apex:column headerValue="Customer Info (Salesforce)" value="{!acc.Customer_ID__c}"/>
+            <apex:column headerValue="Customer Info (Remedy)" value="{!acc.AccountNumber}"/>
+            <apex:column headerValue="Matching ?">
+                <apex:image url="{!$Resource.Matching}" width="12" height="12" rendered="{!IF(acc.Customer_ID__c = acc.AccountNumber ,'true','false')}"/>
+                <apex:image url="{!$Resource.NotMatching}" width="12" height="12" rendered="{!IF(acc.Customer_ID__c != acc.AccountNumber ,'true','false')}"/>
+            </apex:column>
+            
+        </apex:pageBlockTable>
+        
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Step#3 Caller Financial Analysis" collapsible="false" columns="1">
+            <apex:outputLabel >If you see this Account is in <b>collections/has a security hold</b> on it, please transfer the caller to the appropriate Security extension. Then click the Security and Holds button below.</apex:outputLabel>
+        
+        <apex:panelGrid columns="2">
+        
+        <apex:chart height="250" width="450" data="{!pieData}" legend="true"> 
+            <apex:pieSeries tips="true" dataField="data" labelField="name"/> 
+            <apex:legend position="bottom"/>
+        </apex:chart>
+        
+        <apex:chart height="300" width="650" data="{!data}">
+            <apex:legend position="right"/>
+            <apex:axis type="Numeric" position="left" fields="data1" title="Opportunities Closed" grid="true"/>
+            <apex:axis type="Numeric" position="right" fields="data3" title="Revenue (millions)"/>
+            <apex:axis type="Category" position="bottom" fields="name" title="Month of the Year">
+                <apex:chartLabel rotate="315"/>
+            </apex:axis>
+            <apex:barSeries title="Monthly Sales" orientation="vertical" axis="right" xField="name" yField="data3">
+                <apex:chartTips height="20" width="120"/>
+            </apex:barSeries>
+            <apex:lineSeries title="Closed-Won" axis="left" xField="name" yField="data1" fill="true" markerType="cross" markerSize="3" markerFill="#FF0000"/>
+            <apex:lineSeries title="Closed-Lost" axis="left" xField="name" yField="data2" markerType="circle" markerSize="3" markerFill="#8E35EF"/>
+        </apex:chart>
+        
+        
+        </apex:panelGrid>
+        
+        
+        
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    
+    
+    <apex:inputhidden id="caseIdfield" value="{!caseId}"/>
+    <apex:actionFunction name="updateCaseId" reRender="form" immediate="true">
+       <apex:param name="selectedcaseid" value="" assignTo="{!caseId}"/>
+    </apex:actionFunction>
+       
+    
+    <script type="text/javascript">
+    window.onload = function() { 
+        testGetFocusedPrimaryTabObjectId();
+    }
+    
+    function testGetFocusedPrimaryTabObjectId() {
+    sforce.console.getFocusedPrimaryTabObjectId(showObjectId);
+    }
+    var showObjectId = function showObjectId(result) {
+    //Display the object ID
+    //alert('Object ID: ' + result.id);
+    document.getElementById('{!$Component.caseIdfield}').value = result.id;
+    updateCaseId(result.id);
+    };
+    </script>
+    
+    
+    
+    
+</apex:form>    
+</apex:page>

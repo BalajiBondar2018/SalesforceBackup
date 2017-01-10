@@ -1,0 +1,7 @@
+<apex:page >
+    <apex:pageBlock >
+        <apex:sectionHeader title="This is Composition sectionHeader."/><br/>
+        <apex:insert name="body"/>
+        <apex:outputText value="(template) This is composition footer."/><br/>
+    </apex:pageBlock>
+</apex:page>

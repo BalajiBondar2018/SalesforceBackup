@@ -1,0 +1,84 @@
+<apex:page controller="FinancialController" tabStyle="case">
+    <apex:pageBlock >
+
+    <apex:pageBlockSection title="Opportunity share / Month & opportunity Revenue / Month" columns="2">
+        <apex:outputPanel id="theChart">
+        <apex:form >
+            <apex:outputLabel >Select Year</apex:outputLabel>&nbsp;&nbsp;
+            <apex:selectList value="{!chartYear}" size="1">
+            <apex:selectOptions value="{!chartYearOptions}"/>
+                <apex:actionSupport event="onchange" reRender="theChart" status="actionStatusDisplay"/>
+            </apex:selectList>
+            <apex:actionStatus id="actionStatusDisplay" startText="Loading..." stopText=""/>
+        </apex:form>
+        
+    
+    
+        <apex:chart height="200" width="300" data="{!pieData}" name="Opportunity Revenue / Month">
+            <apex:pieSeries dataField="data" labelField="name"/>
+            <apex:legend position="right"/>
+        </apex:chart>
+    </apex:outputPanel>
+    
+     <apex:outputPanel id="theChart1">
+    <apex:form >
+            <apex:outputLabel >Select Year</apex:outputLabel>&nbsp;&nbsp;
+            <apex:selectList value="{!chartYear}" size="1">
+            <apex:selectOptions value="{!chartYearOptions}"/>
+                <apex:actionSupport event="onchange" reRender="theChart1" status="actionStatusDisplay"/>
+            </apex:selectList>
+            <apex:actionStatus id="actionStatusDisplay" startText="loading..." stopText=""/>
+        </apex:form>
+        
+    
+   
+        <apex:chart height="200" width="300" data="{!pieData}">
+            <apex:pieSeries dataField="data" labelField="name"/>
+            <apex:legend position="right"/>
+        </apex:chart>
+    </apex:outputPanel>
+    </apex:pageBlockSection>
+    
+    
+    
+    <apex:pageBlockSection title="Opportunity pipeline / Month & opportunity Revenue / Month" columns="2">
+        <apex:outputPanel id="theChart">
+        <apex:form >
+            <apex:outputLabel >Select Year</apex:outputLabel>&nbsp;&nbsp;
+            <apex:selectList value="{!chartYear}" size="1">
+            <apex:selectOptions value="{!chartYearOptions}"/>
+                <apex:actionSupport event="onchange" reRender="theChart" status="actionStatusDisplay"/>
+            </apex:selectList>
+            <apex:actionStatus id="actionStatusDisplay" startText="Loading..." stopText=""/>
+        </apex:form>
+        
+    
+    
+        <apex:chart height="200" width="300" data="{!pieData}">
+            <apex:pieSeries dataField="data" labelField="name"/>
+            <apex:legend position="right"/>
+        </apex:chart>
+    </apex:outputPanel>
+    
+     <apex:outputPanel id="theChart1">
+    <apex:form >
+            <apex:outputLabel >Select Year</apex:outputLabel>&nbsp;&nbsp;
+            <apex:selectList value="{!chartYear}" size="1">
+            <apex:selectOptions value="{!chartYearOptions}"/>
+                <apex:actionSupport event="onchange" reRender="theChart1" status="actionStatusDisplay"/>
+            </apex:selectList>
+            <apex:actionStatus id="actionStatusDisplay" startText="loading..." stopText=""/>
+        </apex:form>
+        
+    
+   
+        <apex:chart height="200" width="300" data="{!pieData}">
+            <apex:pieSeries dataField="data" labelField="name"/>
+            <apex:legend position="right"/>
+        </apex:chart>
+    </apex:outputPanel>
+    
+    </apex:pageBlockSection>
+    
+    </apex:pageBlock>
+</apex:page>

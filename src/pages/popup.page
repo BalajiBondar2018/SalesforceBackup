@@ -1,0 +1,88 @@
+<apex:page controller="popupcontroller" tabStyle="Contact">
+    <apex:form >
+        <apex:pageBlock >
+        <apex:pageBlockButtons location="Top">
+            <apex:commandButton value="Show Pop up" action="{!showPopup}" rerender="tstpopup"/>
+        </apex:pageBlockButtons>
+            This is just filler text from the Salesforce General.
+        </apex:pageBlock>
+ 
+        <apex:outputPanel id="tstpopup">
+        <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayPopUp}"/>
+            <apex:outputPanel styleClass="custPopup" layout="block" rendered="{!displayPopUp}">
+                <apex:pageBlock >
+                <apex:pageBlockButtons location="Bottom">
+                    <apex:commandButton value="Quick Save" action="{!QuickSaveBtnClick}" reRender="tstpopup" status="processingstatus"/>
+                    <apex:commandButton value="Save & Close" action="{!closePopup}" rerender="tstpopup"/>
+                    <apex:actionStatus id="processingstatus" startText="Processing..."></apex:actionStatus>
+                </apex:pageBlockButtons>
+                <apex:pageBlockSection title="Add/Edit/Delete Account(s)" collapsible="false"></apex:pageBlockSection>
+                <apex:pageBlockTable value="{!Account}" var="acc">
+                <apex:column >
+                    <apex:facet name="header">
+                        <apex:inputCheckbox />
+                    </apex:facet>
+                    <apex:inputCheckbox />
+                </apex:column>
+                <apex:column headerValue="Account Number">
+                <apex:outputField value="{!acc.AccountNumber}"/>
+                </apex:column>
+                <apex:column headerValue="Name">
+                <apex:inputField value="{!acc.Name}"/>
+                </apex:column>
+                <apex:column headerValue="Phone">
+                <apex:inputField value="{!acc.phone}"/>
+                </apex:column>
+                <apex:column headerValue="Fax">
+                <apex:inputField value="{!acc.phone}"/>
+                </apex:column>
+                <apex:column headerValue="Industry">
+                <apex:inputField value="{!acc.Industry}"/>
+                </apex:column>
+ 
+                </apex:pageBlockTable>
+                
+                
+                
+                </apex:pageBlock>
+                <!--
+                <apex:outputLabel style="font-size: 10px;font-weight: bolder;"><b>Note:</b></apex:outputLabel>
+                <apex:outputLabel style="font-size: 10px;"><b>This is a bottom message.</b></apex:outputLabel>
+                -->
+            </apex:outputPanel>
+        </apex:outputPanel>
+ 
+    </apex:form>
+ 
+    <style type="text/css">
+        .custPopup{
+            background-color: white;
+            border-width: 0px;
+            border-style: solid;
+            border-radius: 3px;
+            z-index: 9999;
+            left: 50%;
+            padding:0px;
+            position: absolute;
+            /* These are the 3 css properties you will need to change so the popup
+            displays in the center of the screen. First set the width. Then set
+            margin-left to negative half of what the width is. You can add
+            the height property for a fixed size pop up if you want.*/
+            width: 850px;
+            margin-left: -300px;
+            top:80px;
+        }
+        .popupBackground{
+            background-color:black;
+            opacity: 0.20;
+            filter: alpha(opacity = 20);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9998;
+        }
+
+    </style>
+</apex:page>

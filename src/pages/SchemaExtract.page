@@ -1,0 +1,38 @@
+<apex:page controller="SchemaExtractController">
+    <apex:form >
+
+        <!--  this component gathers the session information required by the page -->
+        <c:getAuthSubToken scope="http://spreadsheets.google.com/feeds/" />
+        <!--  <h2>session token is {!$CurrentPage.parameters.sesstoken}</h2>  -->
+
+        <apex:pageBlock title="Step 1:Select Google Spreadsheet" mode="edit"
+            rendered="{!selectedSheet==null}">
+            <apex:selectList value="{!selectedSheet}" multiselect="false"
+                size="6">
+                <apex:selectOptions value="{!spreadSheets}" />
+            </apex:selectList>
+            <apex:commandButton value="Continue" action="{!continuePage}" />
+        </apex:pageBlock>
+
+        <apex:pageBlock title="Step 2:Select Force.com Object" mode="edit"
+            rendered="{!AND(selectedSheet!=null,selectedObject==null)}">
+            <apex:selectList value="{!selectedObject}" multiselect="false"
+                size="6">
+                <apex:selectOptions value="{!objectList}" />
+            </apex:selectList>
+            <apex:commandButton value="Continue" action="{!extractMore}" />
+        </apex:pageBlock>
+
+        <apex:pageBlock title="Extract Log" rendered="{!logLen>0}">
+            <a href="{!sheetUrl}" >Visit Spreadsheet</a>
+            <apex:dataTable value="{!log}" var="msg" id="theTable"
+                rowClasses="odd,even" styleClass="tableClass">
+                <apex:column >
+                    <apex:facet name="header">Message</apex:facet>
+                    <apex:outputText value="{!msg}" />
+                </apex:column>
+            </apex:dataTable>
+        </apex:pageBlock>
+
+    </apex:form>
+</apex:page>

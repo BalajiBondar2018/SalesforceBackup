@@ -1,0 +1,13 @@
+<apex:page controller="HomeVFController">
+  <apex:pageBlock title="Service Performance Dashboard">
+  <apex:pageBlockSection collapsible="false" columns="1">
+      <apex:chart height="300" width="1200" data="{!data}">
+          <apex:axis type="Numeric" position="left" fields="data1,data2" title="Cases Closed" grid="true"/>
+          <apex:axis type="Category" position="bottom" fields="name" title="Month of the Year" >
+          </apex:axis>
+          <apex:lineSeries axis="left" fill="true" xField="name" yField="data1" markerType="cross" markerSize="4" markerFill="#FF0000"/>
+          <apex:lineSeries axis="left" xField="name" yField="data2" markerType="circle" markerSize="4" markerFill="#8E35EF"/>
+    </apex:chart>
+  </apex:pageBlockSection>
+  </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,60 @@
+<apex:page controller="pagingControllerForUser">
+    <apex:form >
+        <apex:pageBlock >
+            
+            <apex:pageMessages id="pgm"/>
+            
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Search" action="{!Search}"/>
+            </apex:pageBlockButtons>
+            
+            <apex:pageBlockSection >
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="User Name"/>
+                    <apex:inputText value="{!usr.Name}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+
+        </apex:pageBlock>
+
+        <apex:pageBlock rendered="{!IF(AllSearchUsers.size > 0 , true , false)}">
+
+            <apex:outputPanel layout="block" styleClass="pSearchShowMore" id="otpNav2">
+              Total Records Found: <apex:outputText rendered="{!IF(Con.resultSize==10000,true,false)}">10000 +</apex:outputText><apex:outputText rendered="{!IF(Con.resultSize < 10000,true,false)}">{!Con.resultSize}</apex:outputText>
+                  <apex:image url="/img/search_prevarrow_disabled.gif" styleClass="prevArrow" rendered="{!NOT(Con.HasPrevious)}"/>
+                  <apex:image url="/img/search_prevarrow.gif" title="Previous Page" styleClass="prevArrow" rendered="{!Con.HasPrevious}"/>
+                  <apex:commandLink action="{!Previous}" title="Previous Page" value="Previous Page" rendered="{!Con.HasPrevious}"/>
+                  <apex:outputPanel styleClass="pShowLess noLink" style="color:grey" rendered="{!NOT(Con.HasPrevious)}">Previous Page</apex:outputPanel>         
+                  &nbsp;({!IF(Con.PageNumber == 1,1,((Con.PageNumber -1) * Con.PageSize)+1)}-{!IF(Con.resultSize < Con.PageSize,Con.resultSize,Con.PageNumber * Con.pageSize)})&nbsp;
+                  <apex:outputPanel styleClass="pShowLess noLink" style="color:grey" rendered="{!NOT(Con.HasNext)}">Next Page</apex:outputPanel>         
+                  <apex:commandLink title="Next Page" value="Next Page" rendered="{!Con.HasNext}" action="{!Next}"/>&nbsp;
+                  <apex:image url="/img/search_nextarrow.gif" title="Next Page" styleClass="nextArrow" rendered="{!Con.HasNext}"/>
+                  <apex:image url="/img/search_nextarrow_disabled.gif" rendered="{!NOT(Con.HasNext)}"/>          
+              </apex:outputPanel>
+            
+            <apex:pageBlockSection columns="1">
+                <apex:pageBlockTable value="{!AllSearchUsers}" var="UR">
+                    <apex:column headerValue="Name" value="{!UR.Name}"/>
+                    <apex:column headerValue="Email" value="{!UR.Email}"/>
+                    <apex:column headerValue="Phone" value="{!UR.Phone}"/>
+                    <apex:column headerValue="Department" value="{!UR.Department}"/>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            
+            <apex:outputPanel layout="block" styleClass="pSearchShowMore" id="otpNav">
+              Total Records Found: <apex:outputText rendered="{!IF(Con.resultSize==10000,true,false)}">10000 +</apex:outputText><apex:outputText rendered="{!IF(Con.resultSize < 10000,true,false)}">{!Con.resultSize}</apex:outputText>
+                  <apex:image url="/img/search_prevarrow_disabled.gif" styleClass="prevArrow" rendered="{!NOT(Con.HasPrevious)}"/>
+                  <apex:image url="/img/search_prevarrow.gif" title="Previous Page" styleClass="prevArrow" rendered="{!Con.HasPrevious}"/>
+                  <apex:commandLink action="{!Previous}" title="Previous Page" value="Previous Page" rendered="{!Con.HasPrevious}"/>
+                  <apex:outputPanel styleClass="pShowLess noLink" style="color:grey" rendered="{!NOT(Con.HasPrevious)}">Previous Page</apex:outputPanel>         
+                  &nbsp;({!IF(Con.PageNumber == 1,1,((Con.PageNumber -1) * Con.PageSize)+1)}-{!IF(Con.resultSize < Con.PageSize,Con.resultSize,Con.PageNumber * Con.pageSize)})&nbsp;
+                  <apex:outputPanel styleClass="pShowLess noLink" style="color:grey" rendered="{!NOT(Con.HasNext)}">Next Page</apex:outputPanel>         
+                  <apex:commandLink title="Next Page" value="Next Page" rendered="{!Con.HasNext}" action="{!Next}"/>&nbsp;
+                  <apex:image url="/img/search_nextarrow.gif" title="Next Page" styleClass="nextArrow" rendered="{!Con.HasNext}"/>
+                  <apex:image url="/img/search_nextarrow_disabled.gif" rendered="{!NOT(Con.HasNext)}"/>          
+              </apex:outputPanel>
+
+        </apex:pageBlock>
+
+    </apex:form>
+</apex:page>

@@ -1,0 +1,7 @@
+<apex:page controller="RestAPIMetadataExplorerController">
+<apex:form >
+<apex:commandButton value="Show Metadata" action="{!ShowMetadataClick}"/>
+<br/>  
+ {!rawResponse}
+</apex:form>
+</apex:page>

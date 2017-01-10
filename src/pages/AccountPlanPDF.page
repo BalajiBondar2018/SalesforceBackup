@@ -1,0 +1,242 @@
+<apex:page standardController="Account_Plan__c" renderAs="pdf" extensions="AccountPlanPage2Extension"  tabStyle="Account_Plan__tab" sidebar="false" showHeader="false"> 
+<apex:form id="accountplanForm" style="margin-left:1%;width:98%">
+     <table border="0" width="100%" style="font-family:calibri;font-size:x-small;vertical-align:text-top;" cellspacing="0" cellpadding="0">
+        <tr>
+            <td width="70%">
+                <apex:image url="{!$Resource.BarclayCardsLogo}" width="120" height="40"/>
+            </td>
+            <td width="29%" style="text-align:right;">
+                {!accountPlanObj.account__r.Name}<br/>
+                {!accountPlanObj.account__r.BillingStreet} ,<br/>
+                {!accountPlanObj.account__r.BillingCity} , {!accountPlanObj.account__r.BillingState} , <br/>
+                {!accountPlanObj.account__r.BillingCountry},{!accountPlanObj.account__r.BillingPostalCode}.
+                
+            </td>    
+            <td width="1%">&nbsp;</td>
+        </tr>
+    </table>
+    <br/>
+    
+    <h4>Account Plan</h4>
+   
+    <table border="0" width="100%" cellspacing="0" cellpadding="5" style="font-family:calibri;font-size:xx-small;vertical-align:text-top;">
+    <tr>
+        <td  colspan="4"><hr style="height:1px;border-width:0;color:gray;background-color:gray"/></td>
+    </tr>
+    
+    <tr>
+        <td  colspan="4" style="text-align:left;background-color:gray;color:white;font-weight:bold;">Account Plan Information</td>
+    </tr>
+    <tr>
+        <td style="text-align:right;width:20%;font-weight:bold">Account Plan #</td><td style="text-align:left;width:35%">{!accountPlanObj.Name}</td>
+        <td style="text-align:right;width:20%;font-weight:bold">Requested On</td><td style="text-align:left;width:35%">
+        
+        <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+			<apex:param value="{!accountPlanObj.Requested_On__c}" /> 
+		</apex:outputText>
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align:right;width:20%;font-weight:bold">Account Plan Name</td><td style="text-align:left;width:35%">{!accountPlanObj.Account_Plan_Name__c}</td>
+        <td style="text-align:right;width:20%;font-weight:bold">Request Status</td><td style="text-align:left;width:35%">{!accountPlanObj.Request_Status__c}</td>
+    </tr>
+    <tr>
+        <td style="text-align:right;width:20%;font-weight:bold">Created Date</td><td style="text-align:left;width:35%">
+        
+        <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+            <apex:param value="{!accountPlanObj.CreatedDate}"/> 
+        </apex:outputText>
+        </td>
+        <td style="text-align:right;width:20%;font-weight:bold">Approved/Rejected On</td><td style="text-align:left;width:35%">
+        
+        <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+			<apex:param value="{!accountPlanObj.Approved_Rejected_On__c}" /> 
+		</apex:outputText>
+        </td>
+    </tr>
+     <tr>
+        <td  colspan="4" style="text-align:left;background-color:gray;color:white;font-weight:bold;">Objective Information</td>
+    </tr>
+    <tr>
+        <td style="text-align:right;width:20%;font-weight:bold">Objective Type</td><td style="text-align:left;width:35%">{!objectiveObj.Objective_Type__c}</td>
+        <td style="text-align:right;width:20%;font-weight:bold">Description</td><td style="text-align:left;width:35%">{!objectiveObj.Description__c}</td>
+    </tr>
+    
+    <tr>
+        <td  colspan="4" style="text-align:left;background-color:gray;color:white;font-weight:bold;">Account Information</td>
+    </tr>
+   
+    <tr>
+        <td style="text-align:right;width:20%;font-weight:bold">Account Name</td>
+        <td style="text-align:left;width:35%">
+            <apex:outputlabel value="{!accountClonewrapperObj.accountclone.Name__c}"/>&nbsp;
+            <apex:image url="{!$Resource.UpdateIcon}" width="10" height="10"/>    
+        </td>
+        <td style="text-align:right;width:20%;font-weight:bold">Account Number</td>
+        <td style="text-align:left;width:35%">
+            {!accountClonewrapperObj.accountclone.AccountNumber__c}
+        <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(accountClonewrapperObj.accountclone.AccountNumber__c != accountClonewrapperObj.account.AccountNumber, true, false)}"/>            
+        </td>
+    </tr>
+    <tr>  
+        <td style="text-align:right;width:20%;font-weight:bold">Account Owner</td>
+        <td style="text-align:left;width:35%">
+            {!accountClonewrapperObj.accountclone.Owner__r.Name}
+            <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(accountClonewrapperObj.accountclone.Owner__c != accountClonewrapperObj.account.OwnerId, true, false)}"/>    
+        </td>
+    </tr>
+    
+    <tr>
+        <td  colspan="4" style="text-align:left;background-color:gray;color:white;font-weight:bold;">Contact Information</td>
+    </tr>
+    
+    <apex:repeat value="{!contactClonewrapperObjList}" var="conwrapper">
+        <tr>
+            <td style="text-align:right;width:20%;font-weight:bold">Last Name</td>
+            <td style="text-align:left;width:35%">
+                <apex:outputField value="{!conwrapper.contactclone.LastName__c}"/>
+                <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(conwrapper.contactclone.LastName__c != conwrapper.contact.LastName, true, false)}"/>
+            </td>
+            <td style="text-align:right;width:20%;font-weight:bold">First Name</td>
+            <td style="text-align:left;width:35%">
+                <apex:outputField value="{!conwrapper.contactclone.FirstName__c}"/>&nbsp;
+                <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(conwrapper.contactclone.FirstName__c != conwrapper.contact.FirstName, true, false)}"/>    
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="text-align:right;width:20%;font-weight:bold">Email</td>
+            <td style="text-align:left;width:35%">
+                <apex:outputField value="{!conwrapper.contactclone.Email__c}"/>&nbsp;
+                <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(conwrapper.contactclone.Email__c != conwrapper.contact.Email, true, false)}"/>    
+            </td>
+            <td style="text-align:right;width:20%;font-weight:bold">Phone</td>
+            <td style="text-align:left;width:35%">
+                <apex:outputField value="{!conwrapper.contactclone.Phone__c}"/>&nbsp;
+                <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(conwrapper.contactclone.Phone__c != conwrapper.contact.Phone, true, false)}"/>
+            </td>
+        </tr>
+    </apex:repeat> 
+    
+    
+    <tr>
+        <td  colspan="4" style="text-align:left;background-color:gray;color:white;font-weight:bold;">Opportunity Information</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    
+    <tr>
+        <td  colspan="4" style="text-align:left;background-color:gray;color:white;font-weight:bold;">Pipeline(All open opps)</td>
+    </tr>
+    
+    <apex:repeat value="{!openopportunityClonewrapperObjList}" var="openoppwrapper">
+        <tr>
+            <td style="text-align:right;width:20%;font-weight:bold">Opportunity Name</td>
+            <td style="text-align:left;width:35%">
+            <apex:outputfield value="{!openoppwrapper.opportunityclone.Opportunity_Name__c}"/>
+            <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(openoppwrapper.opportunityclone.Opportunity_Name__c != openoppwrapper.opportunity.Name, true, false)}"/>
+            </td>
+            <td style="text-align:right;width:20%;font-weight:bold">Stage</td>
+            <td style="text-align:left;width:35%">
+            <apex:outputfield value="{!openoppwrapper.opportunityclone.Stage__c}"/>&nbsp;
+                    <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(openoppwrapper.opportunityclone.Stage__c != openoppwrapper.opportunity.StageName, true, false)}"/>
+            </td>
+        </tr>
+
+       <tr>
+            <td style="text-align:right;width:20%;font-weight:bold">Product</td>
+            <td style="text-align:left;width:35%">
+            <apex:outputfield value="{!openoppwrapper.opportunityclone.Product__c}"/>&nbsp;
+                    <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(openoppwrapper.opportunityclone.Product__c != openoppwrapper.opportunity.Product__c, true, false)}"/>
+            </td>
+            <td style="text-align:right;width:20%;font-weight:bold">Quantity</td>
+            <td style="text-align:left;width:35%">
+            <apex:outputfield value="{!openoppwrapper.opportunityclone.Quantity__c}"/>&nbsp;
+                    <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(openoppwrapper.opportunityclone.Quantity__c != openoppwrapper.opportunity.TotalOpportunityQuantity, true, false)}"/>    
+            </td>
+        </tr>
+
+       <tr>
+            <td style="text-align:right;width:20%;font-weight:bold">Closed Date</td>
+            <td style="text-align:left;width:35%">
+                <apex:outputfield value="{!openoppwrapper.opportunityclone.Closed_Date__c}"/>
+                        <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(openoppwrapper.opportunityclone.Closed_Date__c != openoppwrapper.opportunity.CloseDate, true, false)}"/>    
+                    
+            </td>
+            <td style="text-align:right;width:20%;font-weight:bold"></td>
+            <td style="text-align:left;width:35%"></td>
+        </tr>
+        </apex:repeat>
+    
+        
+            <tr>
+        <td  colspan="4" style="text-align:left;background-color:gray;color:white;font-weight:bold;">Closed opps(Last 12 months)</td>
+    </tr>
+    
+
+    <apex:repeat value="{!closedopportunityClonewrapperObjList}" var="closedoppwrapper">
+       <tr>
+            <td style="text-align:right;width:20%;font-weight:bold">Opportunity Name</td>
+            <td style="text-align:left;width:35%">
+                <apex:outputfield value="{!closedoppwrapper.opportunityclone.Opportunity_Name__c}"/>
+                <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(closedoppwrapper.opportunityclone.Opportunity_Name__c != closedoppwrapper.opportunity.Name, true, false)}"/>
+            </td>
+            <td style="text-align:right;width:20%;font-weight:bold">Stage</td>
+            <td style="text-align:left;width:35%">
+                <apex:outputfield value="{!closedoppwrapper.opportunityclone.Stage__c}"/>&nbsp;
+                <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(closedoppwrapper.opportunityclone.Stage__c != closedoppwrapper.opportunity.StageName, true, false)}"/>
+            </td>
+        </tr>
+
+       <tr>
+            <td style="text-align:right;width:20%;font-weight:bold">Product</td>
+            <td style="text-align:left;width:35%">
+            <apex:outputfield value="{!closedoppwrapper.opportunityclone.Product__c}"/>&nbsp;
+                    <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(closedoppwrapper.opportunityclone.Product__c != closedoppwrapper.opportunity.Product__c, true, false)}"/>    
+            </td>
+            <td style="text-align:right;width:20%;font-weight:bold">Quantity</td>
+            <td style="text-align:left;width:35%">
+                <apex:outputfield value="{!closedoppwrapper.opportunityclone.Quantity__c}"/>
+                <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(closedoppwrapper.opportunityclone.Quantity__c != closedoppwrapper.opportunity.TotalOpportunityQuantity, false, true)}"/>    
+            </td>
+        </tr>
+
+       <tr>
+            <td style="text-align:right;width:20%;font-weight:bold">Closed Date</td>
+            <td style="text-align:left;width:35%">
+                <apex:outputfield value="{!closedoppwrapper.opportunityclone.Closed_Date__c}"/>
+                <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(closedoppwrapper.opportunityclone.Closed_Date__c != closedoppwrapper.opportunity.CloseDate, true, false)}"/>    
+                        
+            </td>
+            <td style="text-align:right;width:20%;font-weight:bold"></td>
+            <td style="text-align:left;width:35%"></td>
+        </tr>
+        </apex:repeat>
+    
+        
+        <tr>
+             <td  colspan="4" style="text-align:left;background-color:gray;color:white;font-weight:bold;">Performance Summary</td>
+         </tr>
+    
+           <tr>
+                <td style="text-align:right;width:20%;font-weight:bold">Last Month</td>
+                <td style="text-align:left;width:35%">
+                    <apex:outputField value="{!accountPlanObj.account__r.Last_Month__c}"/>
+                </td>
+                <td style="text-align:right;width:20%;font-weight:bold">YTD</td>
+                <td style="text-align:left;width:35%">
+                    <apex:outputField value="{!accountPlanObj.account__r.YTD__c}"/>
+                </td>
+            </tr>
+           <tr>
+                <td style="text-align:right;width:20%;font-weight:bold">Rolling 12 Months</td>
+                <td style="text-align:left;width:35%">
+                       <apex:outputField value="{!accountPlanObj.account__r.Rolling_12_Months__c}"/>
+                </td>
+                <td style="text-align:right;width:20%;font-weight:bold">&nbsp;</td>
+                <td style="text-align:left;width:35%">&nbsp;</td>
+            </tr>
+    </table>
+    </apex:form>
+</apex:page>

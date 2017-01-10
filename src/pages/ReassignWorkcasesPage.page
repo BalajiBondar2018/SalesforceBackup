@@ -1,0 +1,147 @@
+<apex:page controller="WorkcaseReassignmentController" action="{!OnLoad}">
+
+<script>
+window.onload = function(){
+    // x functionality when window loads
+    //alert('onload called.');
+    debugger;
+    var a = 5;
+    var b = 6;
+    var c = a+b;
+    console.log('@@@@@@Addition is '+c);
+    //alert('value of c after addtion '+c);
+}
+</script>
+
+<apex:sectionHeader title="Case Reassignment" subtitle="Queuewise/Agentwise"/>
+<apex:form id="reAssignCaseForm">
+<apex:commandLink value="<< Back To Home"/>
+<apex:pageBlock >
+
+<!--<apex:pageMessage severity="INFO" strength="2" title="Reassignment Summary" summary="All Work Currently Assigned To  Surya Gunisetty with  0 - cases  Will be Reassigned To  Surya Gunisetty "></apex:pageMessage>-->
+
+<apex:pageBlockButtons location="bottom">
+<apex:commandButton value="Reassign" action="{!ReassignBtnClick}" reRender="reAssignCaseForm" status="actionstatuspanel"/>
+<apex:commandButton value="Cancel" action="{!CancelBtnClick}" reRender="reAssignCaseForm" status="actionstatuspanel"/>
+</apex:pageBlockButtons>
+    
+    <apex:pageBlockSection title="Step#1 Select Case & Operation Type" columns="1" collapsible="false">
+     <apex:pageBlockSectionItem >
+    <apex:outputLabel >Type</apex:outputLabel>
+    <apex:outputPanel >
+        <apex:selectList size="1" value="{!selectedCaseType}">
+            <apex:actionSupport event="onchange" action="{!CaseTypeChange}" reRender="reAssignCaseForm"/>
+            <apex:selectOption itemLabel="--Select--" itemValue="Select"></apex:selectOption>
+            <apex:selectOption itemLabel="Work Case" itemValue="WorkCase"></apex:selectOption>
+            <apex:selectOption itemLabel="Work Case Item" itemValue="OfficeDepot__Work_Case_Item__c"></apex:selectOption>
+            <apex:selectOption itemLabel="Subscriber Case" itemValue="SubscriberCase"></apex:selectOption>
+        </apex:selectList>
+
+        <apex:selectList size="1" value="{!selectedOperationType}" disabled="{!disableOperationTypeFlag}">
+            <apex:actionSupport event="onchange" action="{!OperationTypeChange}" reRender="reAssignCaseForm"/>
+            <apex:selectOptions value="{!OperationTypeList}"/>
+        </apex:selectList>
+        
+    </apex:outputPanel>
+    </apex:pageBlockSectionItem>
+    </apex:pageBlockSection>
+    
+    <apex:pageBlockSection title="Step#2 Select Work Queue" columns="1" collapsible="false">
+     <apex:pageBlockSectionItem >
+    <apex:outputLabel >Queue</apex:outputLabel>
+   <apex:outputPanel >
+    <!--
+    <apex:selectList value="{!SelectedReassignmentCriteria}" size="1" disabled="{!disableReassignmentCriteriaFlag }">
+        <apex:actionSupport event="onchange" action="{!reassignmentCriteriaChange}" reRender="reAssignCaseForm"/>
+        <apex:selectOption itemLabel="--Select--" itemValue="Select"></apex:selectOption>
+        <apex:selectOption itemLabel="Queue" itemValue="Queue"></apex:selectOption>
+        <apex:selectOption itemLabel="Agent" itemValue="Agent"></apex:selectOption>
+    </apex:selectList>
+    -->
+    <apex:selectList size="1" Value="{!selectedQueueName}" disabled="{!disableReassignmentQueueFlag}">
+            <apex:actionSupport event="onchange" action="{!QueueChange}" reRender="reAssignCaseForm"/>
+            <apex:selectOptions value="{!queueNameList}"/>
+    </apex:selectList>
+    </apex:outputPanel>
+    </apex:pageBlockSectionItem>
+    </apex:pageBlockSection>
+    
+    <apex:pageBlockSection title="Step#3 Select Agent Information"  collapsible="false">
+    <apex:pageBlockSectionItem >
+    <apex:outputLabel >From</apex:outputLabel>
+   
+    <apex:selectList size="1" Value="{!selectedFromAgent}" disabled="{!disableFromAgentFlag}">
+            <apex:actionSupport event="onchange" action="{!FromAgentChange}" reRender="reAssignCaseForm"/>
+            <apex:selectOptions value="{!FromAgentList}"/>
+    </apex:selectList>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+    
+    <apex:outputLabel >To</apex:outputLabel>
+    <apex:outputPanel >
+        <div class = "requiredInput">
+            <div class = "requiredBlock"></div>
+            <apex:selectList size="1" Value="{!selectedToAgent}" disabled="{!disableToAgentFlag}">
+                    <apex:actionSupport event="onchange" action="{!ToAgentChange}" reRender="reAssignCaseForm"/>
+                    <apex:selectOptions value="{!ToAgentList}"/>
+            </apex:selectList>
+        </div>
+    </apex:outputPanel>
+    </apex:pageBlockSectionItem>
+    </apex:pageBlockSection>
+    
+    
+    <apex:pageBlockSection title="Step#4 Select Case Filter  Criteria" columns="1" collapsible="false">
+     <apex:pageBlockSectionItem >
+    <apex:outputLabel >Parameter</apex:outputLabel>
+    <apex:outputPanel >
+        <apex:selectList size="1" value="{!selectedCaseFilterCriteria}" disabled="{!disableCaseFilterCriteriaFlag}">
+            <apex:actionSupport event="onchange" action="{!CaseFilterCriteriaChange}" reRender="reAssignCaseForm"/>
+            <apex:selectOption itemLabel="--Select--" itemValue="Select"></apex:selectOption>
+            <apex:selectOption itemLabel="Status" itemValue="Status"></apex:selectOption>
+            <apex:selectOption itemLabel="Priority" itemValue="Priority"></apex:selectOption>
+        </apex:selectList>
+    
+        <apex:selectList size="1" Value="{!selectedCaseFilterInput}" disabled="{!disableCaseFilterInputFlag}">
+                <apex:selectOptions value="{!FilterCriteriaList}"/>
+        </apex:selectList>
+    
+    </apex:outputPanel>
+    </apex:pageBlockSectionItem>
+    </apex:pageBlockSection>
+    
+    <apex:pageBlockSection title="Step#5 Select Reassignment Reason"  collapsible="false">
+    <apex:pageBlockSectionItem >
+    <apex:outputLabel >Reassignment Reason</apex:outputLabel>
+    <apex:outputPanel >
+        <div class = "requiredInput">
+            <div class = "requiredBlock"></div>
+            <apex:selectList size="1" value="{!selectedReassignmentReason}" disabled="{!disableReassignmentReasonFlag}">
+                <apex:selectOption itemLabel="--Select--" itemValue="Select"></apex:selectOption>
+                <apex:selectOption itemLabel="Escalation" itemValue="Queue"></apex:selectOption>
+                <apex:selectOption itemLabel="Initial Assignment" itemValue="Agent"></apex:selectOption>
+                <apex:selectOption itemLabel="Invalid Entry" itemValue="Invalid Entry"></apex:selectOption>
+                <apex:selectOption itemLabel="Workload Adjustment" itemValue="Invalid Entry"></apex:selectOption>
+            </apex:selectList>
+        </div>
+    </apex:outputPanel>
+    </apex:pageBlockSectionItem>
+    </apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+
+<apex:outputpanel >
+        <apex:actionstatus id="actionstatuspanel">
+            <apex:facet name="start">
+                <div class="waitingSearchDiv" id="el_loading" style="background-color: #DCD6D6;
+                       height: 100%;opacity:0.65;width:100%;"> 
+                    <div class="waitingHolder" style="top: 80px; width: 91px;">
+                        <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                        <span class="waitingDescription">Processing...</span>
+                    </div>
+                </div>
+            </apex:facet>
+        </apex:actionstatus>
+    </apex:outputpanel>
+
+</apex:page>

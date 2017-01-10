@@ -1,0 +1,38 @@
+<apex:page controller="MobileHybridController" sidebar="false" showHeader="false">
+
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+
+
+<apex:form >
+    <div data-role="page">
+        <div data-role="header" data-position="inline" data-theme="c"> 
+            <h1>Salesforce.com Demo</h1>
+            <a href="index.html" data-icon="gear" class="ui-btn-right">Options</a>
+        </div>
+        
+        <div data-role="content">
+                <div class="content-primary">   
+                    <ul data-role="listview" data-filter="true" >
+                        <li><a href="/apex/MobileHybridAccountDetailpage">Acura</a></li>
+                        <li><a href="/apex/MobileHybridAccountDetailpage">Audi</a></li>
+                        <li><a href="/apex/MobileHybridAccountDetailpage">BMW</a></li>
+                        <li><a href="index.html">Cadillac</a></li>
+                        <li><a href="/apex/MobileHybridAccountDetailpage">Acura</a></li>
+                        <li><a href="/apex/MobileHybridAccountDetailpage">Audi</a></li>
+                        <li><a href="/apex/MobileHybridAccountDetailpage">BMW</a></li>
+                        <li><a href="index.html">Cadillac</a></li>
+                    </ul>
+                </div><!--/content-primary -->      
+        
+        </div><!--/content-->
+        
+    </div><!-- /page -->
+    
+    
+
+
+</apex:form>
+
+</apex:page>

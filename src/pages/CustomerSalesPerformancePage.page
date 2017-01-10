@@ -1,0 +1,190 @@
+<apex:page standardController="Account" extensions="CustomerSalesPerformanceExtension" showHeader="false" sidebar="false" tabStyle="product2">
+<style type="text/css">
+#lysalesperformance {
+    border: 1px solid red;
+
+    border-collapse: collapse;
+    
+}
+#lysalesperformance td {
+    border-left: 1px solid red;
+    border-right: 1px solid red;
+    border-top: 1px solid red;
+    border-bottom: 1px solid red;
+    
+}
+</style>
+
+<apex:pageBlock >
+<apex:sectionHeader title="{!accountObj.Name}" subtitle="Sales Performance"/>
+<apex:pageBlockSection title="Sales Performance-Yearly">
+
+<table border="1">
+    <tr style="text-align:center;">
+        <td>&nbsp;</td>
+        <td colspan="18">2012</td>
+        <td colspan="21">2013</td>
+    </tr>
+    <tr style="text-align:center;">
+        <td>&nbsp;</td>
+        <td colspan="3">P1</td>
+        <td colspan="3">P2</td>
+        <td colspan="3">P3</td>
+        <td colspan="3">P4</td>
+        <td colspan="3">P5</td>
+        <td colspan="3">P6</td>
+        <td colspan="3">P7</td>
+        <td colspan="3">P8</td>
+        <td colspan="3">P9</td>
+        <td colspan="3">P10</td>
+        <td colspan="3">P11</td>
+        <td colspan="3">P12</td>
+        <td colspan="3">P13</td>
+    </tr>
+    <tr>
+        <td width="20">Category</td>
+        <td>Net Sales</td>
+        <td>IMU</td>
+        <td>IMU%</td>
+        
+        <td>Net Sales</td>
+        <td>IMU</td>
+        <td>IMU%</td>
+
+        <td>Net Sales</td>
+        <td>IMU</td>
+        <td>IMU%</td>
+    
+        <td>Net Sales</td>
+        <td>IMU</td>
+        <td>IMU%</td>
+        
+        <td>Net Sales</td>
+        <td>IMU</td>
+        <td>IMU%</td>
+        
+        <td>Net Sales</td>
+        <td>IMU</td>
+        <td>IMU%</td>
+        
+        <td>Net Sales</td>
+        <td>IMU</td>
+        <td>IMU%</td>
+        
+        <td>Net Sales</td>
+        <td>IMU</td>
+        <td>IMU%</td>
+        
+        <td>Net Sales</td>
+        <td>IMU</td>
+        <td>IMU%</td>
+        
+        <td>Net Sales</td>
+        <td>IMU</td>
+        <td>IMU%</td>
+        
+        <td>Net Sales</td>
+        <td>IMU</td>
+        <td>IMU%</td>
+        
+        <td>Net Sales</td>
+        <td>IMU</td>
+        <td>IMU%</td>
+        
+        <td>Net Sales</td>
+        <td>IMU</td>
+        <td>IMU%</td>
+    </tr>
+    
+    
+    <tr>
+        <td>Category Name</td>
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+        
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+        
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+        
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+        
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+        
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+        
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+        
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+        
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+        
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+        
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+        
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+        
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+        
+    </tr>
+</table>
+
+
+</apex:pageBlockSection>
+<apex:pageBlockSection title="Sales Performance-Current Period" columns="1">
+<table border="1">
+    <tr style="text-align:center;">
+        <td>&nbsp;</td>
+        <td colspan="12">P5</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td colspan="3">1</td>
+        <td colspan="3">2</td>
+        <td colspan="3">3</td>
+        <td colspan="3">4</td>
+    </tr>
+    <tr>
+        <td>Category</td>
+        <td>Net Sales</td>
+        <td>IMU</td>
+        <td>IMU%</td>
+        <td>Net Sales</td>
+        <td>IMU</td>
+        <td>IMU%</td>
+        <td>Net Sales</td>
+        <td>IMU</td>
+        <td>IMU%</td>
+        <td>Net Sales</td>
+        <td>IMU</td>
+        <td>IMU%</td>
+    </tr>
+</table>
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:page>

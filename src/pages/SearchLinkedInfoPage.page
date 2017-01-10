@@ -1,0 +1,12 @@
+<apex:page standardController="Case" extensions="SearchLinkedInfoExtension">
+ <apex:form >
+ <apex:sectionHeader title="Search Linked Information" subtitle="Case#{001234567}"/>
+ <apex:commandLink value="<< Back To Case#00132456"/>
+     <apex:pageBlock >
+     <apex:pageBlockSection title="Linked Info Search Criteria" collapsible="false">
+     
+     </apex:pageBlockSection>
+     </apex:pageBlock>
+ 
+ </apex:form>
+</apex:page>

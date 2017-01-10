@@ -1,0 +1,34 @@
+<apex:page standardController="Letter__c" extensions="LetterTemplateExtension">
+ <apex:sectionHeader title="Letter Template" subtitle="Create Letter Template"/>
+<apex:form id="LetterTemplate5Form">
+<apex:commandLink value="<< Back To Home"/>
+<apex:pageBlock >
+    <apex:pageBlockButtons location="bottom">
+        <apex:commandButton value="Previous" action="{!Previous5BtnClick}"/>
+        <apex:commandButton value="Save"/>
+        <apex:commandButton value="Next" disabled="true"/>
+    </apex:pageBlockButtons>
+    
+    <apex:pageBlockSection title="Letter Optional Paragraph" columns="2">
+        <apex:pageBlockTable value="{!optionList}" var="olist">
+        <apex:column headerValue="Action"> 
+            <apex:inputCheckbox />
+        </apex:column>
+        
+        <apex:column headerValue="Description"> 
+            <apex:outputText >{!olist}</apex:outputText>
+        </apex:column>        
+        
+        
+        </apex:pageBlockTable>
+    
+    </apex:pageBlockSection>
+    <apex:pageBlockSection title="Deployment Status" columns="2">
+        <apex:outputPanel >
+            <apex:outputLabel >Deployed</apex:outputLabel>&nbsp;&nbsp;&nbsp;
+                <apex:inputCheckbox />
+            </apex:outputPanel>
+    </apex:pageBlockSection>
+    </apex:pageBlock>
+ </apex:form>   
+</apex:page>

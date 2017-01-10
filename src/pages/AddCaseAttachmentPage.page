@@ -1,0 +1,54 @@
+<apex:page StandardController="Case_Attachment__c" extensions="AddCaseAttachmentExtension">
+ <apex:sectionHeader title="Case# 00003454354" subtitle="Attach File"/>
+<apex:form id="form_Upload">
+ <apex:commandLink value="<< back to case#1234567"/> 
+ <apex:pageBlock >
+ <apex:pageBlockButtons location="Bottom">
+ <apex:commandButton value="Save"/>
+  <apex:commandButton value="Cancel"/>
+ </apex:pageBlockButtons>
+ <apex:pageMessages />
+ 
+  <apex:pageBlockSection columns="1" title="Additional Attachment Information" collapsible="false">
+  
+   
+    <apex:pageBlockSectionItem >
+      <apex:outputLabel value="Type" for="type"/>
+      <apex:selectList value="{!selectedType}" size="1" id="type"> 
+        <apex:selectOption itemValue="Plain ole awesome" itemLabel="Workcase"/>
+        <apex:selectOption itemValue="Super awesome" itemLabel="Additional Case"/>
+        <apex:selectOption itemValue="Super awesome" itemLabel="Workcase Item"/>
+      </apex:selectList>
+    </apex:pageBlockSectionItem>
+    
+    
+    <apex:pageBlockSectionItem >
+      <apex:outputLabel value="Description" for="description"/> 
+      <apex:inputTextarea id="description" value="{!description}" rows="2" cols="80"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+      <apex:outputLabel value="Additional Information Date" for="description"/> 
+      <apex:inputfield value="{!caseAttachmentObj.Additional_Information_Date__c}"/>
+    </apex:pageBlockSectionItem>
+    
+    
+     <apex:pageBlockSectionItem >
+      
+      <apex:outputLabel value="File" for="file_File"/>
+      <apex:inputFile id="file_File" value="{!fileBody}" filename="{!fileName}"/>
+    </apex:pageBlockSectionItem>
+  
+    <apex:pageBlockSectionItem >
+      <apex:outputLabel value="" for="uploadBtn"/> 
+      <apex:commandButton id="uploadBtn" value="Attach File" action="{!processUpload}" />
+    </apex:pageBlockSectionItem>    
+    
+  </apex:pageBlockSection>
+ 
+ </apex:pageBlock>
+ 
+ 
+ </apex:form>  
+ 
+</apex:page>

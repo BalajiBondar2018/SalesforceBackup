@@ -1,0 +1,41 @@
+<apex:page tabStyle="Case" standardController="Case" extensions="LetterTableExtension">
+    <apex:form id="lettertableform">
+    <apex:pageBlock >
+        {!rightselected}{!selectedValueList}
+        <apex:pageBlockSection title="Select Columns" columns="1"></apex:pageBlockSection>
+            <apex:panelGrid columns="3" id="abcd">
+            <apex:selectList id="sel1" value="{!leftselected}" multiselect="true" style="width:100px" size="5">
+                <apex:selectOptions value="{!unselectedvalues}" />
+            </apex:selectList>
+                <apex:panelGroup >
+                    <br/>
+                    <apex:commandButton value=">>" reRender="lettertableform">
+                        <apex:actionSupport event="onclick" action="{!selectclick}" />
+                    </apex:commandButton>
+                    <br/><br/>
+                    <apex:commandButton value="<<"  reRender="lettertableform">
+                        <apex:actionSupport event="onclick" action="{!unselectclick}"/>
+                    </apex:commandButton>
+                </apex:panelGroup>
+            <apex:selectList id="sel2" value="{!rightselected}" multiselect="true" style="width:100px" size="5">
+                <apex:selectOptions value="{!SelectedValues}" />
+            </apex:selectList>
+        </apex:panelGrid>
+            
+        <apex:pageBlockSection title="DataTable Preview" columns="1"></apex:pageBlockSection>    
+            
+            <table border='1'>
+                <tr>
+                <apex:repeat value="{!selectedValueList}" var="columnname">
+                    <td width='150px;'>{!columnname}</td>
+                </apex:repeat>
+                </tr>
+                <tr>
+                <apex:repeat value="{!selectedValueList}" var="columnname">
+                    <td width='150px;'>&nbsp;</td>
+                </apex:repeat>
+                </tr>
+            </table>        
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

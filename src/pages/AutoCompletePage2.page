@@ -1,0 +1,77 @@
+<apex:page controller="AutoCompleteDemoController" tabStyle="Account">
+    <!--Make sure you have the Javascript in the same order that I have listed below.-->
+    <script src="https://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="/soap/ajax/26.0/connection.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css"/>
+    <script type="text/javascript">
+        var j$ = jQuery.noConflict();
+        var apexAccountList =[];
+         
+        //use the <!-- <apex:repeat > -->tag to iterate through the list returned from the class and store only the names in the javascript variable.
+        <apex:repeat value="{!accountList}" var="accList">
+            //Store the name of the account in the array variable.
+            apexAccountList.push('{!accList.name}');
+        </apex:repeat>
+         
+        //We will establish a connection salesforce database using the sforce.connection.init(sessionID, ServerURL) function.
+        var sid = '{!$Api.Session_ID}';
+        var server = "https://" + window.location.host + "/services/Soap/u/26.0";
+        sforce.connection.init(sid, server);
+         
+        //We will query the contact object using the sforce.connection.query function. This will return 200 results.
+        var result = sforce.connection.query("select Name from Account LIMIT 10");
+        var records = result.getArray("records");
+        var javascriptContactList =[];
+         
+        //Iterate thru the list of contact and store them in a javascript simple array variable which will then assign it to the source of the autocomplete.
+        for(i=0;i<records.length;i++){
+            javascriptContactList[i]=records[i].Name;
+        }
+        //on Document ready
+        j$(document).ready(function(){
+             
+            j$("#apexaccountautocomplete").autocomplete({
+                source : apexAccountList
+            });
+            j$("#sfjscontactautocomplete").autocomplete({
+                source : javascriptContactList
+            });
+        });
+    </script>
+     
+    <apex:form >
+        
+        
+        <apex:sectionHeader title="Autocomplete" subtitle="Search Account"/>
+        <apex:pageBlock >
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton value="Select"/>
+            <apex:commandButton value="Cancel"/>
+        </apex:pageBlockButtons>
+        
+        
+        <apex:pageBlockSection title="Using APEX Class" collapsible="false">
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Account Name</apex:outputLabel>
+                <input type="text" id="apexaccountautocomplete"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Account #</apex:outputLabel>
+                <input type="text" id="apexaccountautocomplete"/>
+            </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Using AJAX Toolkit" collapsible="false">
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Account Name</apex:outputLabel>
+                <input type="text" id="sfjscontactautocomplete"/>
+            </apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem >
+                <apex:outputLabel >Account #</apex:outputLabel>
+                <input type="text" id="sfjscontactautocomplete"/>
+            </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+       </apex:pageBlock>
+    </apex:form>
+     
+</apex:page>

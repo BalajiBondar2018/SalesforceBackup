@@ -1,0 +1,508 @@
+<apex:page standardController="Opportunity" extensions="ImplementationRequestFormExtension" tabStyle="Implementation__tab">
+<apex:form id="implementationrequestform">
+<apex:sectionHeader title="Implementation Request Form" subtitle="complete checklist & send for Approval"/>
+
+<apex:image url="{!$Resource.General}" rendered="{!showGenaralSectionFlag }"/>
+<apex:image url="{!$Resource.OrganizationDetails}" rendered="{!showOrganizationDetailsFlag}"/>
+<apex:image url="{!$Resource.OpportunityDetails}" rendered="{!showOpportunityDetailsFlag}"/>
+<apex:image url="{!$Resource.CustomerDetails}" rendered="{!showCustomerDetailsFlag}"/>
+<apex:image url="{!$Resource.ImplementationDetails}" rendered="{!showImplementationDetailsFlag}"/>
+<apex:image url="{!$Resource.B2B}" rendered="{!showB2BFlag}"/>
+<apex:image url="{!$Resource.BSM}" rendered="{!showBSMFlag}"/>
+<apex:image url="{!$Resource.PrecisionPay}" rendered="{!showPrecisionPayFlag}"/>
+
+<br/>
+<br/>
+
+<apex:commandLink value="<<Back to {!OpportunityObj.Name}" action="{!BackToOpportunity}"/>
+<apex:pageBlock >
+<apex:pageBlockButtons >
+<apex:commandButton value="Back" action="{!BackBtnClick}" reRender="implementationrequestform" status="processstatus" disabled="{!showGenaralSectionFlag}"/>
+<apex:commandButton value="Save & Next" action="{!NextBtnClick}" reRender="implementationrequestform" status="processstatus" disabled="{!showPrecisionPayFlag}"/>
+<apex:commandButton value="Submit for Approval" action="{!SubmitBtnClick}" reRender="implementationrequestform" status="processstatus" rendered="{!showPrecisionPayFlag}" disabled="{!IsSubmittedforApproval}"/>
+<apex:image value="{!$Resource.RecordLockImage}" rendered="{!IsSubmittedforApproval}"/>
+<apex:actionStatus id="processstatus" startText="Processing..."/>
+</apex:pageBlockButtons>
+<apex:pageBlockSection columns="1" title="General" rendered="{!showGenaralSectionFlag}" collapsible="false">
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >NBM/ADM Name</apex:outputLabel>
+        <apex:inputField style="width:200px;" value="{!implementationObj.General_NBMADMName__c}"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >What resource is required?</apex:outputLabel>
+        <apex:inputField style="width:200px;" value="{!implementationObj.General_RequiredResource__c}"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Has the contract been sent to the customer?</apex:outputLabel>
+        <apex:outputPanel >
+            <apex:selectRadio value="{!implementationObj.General_Contract_Sent_Status__c}">
+                    <apex:selectOption itemLabel="Yes" itemvalue="True"/>
+                    <apex:selectOption itemLabel="No" itemvalue="False"/><br/>
+                    <apex:actionsupport event="onchange" action="{!GeneralNACSStatusOnChange}" reRender="implementationrequestform" status="processstatus"/>         
+            </apex:selectRadio>
+            <apex:outputPanel rendered="{!implementationObj.General_Contract_Sent_Status__c}">
+                <apex:outputLabel value="If yes, Please details"/><br/>
+                <apex:inputTextarea rows="3" cols="100"/>
+            </apex:outputPanel>
+        </apex:outputPanel>
+    </apex:pageBlockSectionItem>
+
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Please confirm value by currency and date gained:</apex:outputLabel>
+        <apex:outputPanel >
+           <table cellspacing="2" cellpadding="0">
+                    <tr>
+                        <td>Currency</td>
+                        <td>Value</td>
+                        <td>Date</td>
+                    </tr>
+                    <tr>
+                        <td><apex:inputField value="{!implementationObj.General_Currency1__c}" /></td>
+                        <td><apex:inputText /></td>
+                        <td><apex:inputField value="{!opportunity.TestDate__c}"/></td>
+                    </tr>
+                    <tr>
+                        <td><apex:inputField value="{!implementationObj.General_Currency2__c}" /></td>
+                        <td><apex:inputText /></td>
+                        <td><apex:inputField value="{!opportunity.TestDate__c}"/></td>
+                    </tr>
+                    <tr>
+                        <td><apex:inputField value="{!implementationObj.General_Currency3__c}" /></td>
+                        <td><apex:inputText /></td>
+                        <td><apex:inputField value="{!opportunity.TestDate__c}"/></td>
+                    </tr>
+                </table>
+        </apex:outputPanel>
+    </apex:pageBlockSectionItem>
+
+    <apex:pageBlockSectionItem id="NACSStatusRequiredPBSectionItem">
+        <apex:outputLabel >Is NACS Status Required?</apex:outputLabel>
+        <apex:outputPanel >
+            <apex:selectRadio value="{!implementationObj.General_NACS_Status_Required__c}">
+                    <apex:selectOption itemLabel="Yes" itemvalue="True"/>
+                    <apex:selectOption itemLabel="No" itemvalue="False"/>
+            <apex:actionsupport event="onchange" action="{!GeneralNACSStatusOnChange}" reRender="implementationrequestform" status="processstatus"/>         
+            </apex:selectRadio>
+            <apex:outputPanel id="NACSStatusRequiredOutputPanel" rendered="{!implementationObj.General_NACS_Status_Required__c }">
+                <apex:outputLabel value="If yes, Confirm who has been assigned"/><br/>
+                <apex:inputTextarea rows="3" cols="100" value="{!implementationObj.General_NACS_Status_Required_Description__c}"/>
+            </apex:outputPanel>
+        </apex:outputPanel>
+    </apex:pageBlockSectionItem>
+    <!--
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Has the opportunity gone to deal review?</apex:outputLabel>
+        <apex:outputPanel >
+            <apex:selectRadio value="{!implementationObj.General_Opportunity_Deal_Review__c}">
+                    <apex:selectOption itemLabel="Yes" itemValue="True"></apex:selectOption>
+                    <apex:selectOption itemLabel="No" itemValue="False"></apex:selectOption>
+            </apex:selectRadio>
+            <apex:outputLabel value="If yes, Please specify what is non standards"/><br/>
+            <apex:inputTextarea rows="3" cols="100"/>
+        </apex:outputPanel>
+    </apex:pageBlockSectionItem>
+    -->
+</apex:pageBlockSection>
+    
+<apex:pageBlockSection title="Organization Details" columns="1" rendered="{!showOrganizationDetailsFlag}" collapsible="false">
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Organization Name</apex:outputLabel>
+        <apex:inputText />     
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Contracting Entity Name if different from the above</apex:outputLabel>
+        <apex:inputText />     
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Address</apex:outputLabel>
+        <apex:inputTextarea rows="3" cols="100"/>     
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >PostCode</apex:outputLabel>
+        <apex:inputText />     
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Line of Business/Industry</apex:outputLabel>
+        <apex:inputText />     
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Registered Number</apex:outputLabel>
+        <apex:inputText />     
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Company Turnover</apex:outputLabel>
+        <apex:inputText />     
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Please confirm whether the customer is Barclay's banked.</apex:outputLabel>
+        <apex:selectRadio >
+            <apex:selectOption itemLabel="Yes" title="Yes"></apex:selectOption>
+            <apex:selectOption ></apex:selectOption>
+        </apex:selectRadio>     
+    </apex:pageBlockSectionItem>
+    
+    
+</apex:pageBlockSection>
+
+
+<apex:pageBlockSection title="Opportunity Details" columns="1" rendered="{!showOpportunityDetailsFlag}" collapsible="false">
+<apex:pageBlockSectionItem >
+        <apex:outputLabel >&nbsp;</apex:outputLabel>
+        <apex:outputPanel >
+           <table cellspacing="2" cellpadding="0">
+                    <tr>
+                        <td>Product</td>
+                        <td>No OF CARDS</td>
+                        <td>YEAR 1 SPEND</td>
+                        <td>POTENTIAL GO-LIVE</td>
+                    </tr>
+                    <tr>
+                        <td><apex:inputField value="{!implementationObj.Opportunity_Product1__c}"/></td>
+                        <td><apex:inputText /></td>
+                        <td><apex:inputText /></td>
+                        <td><apex:inputText /></td>
+                    </tr>
+                    <tr>
+                        <td><apex:inputField value="{!implementationObj.Opportunity_Product2__c}"/></td>
+                        <td><apex:inputText /></td>
+                        <td><apex:inputText /></td>
+                        <td><apex:inputText /></td>
+                    </tr>
+                    <tr>
+                        <td><apex:inputField value="{!implementationObj.Opportunity_Product3__c}"/></td>
+                        <td><apex:inputText /></td>
+                        <td><apex:inputText /></td>
+                        <td><apex:inputText /></td>
+                    </tr>
+                    <tr>
+                        <td><apex:inputField value="{!implementationObj.Opportunity_Product4__c}"/></td>
+                        <td><apex:inputText /></td>
+                        <td><apex:inputText /></td>
+                        <td><apex:inputText /></td>
+                    </tr>
+                    <tr>
+                        <td><apex:inputField value="{!implementationObj.Opportunity_Product5__c}"/></td>
+                        <td><apex:inputText /></td>
+                        <td><apex:inputText /></td>
+                        <td><apex:inputText /></td>
+                    </tr>
+                </table>
+        </apex:outputPanel>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >What are the Customers key drivers for implementing the opportunities? </apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Are there any compelling events driving the timescales against each opportunity? </apex:outputLabel>
+        <apex:outputPanel >
+            <apex:selectRadio >
+                    <apex:selectOption itemLabel="Yes" title="Yes"></apex:selectOption>
+                    <apex:selectOption ></apex:selectOption>
+            </apex:selectRadio>
+            <apex:outputLabel value="If yes, Please details"/><br/>
+            <apex:inputTextarea rows="3" cols="100"/>
+        </apex:outputPanel>
+    </apex:pageBlockSectionItem>
+    
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Are there any other competing or influencing projects? </apex:outputLabel>
+        <apex:outputPanel >
+            <apex:selectRadio >
+                    <apex:selectOption itemLabel="Yes" title="Yes"></apex:selectOption>
+                    <apex:selectOption ></apex:selectOption>
+            </apex:selectRadio>
+            <apex:outputLabel value="If yes, Please details"/><br/>
+            <apex:inputTextarea rows="3" cols="100"/>
+        </apex:outputPanel>
+    </apex:pageBlockSectionItem>
+
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Is the project dependent on any new ERP/System release? </apex:outputLabel>
+        <apex:outputPanel >
+            <apex:selectRadio >
+                    <apex:selectOption itemLabel="Yes" title="Yes"></apex:selectOption>
+                    <apex:selectOption ></apex:selectOption>
+            </apex:selectRadio>
+            <apex:outputLabel value="If yes, Please details"/><br/>
+            <apex:inputTextarea rows="3" cols="100"/>
+        </apex:outputPanel>
+    </apex:pageBlockSectionItem>
+    
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Is any language support required other than English? </apex:outputLabel>
+        <apex:outputPanel >
+            <apex:selectRadio >
+                    <apex:selectOption itemLabel="Yes" title="Yes"></apex:selectOption>
+                    <apex:selectOption ></apex:selectOption>
+            </apex:selectRadio>
+            <apex:outputLabel value="If yes, Please details"/><br/>
+            <apex:inputTextarea rows="3" cols="100"/>
+        </apex:outputPanel>
+    </apex:pageBlockSectionItem>
+    
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Will the customer mandate the use of the solutions being provided? </apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >If Lodge,What data do they currently receive;Please provide the copy. </apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >If IBU,Will the customer mandate that payment is made by Direct Debit? </apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >If Embedded PCards,Which suppliers will they be embedding cards with? </apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+</apex:pageBlockSection>
+
+<apex:pageBlockSection title="Contact Details" columns="1" rendered="{!showCustomerDetailsFlag}" collapsible="false">
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Project Sponsor</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Project Manger</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Is this the sole project of Project Manager?</apex:outputLabel>
+        <apex:selectRadio >
+            <apex:selectOption itemLabel="Yes" title="Yes"></apex:selectOption>
+            <apex:selectOption ></apex:selectOption>
+        </apex:selectRadio>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >IT Manager</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Is IT Manager Internal/External?</apex:outputLabel>
+            <apex:selectRadio >
+            <apex:selectOption itemLabel="Yes" title="Yes"></apex:selectOption>
+            <apex:selectOption ></apex:selectOption>
+            </apex:selectRadio>
+        </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Finance Manager</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Project Administrator</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Other</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    </apex:pageBlockSection>
+    
+    <apex:pageBlockSection title="Implementation Details" columns="1" rendered="{!showImplementationDetailsFlag}" collapsible="false">
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >What training is expected by customer?</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >What has the Project Sponsor communicated to Key Stackholders ?</apex:outputLabel>
+        <apex:inputTextarea rows="3" cols="100"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Is the project being co-ordinated centrally or are there local/regional resources to be aligned for multinational implementations?</apex:outputLabel>
+        <apex:inputTextarea rows="3" cols="100"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >For how long has the Project Manager been assigned to this project?</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >For how long has the IT resources been assigned to this project?</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Are there any resource constraints to be aware of?</apex:outputLabel>
+        <apex:outputpanel >
+            <apex:inputField value="{!implementationObj.Implementation_ResourceConstraints__c}"/><br/>
+            <apex:outputlabel >Please detail</apex:outputlabel><br/>
+            <apex:inputTextarea rows="3" cols="100"/>
+        </apex:outputpanel>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Will the launch of the solutions be big-bang or phased roll out ?</apex:outputLabel>
+        <apex:inputField value="{!implementationObj.Implementation_SolutionLaunch__c}"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Are there any restrictions on the programme that IM/TRM should be aware of i.e. max number of cards to be supported,BSM template, credit limit to support B2B growth?</apex:outputLabel>
+        <apex:inputTextarea rows="3" cols="100"/>
+    </apex:pageBlockSectionItem>
+    </apex:pageBlockSection>
+    
+    <apex:pageBlockSection title="B2B" columns="1" rendered="{!showB2BFlag}" collapsible="false">
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >How many supplies does the client have?</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >What are the customers typical settlement terms with Supplies. e.g. 30,60,90 days?</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >What actual terms do they achieve?</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Do the Suppliers offer early settlement discount?</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >What is the value of invoices pa?</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >What is the customers cost of capital?</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >What level of data is required for Pcards?</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Are there any clauses in supplier contracts that prevent Payment by Card?</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >How long does the invoice Approval process take at the Client(Posting to Approval)?</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >If Payables, is the customer expecting full automated invoice extract process from their ERP system?</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+    </apex:pageBlockSection>
+    
+    <apex:pageBlockSection title="BSM" columns="1" rendered="{!showBSMFlag}" collapsible="false">
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Do all potential BSM users have access to the internet?</apex:outputLabel>
+        <apex:outputPanel >
+            <apex:selectRadio >
+                    <apex:selectOption ></apex:selectOption>
+                    <apex:selectOption ></apex:selectOption>
+            </apex:selectRadio>
+            <apex:outputLabel value="If No, Please detail constraints"/><br/>
+            <apex:inputTextarea rows="3" cols="100"/>
+        </apex:outputPanel>
+        </apex:pageBlockSectionItem>
+        
+        
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Does the customer have existing written policy for Expense Management including workflow and approval rules, manage lists etc.if so please provide a copy?</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >What expectations does the customer have re extract from BSM? Are there any critical data/tax fields needed?</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >What BSM Template has been signed off in the pricing,confirm number of instances and any plus features e.g image receipting,auto delivery etc.?</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >What are the billing points, e.g. Company level,divisional level etc.?</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Number of Chart of Account structures?</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >What coding structure is required?</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    </apex:pageBlockSection>
+    
+    
+    
+    
+    <apex:pageBlockSection title="PrecisionPay" columns="1" rendered="{!showPrecisionPayFlag}" collapsible="false">
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Is PrecisionPay needed for Travel or B2B?</apex:outputLabel>
+        <apex:inputField value="{!implementationObj.PrecisionPay_Need__c}"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >What is the payment method used by customer today?</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >What is the payment initiation point i.e PO,Booking or Invoice?</apex:outputLabel>
+        <apex:inputField value="{!implementationObj.PrecisionPay_PaymentInitiationPoint__c}"/>     
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Does the customer require WebPortal, API or Batch Solution?</apex:outputLabel>
+        <apex:inputField value="{!implementationObj.PrecisionPay_CustomerRequirement__c}"/>     
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Is current system capable of API/Batch output files?</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >For travel, What is the average time for booking to charge?</apex:outputLabel>
+        <apex:inputText style="width:200px;"/>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Does the customer require true single use or roller deck solution?</apex:outputLabel>
+        <apex:inputField value="{!implementationObj.PrecisionPay_SolutionType__c}"/>     
+    </apex:pageBlockSectionItem>
+    
+    
+    </apex:pageBlockSection>
+    
+
+</apex:pageBlock>
+</apex:form>
+</apex:page>

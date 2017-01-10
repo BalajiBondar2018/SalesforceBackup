@@ -1,0 +1,33 @@
+<apex:page tabStyle="Account">
+    <script src="https://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css"/>
+    <script type="text/javascript">
+        //Create a new variable j$ just to avoid any conflicts with other libraries which may be using $.
+        var j$ = jQuery.noConflict();
+        //Capture the list of countries in a Array.
+        var countryArray = ['India', 'USA', 'China','FInland','Norway','Netherlands','England','Ukraine','Russia','Japan','Korea','Burma','Srilanka','Iran','Iceland','Canada','Rome','Australia','Armenia','Albania','Afghanisthan'];
+        //on Document ready
+        j$(document).ready(function(){
+            j$("#countryautocomplete").autocomplete({
+                source : countryArray
+            });
+        });
+    </script>
+    
+    <apex:form >
+    <apex:pageBlock >
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton value="Select"/>
+            <apex:commandButton value="Cancel"/>
+        </apex:pageBlockButtons>
+        <apex:pageBlockSection title="Autocomplete Example" collapsible="false">
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Enter Text</apex:outputLabel>
+                <input type="text" id="countryautocomplete"/>
+            </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    </apex:form>
+
+</apex:page>

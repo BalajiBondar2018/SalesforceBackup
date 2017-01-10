@@ -1,0 +1,3 @@
+<apex:page standardController="Case" extensions="AddAttachmentExtension">
+
+</apex:page>

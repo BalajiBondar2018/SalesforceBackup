@@ -1,0 +1,316 @@
+<apex:page standardController="Letter__c" extensions="LetterTemplateExtension">
+  <apex:sectionHeader title="Letter Template" subtitle="Create Letter Template"/>
+<apex:form id="LetterTemplate2Form">
+<apex:commandLink value="<< Back To Home"/>
+<apex:pageBlock >
+    <apex:pageBlockButtons location="bottom">
+        <apex:commandButton value="Previous" action="{!Previous2BtnClick}"/>
+        <apex:commandButton value="Next" action="{!Next2BtnClick}"/>
+    </apex:pageBlockButtons>
+    
+    <!--
+    <apex:pageBlockSection title="Select Letter Tag" columns="1">
+        <apex:pageBlockSectionItem >
+        <apex:outputLabel >Select Tag</apex:outputLabel>
+        <apex:outputPanel >
+             <apex:selectList size="1">
+                <apex:selectOption itemLabel="--Select--" itemValue="select"></apex:selectOption>
+                <apex:selectOption itemLabel="Manual" itemValue="Date"/>
+                <apex:selectOption itemLabel="WMS" itemValue="Date"/>
+                <apex:selectOption itemLabel="Telecheck" itemValue="Date"/>
+            </apex:selectList>
+            
+            <apex:selectList size="1">
+                <apex:selectOption itemLabel="--Select--" itemValue="select"></apex:selectOption>
+                <apex:selectOption itemLabel="Manual" itemValue="Date"/>
+                <apex:selectOption itemLabel="Workcase" itemValue="Date"/>
+                <apex:selectOption itemLabel="Collection" itemValue="Date"/>
+                <apex:selectOption itemLabel="ROC" itemValue="Date"/>
+                <apex:selectOption itemLabel="Telecheck" itemValue="Date"/>
+            </apex:selectList>
+                    
+            <apex:selectList size="1">
+            <apex:selectOption itemLabel="--Select--" itemValue="select"></apex:selectOption>
+            <apex:selectOption itemLabel="First Name" itemValue="Date"/>
+            <apex:selectOption itemLabel="LastName" itemValue="Date"/>
+            <apex:selectOption itemLabel="Phone" itemValue="Date"/>
+            <apex:selectOption itemLabel="TCheck#" itemValue="Address Block"/>
+            <apex:selectOption itemLabel="Payee" itemValue="Greeting"/>
+        </apex:selectList>
+        &nbsp;
+        <apex:inputtext />
+        </apex:outputPanel>
+        </apex:pageBlockSectionItem>
+    </apex:pageBlockSection>
+    
+    -->
+    <apex:pageBlockSection title="Letter Section Information" columns="2">
+    <apex:pageBlockSectionItem >
+        <apex:outputPanel >
+        <apex:outputLabel >Section 1</apex:outputLabel><br/>
+        <apex:selectList size="1">
+            <apex:selectOption itemLabel="--Select--" itemValue="select"></apex:selectOption>
+            <apex:selectOption itemLabel="Date" itemValue="Date"/>
+            <apex:selectOption itemLabel="Address Block" itemValue="Address Block"/>
+            <apex:selectOption itemLabel="Greeting" itemValue="Greeting"/>
+            <apex:selectOption itemLabel="Acknowledge" itemValue="Acknowledge"/>
+            <apex:selectOption itemLabel="Criteria" itemValue="Criteria"/>
+            <apex:selectOption itemLabel="List of Activity" itemValue="List of Activity"/>
+            <apex:selectOption itemLabel="Table" itemValue="Table"/>
+            <apex:selectOption itemLabel="Next Steps" itemValue="Next Steps"/>
+            <apex:selectOption itemLabel="Time limit" itemValue="Time limit"/>
+            <apex:selectOption itemLabel="Closing" itemValue="Closing"/>
+            <apex:selectOption itemLabel="Optional" itemValue="Optional"/>
+            <apex:selectOption itemLabel="Other" itemValue="Other"/>
+        </apex:selectList>
+        </apex:outputPanel>
+        <apex:inputTextarea cols="70" rows="4" />
+    </apex:pageBlockSectionItem>
+    
+    
+        <apex:pageBlockSectionItem >
+        <apex:outputPanel >
+        <apex:outputLabel >Section 7</apex:outputLabel><br/>
+        <apex:selectList size="1">
+            <apex:selectOption itemLabel="--Select--" itemValue="select"></apex:selectOption>
+            <apex:selectOption itemLabel="Date" itemValue="Date"/>
+            <apex:selectOption itemLabel="Address Block" itemValue="Address Block"/>
+            <apex:selectOption itemLabel="Greeting" itemValue="Greeting"/>
+            <apex:selectOption itemLabel="Acknowledge" itemValue="Acknowledge"/>
+            <apex:selectOption itemLabel="Criteria" itemValue="Criteria"/>
+            <apex:selectOption itemLabel="List of Activity" itemValue="List of Activity"/>
+            <apex:selectOption itemLabel="Table" itemValue="Table"/>
+            <apex:selectOption itemLabel="Next Steps" itemValue="Next Steps"/>
+            <apex:selectOption itemLabel="Time limit" itemValue="Time limit"/>
+            <apex:selectOption itemLabel="Closing" itemValue="Closing"/>
+            <apex:selectOption itemLabel="Optional" itemValue="Optional"/>
+            <apex:selectOption itemLabel="Other" itemValue="Other"/>
+        </apex:selectList>
+        </apex:outputPanel>
+        <apex:inputTextarea cols="70" rows="4" />
+    </apex:pageBlockSectionItem>
+    
+        <apex:pageBlockSectionItem >
+        <apex:outputPanel >
+        <apex:outputLabel >Section 2</apex:outputLabel><br/>
+        <apex:selectList size="1">
+            <apex:selectOption itemLabel="--Select--" itemValue="select"></apex:selectOption>
+            <apex:selectOption itemLabel="Date" itemValue="Date"/>
+            <apex:selectOption itemLabel="Address Block" itemValue="Address Block"/>
+            <apex:selectOption itemLabel="Greeting" itemValue="Greeting"/>
+            <apex:selectOption itemLabel="Acknowledge" itemValue="Acknowledge"/>
+            <apex:selectOption itemLabel="Criteria" itemValue="Criteria"/>
+            <apex:selectOption itemLabel="List of Activity" itemValue="List of Activity"/>
+            <apex:selectOption itemLabel="Table" itemValue="Table"/>
+            <apex:selectOption itemLabel="Next Steps" itemValue="Next Steps"/>
+            <apex:selectOption itemLabel="Time limit" itemValue="Time limit"/>
+            <apex:selectOption itemLabel="Closing" itemValue="Closing"/>
+            <apex:selectOption itemLabel="Optional" itemValue="Optional"/>
+            <apex:selectOption itemLabel="Other" itemValue="Other"/>
+        </apex:selectList>
+        </apex:outputPanel>
+        <apex:inputTextarea cols="70" rows="4" />
+    </apex:pageBlockSectionItem>
+    
+        <apex:pageBlockSectionItem >
+        <apex:outputPanel >
+        <apex:outputLabel >Section 8</apex:outputLabel><br/>
+        <apex:selectList size="1">
+            <apex:selectOption itemLabel="--Select--" itemValue="select"></apex:selectOption>
+            <apex:selectOption itemLabel="Date" itemValue="Date"/>
+            <apex:selectOption itemLabel="Address Block" itemValue="Address Block"/>
+            <apex:selectOption itemLabel="Greeting" itemValue="Greeting"/>
+            <apex:selectOption itemLabel="Acknowledge" itemValue="Acknowledge"/>
+            <apex:selectOption itemLabel="Criteria" itemValue="Criteria"/>
+            <apex:selectOption itemLabel="List of Activity" itemValue="List of Activity"/>
+            <apex:selectOption itemLabel="Table" itemValue="Table"/>
+            <apex:selectOption itemLabel="Next Steps" itemValue="Next Steps"/>
+            <apex:selectOption itemLabel="Time limit" itemValue="Time limit"/>
+            <apex:selectOption itemLabel="Closing" itemValue="Closing"/>
+            <apex:selectOption itemLabel="Optional" itemValue="Optional"/>
+            <apex:selectOption itemLabel="Other" itemValue="Other"/>
+        </apex:selectList>
+        </apex:outputPanel>
+        <apex:inputTextarea cols="70" rows="4" />
+    </apex:pageBlockSectionItem>
+    
+        <apex:pageBlockSectionItem >
+        <apex:outputPanel >
+        <apex:outputLabel >Section 3</apex:outputLabel><br/>
+        <apex:selectList size="1">
+            <apex:selectOption itemLabel="--Select--" itemValue="select"></apex:selectOption>
+            <apex:selectOption itemLabel="Date" itemValue="Date"/>
+            <apex:selectOption itemLabel="Address Block" itemValue="Address Block"/>
+            <apex:selectOption itemLabel="Greeting" itemValue="Greeting"/>
+            <apex:selectOption itemLabel="Acknowledge" itemValue="Acknowledge"/>
+            <apex:selectOption itemLabel="Criteria" itemValue="Criteria"/>
+            <apex:selectOption itemLabel="List of Activity" itemValue="List of Activity"/>
+            <apex:selectOption itemLabel="Table" itemValue="Table"/>
+            <apex:selectOption itemLabel="Next Steps" itemValue="Next Steps"/>
+            <apex:selectOption itemLabel="Time limit" itemValue="Time limit"/>
+            <apex:selectOption itemLabel="Closing" itemValue="Closing"/>
+            <apex:selectOption itemLabel="Optional" itemValue="Optional"/>
+            <apex:selectOption itemLabel="Other" itemValue="Other"/>
+        </apex:selectList>
+        </apex:outputPanel>
+        <apex:inputTextarea cols="70" rows="4" />
+    </apex:pageBlockSectionItem>
+    
+        <apex:pageBlockSectionItem >
+        <apex:outputPanel >
+        <apex:outputLabel >Section 9</apex:outputLabel><br/>
+        <apex:selectList size="1">
+            <apex:selectOption itemLabel="--Select--" itemValue="select"></apex:selectOption>
+            <apex:selectOption itemLabel="Date" itemValue="Date"/>
+            <apex:selectOption itemLabel="Address Block" itemValue="Address Block"/>
+            <apex:selectOption itemLabel="Greeting" itemValue="Greeting"/>
+            <apex:selectOption itemLabel="Acknowledge" itemValue="Acknowledge"/>
+            <apex:selectOption itemLabel="Criteria" itemValue="Criteria"/>
+            <apex:selectOption itemLabel="List of Activity" itemValue="List of Activity"/>
+            <apex:selectOption itemLabel="Table" itemValue="Table"/>
+            <apex:selectOption itemLabel="Next Steps" itemValue="Next Steps"/>
+            <apex:selectOption itemLabel="Time limit" itemValue="Time limit"/>
+            <apex:selectOption itemLabel="Closing" itemValue="Closing"/>
+            <apex:selectOption itemLabel="Optional" itemValue="Optional"/>
+            <apex:selectOption itemLabel="Other" itemValue="Other"/>
+        </apex:selectList>
+        </apex:outputPanel>
+        <apex:inputTextarea cols="70" rows="4" />
+    </apex:pageBlockSectionItem>
+    
+        <apex:pageBlockSectionItem >
+        <apex:outputPanel >
+        <apex:outputLabel >Section 4</apex:outputLabel><br/>
+        <apex:selectList size="1">
+            <apex:selectOption itemLabel="--Select--" itemValue="select"></apex:selectOption>
+            <apex:selectOption itemLabel="Date" itemValue="Date"/>
+            <apex:selectOption itemLabel="Address Block" itemValue="Address Block"/>
+            <apex:selectOption itemLabel="Greeting" itemValue="Greeting"/>
+            <apex:selectOption itemLabel="Acknowledge" itemValue="Acknowledge"/>
+            <apex:selectOption itemLabel="Criteria" itemValue="Criteria"/>
+            <apex:selectOption itemLabel="List of Activity" itemValue="List of Activity"/>
+            <apex:selectOption itemLabel="Table" itemValue="Table"/>
+            <apex:selectOption itemLabel="Next Steps" itemValue="Next Steps"/>
+            <apex:selectOption itemLabel="Time limit" itemValue="Time limit"/>
+            <apex:selectOption itemLabel="Closing" itemValue="Closing"/>
+            <apex:selectOption itemLabel="Optional" itemValue="Optional"/>
+            <apex:selectOption itemLabel="Other" itemValue="Other"/>
+        </apex:selectList>
+        </apex:outputPanel>
+        <apex:inputTextarea cols="70" rows="4" />
+    </apex:pageBlockSectionItem>
+    
+        <apex:pageBlockSectionItem >
+        <apex:outputPanel >
+        <apex:outputLabel >Section 10</apex:outputLabel><br/>
+        <apex:selectList size="1">
+            <apex:selectOption itemLabel="--Select--" itemValue="select"></apex:selectOption>
+            <apex:selectOption itemLabel="Date" itemValue="Date"/>
+            <apex:selectOption itemLabel="Address Block" itemValue="Address Block"/>
+            <apex:selectOption itemLabel="Greeting" itemValue="Greeting"/>
+            <apex:selectOption itemLabel="Acknowledge" itemValue="Acknowledge"/>
+            <apex:selectOption itemLabel="Criteria" itemValue="Criteria"/>
+            <apex:selectOption itemLabel="List of Activity" itemValue="List of Activity"/>
+            <apex:selectOption itemLabel="Table" itemValue="Table"/>
+            <apex:selectOption itemLabel="Next Steps" itemValue="Next Steps"/>
+            <apex:selectOption itemLabel="Time limit" itemValue="Time limit"/>
+            <apex:selectOption itemLabel="Closing" itemValue="Closing"/>
+            <apex:selectOption itemLabel="Optional" itemValue="Optional"/>
+            <apex:selectOption itemLabel="Other" itemValue="Other"/>
+        </apex:selectList>
+        </apex:outputPanel>
+        <apex:inputTextarea cols="70" rows="4" />
+    </apex:pageBlockSectionItem>
+    
+        <apex:pageBlockSectionItem >
+        <apex:outputPanel >
+        <apex:outputLabel >Section 5</apex:outputLabel><br/>
+        <apex:selectList size="1">
+            <apex:selectOption itemLabel="--Select--" itemValue="select"></apex:selectOption>
+            <apex:selectOption itemLabel="Date" itemValue="Date"/>
+            <apex:selectOption itemLabel="Address Block" itemValue="Address Block"/>
+            <apex:selectOption itemLabel="Greeting" itemValue="Greeting"/>
+            <apex:selectOption itemLabel="Acknowledge" itemValue="Acknowledge"/>
+            <apex:selectOption itemLabel="Criteria" itemValue="Criteria"/>
+            <apex:selectOption itemLabel="List of Activity" itemValue="List of Activity"/>
+            <apex:selectOption itemLabel="Table" itemValue="Table"/>
+            <apex:selectOption itemLabel="Next Steps" itemValue="Next Steps"/>
+            <apex:selectOption itemLabel="Time limit" itemValue="Time limit"/>
+            <apex:selectOption itemLabel="Closing" itemValue="Closing"/>
+            <apex:selectOption itemLabel="Optional" itemValue="Optional"/>
+            <apex:selectOption itemLabel="Other" itemValue="Other"/>
+        </apex:selectList>
+        </apex:outputPanel>
+        <apex:inputTextarea cols="70" rows="4" />
+    </apex:pageBlockSectionItem>
+    
+    
+        <apex:pageBlockSectionItem >
+        <apex:outputPanel >
+        <apex:outputLabel >Section 11</apex:outputLabel><br/>
+        <apex:selectList size="1">
+            <apex:selectOption itemLabel="--Select--" itemValue="select"></apex:selectOption>
+            <apex:selectOption itemLabel="Date" itemValue="Date"/>
+            <apex:selectOption itemLabel="Address Block" itemValue="Address Block"/>
+            <apex:selectOption itemLabel="Greeting" itemValue="Greeting"/>
+            <apex:selectOption itemLabel="Acknowledge" itemValue="Acknowledge"/>
+            <apex:selectOption itemLabel="Criteria" itemValue="Criteria"/>
+            <apex:selectOption itemLabel="List of Activity" itemValue="List of Activity"/>
+            <apex:selectOption itemLabel="Table" itemValue="Table"/>
+            <apex:selectOption itemLabel="Next Steps" itemValue="Next Steps"/>
+            <apex:selectOption itemLabel="Time limit" itemValue="Time limit"/>
+            <apex:selectOption itemLabel="Closing" itemValue="Closing"/>
+            <apex:selectOption itemLabel="Optional" itemValue="Optional"/>
+            <apex:selectOption itemLabel="Other" itemValue="Other"/>
+        </apex:selectList>
+        </apex:outputPanel>
+        <apex:inputTextarea cols="70" rows="4" />
+    </apex:pageBlockSectionItem>
+    
+        <apex:pageBlockSectionItem >
+        <apex:outputPanel >
+        <apex:outputLabel >Section 6</apex:outputLabel><br/>
+        <apex:selectList size="1">
+            <apex:selectOption itemLabel="--Select--" itemValue="select"></apex:selectOption>
+            <apex:selectOption itemLabel="Date" itemValue="Date"/>
+            <apex:selectOption itemLabel="Address Block" itemValue="Address Block"/>
+            <apex:selectOption itemLabel="Greeting" itemValue="Greeting"/>
+            <apex:selectOption itemLabel="Acknowledge" itemValue="Acknowledge"/>
+            <apex:selectOption itemLabel="Criteria" itemValue="Criteria"/>
+            <apex:selectOption itemLabel="List of Activity" itemValue="List of Activity"/>
+            <apex:selectOption itemLabel="Table" itemValue="Table"/>
+            <apex:selectOption itemLabel="Next Steps" itemValue="Next Steps"/>
+            <apex:selectOption itemLabel="Time limit" itemValue="Time limit"/>
+            <apex:selectOption itemLabel="Closing" itemValue="Closing"/>
+            <apex:selectOption itemLabel="Optional" itemValue="Optional"/>
+            <apex:selectOption itemLabel="Other" itemValue="Other"/>
+        </apex:selectList>
+        </apex:outputPanel>
+        <apex:inputTextarea cols="70" rows="4" />
+    </apex:pageBlockSectionItem>
+    
+     <apex:pageBlockSectionItem >
+        <apex:outputPanel >
+        <apex:outputLabel >Section 12</apex:outputLabel><br/>
+        <apex:selectList size="1">
+            <apex:selectOption itemLabel="--Select--" itemValue="select"></apex:selectOption>
+            <apex:selectOption itemLabel="Date" itemValue="Date"/>
+            <apex:selectOption itemLabel="Address Block" itemValue="Address Block"/>
+            <apex:selectOption itemLabel="Greeting" itemValue="Greeting"/>
+            <apex:selectOption itemLabel="Acknowledge" itemValue="Acknowledge"/>
+            <apex:selectOption itemLabel="Criteria" itemValue="Criteria"/>
+            <apex:selectOption itemLabel="List of Activity" itemValue="List of Activity"/>
+            <apex:selectOption itemLabel="Table" itemValue="Table"/>
+            <apex:selectOption itemLabel="Next Steps" itemValue="Next Steps"/>
+            <apex:selectOption itemLabel="Time limit" itemValue="Time limit"/>
+            <apex:selectOption itemLabel="Closing" itemValue="Closing"/>
+            <apex:selectOption itemLabel="Optional" itemValue="Optional"/>
+            <apex:selectOption itemLabel="Other" itemValue="Other"/>
+        </apex:selectList>
+        </apex:outputPanel>
+        <apex:inputTextarea cols="70" rows="4" />
+    </apex:pageBlockSectionItem>
+    </apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

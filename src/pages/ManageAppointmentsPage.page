@@ -1,0 +1,298 @@
+<apex:page sidebar="false" tabStyle="Account" standardController="Account" extensions="ManageAppointmentsExtension">
+<!-- CSS goes in the document HEAD or added to your external stylesheet -->
+<style type="text/css">
+table.eventtable {
+    font-family: verdana,arial,sans-serif;
+    font-size:11px;
+    border-width: 1px;
+    border-color: #C9CCD1;
+    border-collapse: collapse;
+    width:100%;
+}
+table.eventtable th {
+    font-family: verdana,arial,sans-serif;
+    font-size:10px;
+    padding: 5px;
+    background-color:#E6E7ED;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #B6B8BA;
+    text-align:center;
+}
+table.eventtable tr {
+    text-align:center;
+    vertical-align:middle;
+  }
+table.eventtable td {
+    padding: 4px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #C9CCD1;
+    
+}
+table.eventtable tr:hover {
+background-color: #E3EEFC;
+} 
+
+
+</style>
+<apex:form id="appointmentform">
+<apex:sectionHeader title="Manage Timeslot Availability" subtitle="Balaji Bondar"/>
+    <apex:commandLink value="<<Back to {Employee}"/>
+    <apex:pageBlock >
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton value="Save"/>
+            <apex:commandButton value="Book Timeslots"/>
+             <apex:commandButton value="Cancel Timeslots"/>
+        </apex:pageBlockButtons>
+        <apex:pageBlockSection title="Timeslot Allocation" collapsible="false"></apex:pageBlockSection>
+            <table width="100%" style="background-color:#C8C9CC;" cellspacing="2" cellpadding="" border="0">
+
+                <tr>
+                    
+                    <td style="width:7%">
+                        <apex:outputLabel styleClass="labelCol">Start Period</apex:outputLabel>&nbsp;
+                    </td>
+                    <td style="width:7%">
+                        <c:noDateLink >
+                            <apex:inputfield value="{!account.End_Date__c}"/>
+                        </c:noDateLink>
+                    </td>
+                    <td style="width:7%">
+                        <apex:outputLabel styleClass="labelCol">End Period</apex:outputLabel>&nbsp;
+                    </td>
+                    <td style="width:5%">
+                        <c:noDateLink >
+                            <apex:inputfield value="{!account.End_Date__c}"/>
+                        </c:noDateLink>
+                    </td>
+                    <td>
+                        <apex:commandButton value="Show Availableability" status="fetchstatus" reRender="appointmentform"/>
+                        <apex:actionStatus id="fetchstatus" startText="Processing..."></apex:actionStatus>
+                    </td>
+                </tr>
+            </table>
+        
+        <apex:pageBlockSection title="Timeslot Availability Information" collapsible="false"></apex:pageBlockSection>
+            <table class="eventtable"> 
+            
+            <tr>
+                <th>Day</th>        
+                <th>09.00</th>
+                <th>09.30</th>
+                <th>10.00</th>
+                <th>10.30</th>
+                <th>11.00</th>
+                <th>11.30</th>
+                <th>12.00</th>
+                <th>12.30</th>
+                <th>01.00</th>
+                <th>01.30</th>
+                <th>02.00</th>
+                <th>02.30</th>
+                <th>03.00</th>
+                <th>03.30</th>
+                <th>04.00</th>
+                <th>04.30</th>
+                <th>05.00</th>
+                <th>05.30</th>
+                <th>06.00</th>
+                <th>06.30</th>
+                <th>07.00</th>
+                <th>07.30</th>
+                <th>08.00</th>
+            </tr>
+            
+            <tr style="text-align:center;font-weight:bold;">
+            <td></td>
+            <td></td>
+            <td colspan="7">(AM)</td>
+            <td colspan="16">(PM)</td>
+            </tr>
+            
+              <tr>
+                <td>Monday</td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                 <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+            </tr>
+            <tr>
+                <td>Tuesday</td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                 <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+            </tr>
+            <tr>
+                <td>Wednesday</td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                 <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+            </tr>
+            <tr>
+                <td>Thursday</td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+            </tr>
+            <tr>
+                <td>Friday</td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+            </tr>
+            <tr>
+                <td>Saturday</td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+            </tr>
+            <tr>
+                <td>Sunday</td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+            </tr>
+        </table>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

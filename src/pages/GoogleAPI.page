@@ -1,0 +1,39 @@
+<apex:page controller="AuthSubController">
+<apex:form >
+<!--  if we are missing a token, ask for one -->
+
+<apex:outputPanel rendered="{!requestToken}">
+<script> 
+var scope = 'http://www.google.com/calendar/feeds/';
+// var scope = 'http://spreadsheets.google.com/feeds/'; 
+// var scope = 'http://docs.google.com/feeds/documents';
+// see Google Data API reference for other valid SCOPE paramaters
+
+var forceReDirect = '/_ui/core/google/GoogleAuthSubCallback?url=' ;
+var googleRedir = 'https://www.google.com/accounts/AuthSubRequest?next=';
+                    
+// destination (relateive path) that will capture the token and store it for your app   
+// you can pass your own query string parms
+var myApp = encodeURIComponent( 
+        window.location.pathname + "?id={!$CurrentPage.parameters.id}" ) ;
+    
+   var nextUrl = window.location.protocol + '//' + window.location.host + 
+        forceReDirect + myApp ;  
+      
+  var tokenRequestUrl  = googleRedir + 
+            encodeURIComponent( nextUrl ) + 
+            "&session=1&secure=0&scope="+ scope;
+
+// go there now
+   window.location.href = tokenRequestUrl;
+</script>
+</apex:outputPanel>
+<apex:outputPanel rendered="{!$CurrentPage.parameters.token != null}"> 
+The one time use token is :<b>{!$CurrentPage.parameters.token}</b>
+<br />
+Record to update is {!$CurrentPage.parameters.id}
+<apex:commandbutton action="{!exchangeRequestToken}"
+    oncomplete="window.close();" value="Request Session token" />
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

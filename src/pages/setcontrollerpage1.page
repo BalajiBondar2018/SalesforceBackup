@@ -1,0 +1,70 @@
+<apex:page controller="CCW_ContactPaginationController">
+ 
+    <script type="text/javascript">
+ 
+        /*
+        *    function to handle checkbox selection
+        */
+        function doCheckboxChange(cb,itemId){
+ 
+            if(cb.checked==true){
+                aSelectItem(itemId);
+            }
+            else{
+                aDeselectItem(itemId);
+            }
+ 
+        }
+ 
+    </script>
+ 
+    <apex:form >
+ 
+        <!-- handle selected item -->
+        <apex:actionFunction name="aSelectItem" action="{!doSelectItem}" rerender="mpb">
+            <apex:param name="contextItem" value="" assignTo="{!contextItem}"/>
+        </apex:actionFunction>
+ 
+        <!-- handle deselected item -->
+        <apex:actionFunction name="aDeselectItem" action="{!doDeselectItem}" rerender="mpb">
+            <apex:param name="contextItem" value="" assignTo="{!contextItem}"/>
+        </apex:actionFunction>
+ 
+        <apex:pageBlock title="CloudClickware Pagination Sample" id="mpb">
+ 
+            <!-- table of data -->
+            <apex:pageBlockTable title="Contacts" value="{!contacts}" var="c">
+                <apex:column >
+                    <apex:facet name="header">Action</apex:facet>
+                    <apex:inputCheckbox value="{!c.IsSelected}" onchange="doCheckboxChange(this,'{!c.tContact.Id}')"/>
+                </apex:column>
+                <apex:column headerValue="First Name">
+                <apex:inputField value="{!c.tContact.FirstName}"/>
+                </apex:column>
+                <apex:column footerClass="" headerValue="Last Name">
+                                <apex:inputField value="{!c.tContact.LastName}"/>
+                </apex:column>
+                <apex:column value="{!c.tContact.Title}"/>
+                <apex:column value="{!c.tContact.Phone}"/>
+                <apex:column value="{!c.tContact.Email}"/>
+            </apex:pageBlockTable>
+ 
+            <!-- count of selected items -->
+            <apex:outputLabel value="[{!selectedCount} records selected]" />
+ 
+            <br/>
+ 
+            <!-- next, previous and page info -->
+            <apex:commandLink action="{!doPrevious}" rendered="{!hasPrevious}" value="Previous" />
+            <apex:outputLabel rendered="{!NOT(hasPrevious)}" value="Previous" />
+ 
+            <apex:outputLabel value=" (page {!pageNumber} of {!totalPages}) " />
+ 
+            <apex:commandLink action="{!doNext}" rendered="{!hasNext}" value="Next" />
+            <apex:outputLabel rendered="{!NOT(hasNext)}" value="Next" />
+ 
+        </apex:pageBlock>
+ 
+    </apex:form>
+ 
+</apex:page>

@@ -1,0 +1,42 @@
+<apex:page controller="captcha" tabStyle="Case">
+    Enter only the <strong>black</strong> characters.
+    <apex:outputPanel styleClass="container" layout="block" id="code">
+        <apex:outputText value="{!char1}" styleClass="blackChar"/>
+        <apex:outputText value="{!char2}" styleClass="redChar"/>
+        <apex:outputText value="{!char3}" styleClass="blackChar"/>
+        <apex:outputText value="{!char4}" styleClass="redChar"/>
+        <apex:outputText value="{!char5}" styleClass="blackChar"/>
+        <apex:outputText value="{!char6}" styleClass="redChar"/>
+    </apex:outputPanel>
+ 
+    <apex:form >
+        <apex:inputText value="{!input}"/>
+        <apex:commandButton action="{!validate}" value="Validate" rerender="result"/>
+        <apex:commandButton value="Reset" rerender="code"/>
+    </apex:form>
+ 
+    <apex:outputPanel id="result">
+        {!result}
+    </apex:outputPanel>
+ 
+    <style>
+        .redChar{
+            color: #C30000;
+            font-size: 24px;
+            padding:5px;
+        }
+        .blackChar{
+            color: black;
+            font-weight: bold;
+            font-size: 24px;
+            padding:5px;
+        }
+        .container{
+            background-color: #E8E8E8;
+            border-style: solid;
+            border-width:1px;
+            width: 150px;
+            text-align: center;
+        }
+    </style>
+</apex:page>

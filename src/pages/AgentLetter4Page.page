@@ -1,0 +1,30 @@
+<apex:page standardController="Letter__c" extensions="AgentLetterExtension">
+<apex:sectionHeader title="WC-000003434" subtitle="Create PDF Letter"/>
+<apex:form id="LetterTemplate1Form">
+<apex:commandLink value="<< Back To WC-000003434"/>
+<apex:pageBlock >
+    <apex:pageBlockButtons location="bottom">
+        <apex:commandButton value="Previous" action="{!Previous4BtnClick}"/>
+        <apex:commandButton value="Next" action="{!Next4BtnClick}"/>
+    </apex:pageBlockButtons>
+    
+    <apex:pageBlockSection title="Letter Optional Paragraph" columns="1">
+    <apex:pageBlockSectionItem >
+        <apex:outputtext >Screen to allow end-user to select a Letter Template and then WMS will auto-populate . User will also select images necessary to send with letter. Then, WMS sends all letter text and images to output file</apex:outputtext>
+        <apex:inputcheckbox />
+    </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+        <apex:outputtext >Screen to allow end-user to select a Letter Template and then WMS will auto-populate . User will also select images necessary to send with letter. Then, WMS sends all letter text and images to output file</apex:outputtext>
+        <apex:inputcheckbox />
+    </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+        <apex:outputtext >Screen to allow end-user to select a Letter Template and then WMS will auto-populate . User will also select images necessary to send with letter. Then, WMS sends all letter text and images to output file</apex:outputtext>
+        <apex:inputcheckbox />
+    </apex:pageBlockSectionItem>
+    
+    
+    
+    </apex:pageBlockSection>
+    </apex:pageBlock>
+ </apex:form> 
+</apex:page>

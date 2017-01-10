@@ -1,0 +1,206 @@
+<apex:page controller="SearchConsumerController" tabStyle="Search_Consumer__tab">
+
+<apex:form id="ConsumerSerachForm">
+
+<apex:sectionHeader title="Search" subtitle="Contact Information"/>
+<apex:commandLink value="<< Back to Home"/>
+<apex:pageBlock >
+Selected Consumer : {!selectedConsumerType}
+<apex:pageBlockSection title="Consumer Search Criteria" collapsible="false" columns="2">
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Contact Type</apex:outputLabel>
+    <apex:selectList size="1" value="{!selectedConsumerType}">
+        <apex:selectOption itemLabel="Consumer" itemValue="Consumer"></apex:selectOption>
+        <apex:selectOption itemLabel="Subscriber" itemValue="Subscriber"></apex:selectOption>
+        <apex:actionSupport event="onchange" action="{!ConsumerTypeChange}" reRender="ConsumerSerachForm"/>
+    </apex:selectList>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+    <apex:outputLabel ></apex:outputLabel>
+    <apex:outputLabel ></apex:outputLabel>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem rendered="{!selectedConsumerType == 'Consumer'}">
+    <apex:outputLabel >First Name</apex:outputLabel>
+    <apex:inputText />
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem rendered="{!selectedConsumerType == 'Consumer'}">
+    <apex:outputLabel >Last Name</apex:outputLabel>
+    <apex:inputText />
+</apex:pageBlockSectionItem>
+
+
+<apex:pageBlockSectionItem rendered="{!selectedConsumerType == 'Consumer'}">
+    <apex:outputLabel >Phone Type 1</apex:outputLabel>
+    <apex:inputField value="{!contactobj.Phone_Type_1__c}"/>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem rendered="{!selectedConsumerType == 'Consumer'}">
+    <apex:outputLabel >Phone Value 1</apex:outputLabel>
+    <apex:inputField value="{!contactobj.Id_Value_1__c}"/>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem rendered="{!selectedConsumerType == 'Consumer'}">
+    <apex:outputLabel >Phone Type 2</apex:outputLabel>
+    <apex:inputField value="{!contactobj.Phone_Type_2__c}"/>
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem rendered="{!selectedConsumerType == 'Consumer'}">
+    <apex:outputLabel >Phone Value 2</apex:outputLabel>
+    <apex:inputField value="{!contactobj.Id_Value_2__c}"/>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem rendered="{!selectedConsumerType == 'Consumer'}">
+    <apex:outputLabel >Consumer Id 1</apex:outputLabel>
+    <apex:outputPanel >
+        <apex:inputField value="{!contactobj.Id_Type_1__c}"/>&nbsp;
+        <apex:inputField value="{!contactobj.Detailed_Id_Type_1__c}"/>
+    </apex:outputPanel>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem rendered="{!selectedConsumerType == 'Consumer'}">
+    <apex:outputLabel >Consumer Id Value 1</apex:outputLabel>
+    <apex:inputField value="{!contactobj.Id_Value_1__c}"/>
+</apex:pageBlockSectionItem>
+
+
+<apex:pageBlockSectionItem rendered="{!selectedConsumerType == 'Consumer'}">
+    <apex:outputLabel >Consumer Id 2</apex:outputLabel>
+    <apex:outputPanel >
+        <apex:inputField value="{!contactobj.Id_Type_2__c}"/>&nbsp;
+        <apex:inputField value="{!contactobj.Detailed_Id_Type_2__c}"/>
+    </apex:outputPanel>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem rendered="{!selectedConsumerType == 'Consumer'}">
+    <apex:outputLabel >Consumer Id Value 2</apex:outputLabel>
+    <apex:inputField value="{!contactobj.Id_Value_2__c}"/>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem rendered="{!selectedConsumerType == 'Consumer'}">
+    <apex:outputLabel >Consumer Id 3</apex:outputLabel>
+    <apex:outputPanel >
+        <apex:inputField value="{!contactobj.Id_Type_3__c}"/>&nbsp;
+        <apex:inputField value="{!contactobj.Detailed_Id_Type_3__c}"/>
+    </apex:outputPanel>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem rendered="{!selectedConsumerType == 'Consumer'}">
+    <apex:outputLabel >Consumer Id Value 3</apex:outputLabel>
+    <apex:inputField value="{!contactobj.Id_Value_3__c}"/>
+</apex:pageBlockSectionItem>
+
+
+    <apex:pageBlockSectionItem rendered="{!selectedConsumerType != 'Consumer'}">
+        <apex:outputLabel >Subscriber Id</apex:outputLabel>
+        <apex:inputText />
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem rendered="{!selectedConsumerType != 'Consumer'}">
+    <apex:outputLabel >Subscriber Name</apex:outputLabel>
+    <apex:inputText />
+    </apex:pageBlockSectionItem>
+    
+    
+    <apex:pageBlockSectionItem rendered="{!selectedConsumerType != 'Consumer'}">
+        <apex:outputLabel ></apex:outputLabel>
+        <apex:outputLabel ></apex:outputLabel>
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem rendered="{!selectedConsumerType != 'Consumer'}">
+    <apex:outputLabel >Zip Code</apex:outputLabel>
+    <apex:inputText />
+    </apex:pageBlockSectionItem>
+
+
+
+<apex:outputPanel style="text-align:center;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+<apex:commandButton value="Search" immediate="true" action="{!SearchClick}" rerender="ConsumerSerachForm" status="actionstatuspanel"/>
+<apex:commandButton value="Cancel" immediate="true" rerender="ConsumerSerachForm" status="actionstatuspanel"/>
+</apex:outputPanel>
+</apex:pageBlockSection>
+
+<apex:outputPanel rendered="{!showConsumerSearchResultFlag }">
+<table style="width:100%;" colspacing="0" colpadding="0">
+<apex:repeat value="{!contactList}" var="contact">
+<tr>
+<td>
+<apex:pageBlock >
+
+<div style="background-color:#8dae84;height:22px;">
+    <table width="100%" cellspacing="0" cellpadding="0">
+        <tr>
+            <td style="vertical-align: middle;color:white;width:40%"><b>&nbsp;&nbsp;Consumer Name: {!contact.FirstName}&nbsp;{!contact.LastName} </b></td>
+            <td style="text-align:right;"><apex:commandButton value="View Details" style="height:20px;"/></td>
+        </tr>
+    </table>
+</div>
+<apex:pageBlockSection collapsible="false" columns="2" >
+<apex:outputField value="{!contact.FirstName}"/>
+<apex:outputField value="{!contact.LastName}"/>
+<apex:outputField value="{!contact.MailingStreet}"/>
+<apex:outputField value="{!contact.MailingState}"/>
+<apex:outputField value="{!contact.MailingCity}"/>
+<apex:outputField value="{!contact.MailingPostalCode}"/>
+<apex:outputField value="{!contact.Phone_Type_1__c}"/>
+<apex:outputField value="{!contact.Phone_Value_1__c}"/>
+<apex:outputField value="{!contact.Phone_Type_2__c}"/>
+<apex:outputField value="{!contact.Phone_Value_2__c}"/>
+
+<apex:outputField value="{!contact.Id_Type_1__c}"/>
+<apex:outputLabel ></apex:outputLabel>
+<apex:outputField value="{!contact.Detailed_Id_Type_1__c}"/>
+<apex:outputField value="{!contact.Id_Value_1__c}"/>
+
+<apex:outputField value="{!contact.Id_Type_2__c}"/>
+<apex:outputLabel ></apex:outputLabel>
+<apex:outputField value="{!contact.Detailed_Id_Type_2__c}"/>
+<apex:outputField value="{!contact.Id_Value_2__c}"/>
+
+<apex:outputField value="{!contact.Id_Type_3__c}"/>
+<apex:outputLabel ></apex:outputLabel>
+<apex:outputField value="{!contact.Detailed_Id_Type_3__c}"/>
+<apex:outputField value="{!contact.Id_Value_3__c}"/>
+
+<apex:outputField value="{!contact.Id_Type_4__c}"/>
+<apex:outputLabel ></apex:outputLabel>
+<apex:outputField value="{!contact.Detailed_Id_Type_4__c}"/>
+<apex:outputField value="{!contact.Id_Value_4__c}"/>
+</apex:pageBlockSection>
+
+</apex:pageBlock>
+</td>
+</tr>
+</apex:repeat>
+</table>
+
+</apex:outputPanel>
+
+</apex:PageBlock>
+</apex:form>
+
+<apex:outputpanel >
+    <apex:actionstatus id="actionstatuspanel">
+        <apex:facet name="start">
+            <div class="waitingSearchDiv" id="el_loading" style="background-color: #DCD6D6;
+                   height: 100%;opacity:0.65;width:100%;"> 
+                <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+                    <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                    <span class="waitingDescription">Processing...</span>
+                </div>
+            </div>
+        </apex:facet>
+    </apex:actionstatus>
+</apex:outputpanel>
+</apex:page>

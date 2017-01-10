@@ -1,0 +1,24 @@
+<apex:page controller="ArticleCreationController">
+<apex:form >
+    <apex:pageBlock >
+        <apex:pageBlockSection title="Select Project Name" collapsible="false">
+            <apex:panelGrid columns="3" id="abcd">
+                <apex:selectList id="sel1" value="{!leftselected}" multiselect="true" style="width:100px" size="5">
+                    <apex:selectOptions value="{!unselectedvalues}" />
+                </apex:selectList>
+                
+                <apex:panelGroup >
+                    <br/>
+                    <apex:commandButton value=">>"  action="{!selectclick}" reRender="abcd"/>
+                    <br/><br/>
+                    <apex:commandButton value="<<"  action="{!unselectclick}" reRender="abcd"/>
+                </apex:panelGroup>
+                
+                <apex:selectList id="sel2" value="{!rightselected}" multiselect="true" style="width:100px" size="5">
+                    <apex:selectOptions value="{!SelectedValues}" />
+                </apex:selectList>
+            </apex:panelGrid>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

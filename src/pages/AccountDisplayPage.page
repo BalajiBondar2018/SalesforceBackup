@@ -1,0 +1,24 @@
+<apex:page standardController="Account" extensions="AccountDisplayExtension">
+<apex:sectionHeader title="Account Details" subtitle="Account subtitle"/>
+<apex:form >
+    <apex:pageBlock title="Account PageBlock">
+        <table border="1">
+            
+            <apex:repeat value="{!accountList}" var="alist">
+            <tr>
+                <td>{!alist.Name}</td>
+                <td>{!alist.Id}</td>
+            </tr>
+            <tr>
+            <td>
+            test
+            </td>
+            </tr>
+            
+            </apex:repeat>
+
+        </table>
+        </apex:pageBlock>
+</apex:form>
+
+</apex:page>

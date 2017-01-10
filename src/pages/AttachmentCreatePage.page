@@ -1,0 +1,5 @@
+<apex:page standardcontroller="Account" extensions="AttachmentCreateExtension">
+  <apex:form >
+      <apex:commandButton value="Upload Attachment" action="{!UploadAttachmentClick}"/>
+  </apex:form>
+</apex:page>

@@ -1,0 +1,4 @@
+<apex:page controller="WoopraController" action="{!doRequest}">
+    {!Headers}
+    {!Response}
+</apex:page>

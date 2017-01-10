@@ -1,0 +1,3 @@
+<apex:page standardController="Case"  extensions="GenerateLetterExtension" renderAs="pdf"  cache="false">
+<apex:outputText escape="false" value="{!letterbodyStr}"/>
+</apex:page>

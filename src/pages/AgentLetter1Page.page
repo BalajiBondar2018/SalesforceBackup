@@ -1,0 +1,30 @@
+<apex:page standardController="Letter__c" extensions="AgentLetterExtension">
+<apex:sectionHeader title="WC-000003434" subtitle="Create PDF Letter"/>
+<apex:form id="LetterTemplate1Form">
+<apex:commandLink value="<< Back To Home"/>
+<apex:pageBlock >
+    <apex:pageBlockButtons location="bottom">
+        <apex:commandButton value="Previous" disabled="true"/>
+        <apex:commandButton value="Next" action="{!Next1BtnClick}"/>
+    </apex:pageBlockButtons>
+    
+    <apex:pageBlockSection title="Select Letter Template" columns="1">
+     <apex:pageBlockSectionItem >
+        <apex:outputLabel >Letter Template Name</apex:outputLabel>
+        <apex:selectList size="1">
+        <apex:selectOption itemLabel="--Select--" itemValue="select"></apex:selectOption>
+        <apex:selectOption itemLabel="Consumer is in the state of Rhode Island" itemValue="Consumer is in the state of Rhode Island"></apex:selectOption>
+        <apex:selectOption itemLabel="Letter Request - Debt Letter" itemValue="Letter Request - Debt Letter"></apex:selectOption>
+        <apex:selectOption itemLabel="Debt Inquiry" itemValue="Debt Inquiry"></apex:selectOption>
+        <apex:selectOption itemLabel="MA Documentation Request" itemValue="MA Documentation Request"></apex:selectOption>
+        <apex:selectOption itemLabel="Check copy/ECA Request" itemValue="Check copy/ECA Request"></apex:selectOption>
+        <apex:selectOption itemLabel="Payment History (CO, WI)" itemValue="Payment History (CO, WI)"></apex:selectOption>
+        <apex:selectOption itemLabel="Letter Request - Paid in Full (CO)" itemValue="Letter Request - Paid in Full (CO)"></apex:selectOption>
+        </apex:selectList>
+    </apex:pageBlockSectionItem>
+    
+    </apex:pageBlockSection>
+    
+</apex:pageBlock>
+</apex:form>
+</apex:page>

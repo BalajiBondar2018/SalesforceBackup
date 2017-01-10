@@ -1,0 +1,70 @@
+<apex:page controller="MassProductUpdateController" tabStyle="Product2" action="{!PageLoad}">
+<apex:form id="form">
+    <apex:sectionHeader title="Mass offerprice/margin Update" subtitle="Flexible Contract Price (FCPs)"/>
+    <apex:commandLink value="<< back to Home" action="{!BackToHomeClick}"/>
+    <apex:pageBlock id="massFCPUpdatePBlock">
+    <apex:pageMessage severity="CONFIRM" strength="2" summary="FCPs are in process queue.FCP status will be confirmed to you via E-mail.Plase don't process same products before completion of the  FCP offer price update process." rendered="{!showsuccessMessageFlag}"/>
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton value="Update" action="{!UpdateBtnClick}"/>
+            <apex:commandButton value="Cancel" action="{!CancelBtnClick}"/>
+        </apex:pageBlockButtons>
+        
+        <apex:pageBlockSection title="Choose parameter">
+            <apex:selectRadio value="{!selectedParameter}">
+                <apex:selectOption itemLabel="% Offer Price" itemValue="offerprice"/>
+                <apex:selectOption itemLabel="% Margin" itemValue="margin"/>
+            </apex:selectRadio>
+        </apex:pageBlockSection>
+        
+        <apex:pageBlockSection title="Upload File" columns="1">
+            <apex:outputPanel >
+                <apex:inputFile value="{!contentFile}" filename="{!nameFile}" size="50"/>
+                <apex:commandButton value="Upload" action="{!UploadBtnClick}"/>
+            </apex:outputPanel>
+        </apex:pageBlockSection>
+        
+        <apex:pageBlockSection id="addupdatecriteriainfoPBSection" title="Add/Update Criteria Information" columns="1">
+            <apex:outputPanel >
+                <table width="30%" border="0">
+                    <tr>
+                        <td width="30%">
+                            <apex:outputLabel value="Product Name" style="font-weight:bold;"/>
+                        </td>
+                        <td width="30%">
+                            <apex:outputLabel value="Operator" style="font-weight:bold;"/>
+                        </td>
+                        <td width="30%">
+                            <apex:outputLabel value="value(%)" style="font-weight:bold;"/>
+                        </td>
+                    </tr>
+                    <apex:repeat value="{!ProductWrapperList}" var="pwrapper">
+                    <tr>
+                       <td width="30%">
+                            <apex:inputField value="{!pwrapper.FCPObj.Product__c}"/>
+                        </td>
+                        <td width="30%">
+                            <apex:selectList size="1" value="{!pwrapper.operator}">
+                                <apex:selectOption itemLabel="Increase" itemValue="Increase"/>
+                                <apex:selectOption itemLabel="Decrease" itemValue="Decrease"/>
+                            </apex:selectList>  
+                        </td>
+                        <td width="30%">
+                            <apex:inputText value="{!pwrapper.value}" style="width:50px;"/>
+                        </td>
+                    </tr>
+                    </apex:repeat>    
+                    
+                    <tr>
+                        <td width="30%">
+                        &nbsp;
+                        </td>
+                        <td width="30%" style="text-align:right;" colspan="2">
+                            <apex:commandLink value="Add 5 rows" action="{!AddRowsClick}"/>
+                        </td>
+                    </tr>
+                </table>
+            </apex:outputPanel>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

@@ -1,0 +1,277 @@
+<apex:page standardController="Contract" extensions="ManageFCPExtension" tabStyle="Account_Plan__tab">
+<script type="text/javascript">
+    //show the error message if no product code is entered for search
+    function showProductCodeErrorMsg(ProductCodeInputTextComponent){
+    var ProductCodeText= document.getElementById(ProductCodeInputTextComponent).value;
+    if(ProductCodeText == ''){
+        alert('Please enter product codes.');
+        return false;
+    }
+    else
+        return true;
+    }
+
+    //check/uncheck the product records in the search product list
+    function checkAllProducts(cb,cbid){
+            var inputElem = document.getElementsByTagName("input");                    
+            for(var i=0; i<inputElem.length; i++){            
+                 if(inputElem[i].id.indexOf(cbid)!=-1){                                       
+                    inputElem[i].checked = cb.checked;
+                }
+            }
+        }
+    //check/uncheck the FCP records in the selected FCPs list
+    function checkAllFCPs(cb,cbid){
+            var inputElem = document.getElementsByTagName("input");                    
+            for(var i=0; i<inputElem.length; i++){            
+                 if(inputElem[i].id.indexOf(cbid)!=-1){                                       
+                    inputElem[i].checked = cb.checked;
+                }
+            }
+        }
+   
+   //calculate the margin % at runtime based on the offer price entered
+   function ValidatePrice(costpriceComponent, offerpriceComponent, minpriceComponent, maxpriceComponent, margininputComponent,marginoutputComponent){
+        var costprice = document.getElementById(costpriceComponent).value;
+        var minprice = document.getElementById(minpriceComponent).value;
+        var maxprice = document.getElementById(maxpriceComponent).value;
+        var offerprice = document.getElementById(offerpriceComponent).value;
+        var marginvalue = ((offerprice-costprice)/costprice)*100; 
+        
+        if(offerprice!=''){
+            document.getElementById(margininputComponent).value = marginvalue.toFixed(2);
+            document.getElementById(marginoutputComponent).innerHTML = marginvalue.toFixed(2);
+            
+            if(offerprice < minprice || offerprice > maxprice )
+                document.getElementById(offerpriceComponent).style.color = "Red";
+            else
+            document.getElementById(offerpriceComponent).style.color = "Black";
+        }
+        else{
+        document.getElementById(margininputComponent).value = '';
+        document.getElementById(marginoutputComponent).innerHTML = '';
+        }
+    }
+    
+  
+</script>
+
+
+<apex:sectionHeader title="Manage FCPs" subtitle="Contract# {!contractObj.ContractNumber}"/>
+    <apex:form id="form">
+        <apex:commandLink value="<<Back to Contract# {!contractObj.ContractNumber}" action="{!BackBtnClick}"/>
+        <apex:pageBlock >
+        <div style="position: relative;">
+        <apex:outputpanel >
+            <apex:actionstatus id="searchstatus">
+                <apex:facet name="start">
+                    <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;height: 100%;opacity:0.65;width:100%;"> 
+                        <div class="waitingHolder" style="top: 150px; width: 85px;">
+                            <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                            <span class="waitingDescription">Loading...</span>
+                        </div>
+                    </div>
+                </apex:facet>
+            </apex:actionstatus>
+        </apex:outputpanel>
+        <apex:pageBlockSection id="searchproductPBSection" title="Search Product(s)" columns="1">
+            <apex:outputPanel >
+                <table width="100%" style="background-color:#C8C9CC;" border="0">
+                    <tr><td>
+                    <div>
+                        <apex:outputLabel styleClass="labelCol"></apex:outputLabel>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <apex:commandButton value="Add" action="{!AddBtnClick}" status="searchstatus" reRender="searchproductPBSection,ContractFCPsPBSection,FCPWrapperPBTable"/>
+                        <apex:commandButton value="Cancel" action="{!CancelBtnClick}" status="searchstatus" reRender="searchproductPBSection"/>
+                        </div>
+                        <div><hr style="color:white;"/></div>
+                    </td></tr>
+                    <tr><td>
+                        <apex:outputLabel styleClass="labelCol">Product Code</apex:outputLabel>
+                        <apex:inputText id="ProductCodeInputText" style="width:300px;" value="{!productCodeStr}"/>&nbsp;
+                        <apex:commandButton value="Search" action="{!SearchBtnClick}" status="searchstatus" rerender="searchproductPBSection" onclick="if(!showProductCodeErrorMsg('{!$Component.ProductCodeInputText}')) return true;"/>
+                    </td></tr>
+                </table>           
+            <!--<apex:pageMessages />-->
+            </apex:outputPanel>
+            <apex:pageBlockTable id="searchproductPBTable" value="{!productWrapperList}" var="pwrapper" rendered="{!IF(productWrapperList.size > 0 , true , false)}">
+                <apex:column style="width:2px;">
+                <apex:facet name="header">
+                    <apex:inputCheckbox value="{!selectAllProductsFlag}" onclick="checkAllProducts(this,'productrow')"/>
+                </apex:facet>
+                    <apex:inputCheckbox value="{!pwrapper.isselected}" id="productrow"/>
+                </apex:column>
+                <apex:column headerValue="Product Category" value="{!pwrapper.Product.Family}"/>
+                <apex:column headerValue="Product Code" value="{!pwrapper.Product.ProductCode}"/>            
+                <apex:column headerValue="Product Name" value="{!pwrapper.Product.Name}"/>
+                <apex:column headerValue="Min Price" value="{!pwrapper.Product.Min_Price__c}"/>
+                <apex:column headerValue="Max Price" value="{!pwrapper.Product.Max_Price__c}"/>
+                <apex:column headerValue="S Book" value="{!pwrapper.Product.S_Book__c}"/>
+                <apex:column headerValue="Q Book" value="{!pwrapper.Product.Q_Book__c}"/>
+                
+            </apex:pageBlockTable>
+            <apex:pageMessage strength="2" severity="INFO" summary="Enter product codes and click on Search to view the available products." rendered="{!IF(productWrapperList.size > 0 , false, true)}"/>
+            
+        </apex:pageBlockSection>
+        
+    <apex:pageBlockSection id="ContractFCPsPBSection" title="Contract FCP(s)" columns="1">
+    <apex:outputPanel >
+    <table width="100%" style="background-color:#C8C9CC;" border="0" cellspacing="0" cellpadding="5">
+    <tr><td colspan="2">
+    <div>
+    <apex:outputLabel styleClass="labelCol"></apex:outputLabel>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <apex:commandButton value="Save" action="{!SaveBtnClick}" status="searchstatus" reRender="ContractFCPsPBSection"/>
+    <apex:commandButton value="Cancel" action="{!SelectedFCPCancelBtnClick}" status="searchstatus" reRender="ContractFCPsPBSection"/>
+    <apex:commandButton value="Delete" action="{!DeleteBtnClick}" status="searchstatus" reRender="ContractFCPsPBSection" onclick="if(!confirm('Are you sure?')) return false;"/>
+    <apex:commandButton value="Activate" action="{!ActivateBtnClick}" status="searchstatus" reRender="ContractFCPsPBSection"/>
+    <apex:commandButton value="Deactivate" action="{!DeActivateBtnClick}" status="searchstatus" reRender="ContractFCPsPBSection"/>
+    <apex:commandButton value="Confirm Mass Price Update" action="{!ConfirmMassOfferPriceUpdateBtnClick}" status="searchstatus" reRender="ContractFCPsPBSection"/>
+    </div>
+    <div><hr style="color:white;"/></div>
+    </td></tr>
+    <tr>
+    <td>
+        <apex:outputLabel styleClass="labelCol">End Date</apex:outputLabel>
+            <apex:inputField value="{!FCPObj.End_Date__c}"/>
+        <apex:commandButton value="Update & Save" action="{!EndDateMassUpdateBtnClick}" status="searchstatus" reRender="ContractFCPsPBSection"/>
+    </td>
+    <td style="width:60%;">
+        <table style="width:100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td style="width:18%;text-align:right;">
+                <apex:outputLabel styleClass="labelCol">Margin(%)</apex:outputLabel>
+                <img src="/s.gif" alt="Help" class="helpIcon" title="Offer price will be set to Min/Max Price if exceeds the Min/Max Price for the product."/>
+                </td>
+                <td style="width:28%">
+                    <apex:selectList size="1" style="width:100px;" value="{!selectedmarginparameter}">
+                    <apex:SelectOption itemValue="None" itemLabel="--None--"/>
+                    <apex:SelectOption itemValue="Equal" itemLabel="Equal"/>
+                    <apex:SelectOption itemValue="Increase" itemLabel="Increase"/>
+                    <apex:SelectOption itemValue="Decrease" itemLabel="Decrease"/>
+                    </apex:selectList>&nbsp;
+                    <apex:inputText size="4" value="{!updatedmargin}"/>
+                </td>
+                <td style="width:54%"><apex:commandButton value="Update & Save" action="{!MarginMassUpdateBtnClick}"  status="searchstatus" reRender="ContractFCPsPBSection"/></td>
+            </tr>
+        </table>
+    </td>
+    </tr>
+    
+    <tr>
+    <td style="width:40%;">&nbsp;</td>
+    <td style="width:60%;">
+         <table style="width:100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td style="width:18%;text-align:right;">
+                    <apex:outputLabel styleClass="labelCol">Discount(%)</apex:outputLabel>
+                    <img src="/s.gif" alt="Help" class="helpIcon" title="Offer price will be set to Min/Max Price if exceeds the Min/Max Price for the product."/>
+                </td>
+                <td style="width:28%">
+                    <apex:selectList size="1" style="width:100px;" value="{!selecteddiscountparameter}">
+                    <apex:SelectOption itemValue="None" itemLabel="--None--"/>
+                    <apex:SelectOption itemValue="SBook" itemLabel="S Book"/>
+                    <apex:SelectOption itemValue="QBook" itemLabel="Q Book"/>
+                    </apex:selectList>&nbsp;
+                    <apex:inputText size="4" value="{!discountpercentage}"/>                
+                </td>
+                <td style="width:55%"><apex:commandButton value="Update & Save" action="{!DiscountMassUpdateBtnClick}" status="searchstatus" reRender="ContractFCPsPBSection"/></td>
+            </tr>
+        </table>
+    </td>
+    </tr> 
+    </table>
+    <apex:PageMessages />
+    </apex:outputPanel>
+    <apex:pageBlockTable id="FCPWrapperPBTable"  value="{!FCPWrapperList}" var="FCPwrapper"  rendered="{!IF(FCPWrapperList.size > 0 , true , false)}">
+              <apex:column style="width:2px;">
+              <apex:facet name="header">
+                  <apex:inputCheckbox id="selectAllCheckBox" value="{!selectAllFCPsFlag}" onclick="checkAllFCPs(this,'fcprow')"/>
+              </apex:facet>
+                  <apex:inputCheckbox value="{!FCPwrapper.isselected}" id="fcprow"/>
+              </apex:column>
+              
+              <apex:column headerValue="Product Category" value="{!FCPwrapper.flexiblecontractprice.Product_Category__c}"/>
+              <apex:column headerValue="Product Code" value="{!FCPwrapper.flexiblecontractprice.product_code__c}"/>
+              <apex:column headerValue="Product Name" value="{!FCPwrapper.flexiblecontractprice.Product_Name__c}"/>
+              
+              <apex:column headerValue="Start Date">
+                  <c:noDateLink >
+                        <apex:inputfield value="{!FCPwrapper.flexiblecontractprice.Start_Date__c}"/>
+                  </c:noDateLink>
+              </apex:column>
+              <apex:column headerValue="End Date">
+                  <c:noDateLink >
+                        <apex:inputfield value="{!FCPwrapper.flexiblecontractprice.End_Date__c}"/>
+                  </c:noDateLink>
+              </apex:column>
+
+              <apex:column headerValue="Min Price">
+                  <apex:inputHidden id="minprice" value="{!FCPwrapper.flexiblecontractprice.Min_Price__c}"/>
+                  <apex:inputHidden id="costprice" value="{!FCPwrapper.flexiblecontractprice.Cost_Price__c}"/>
+                  <apex:outputField value="{!FCPwrapper.flexiblecontractprice.Min_Price__c}"/>
+              </apex:column>
+
+              <apex:column headerValue="Max Price">
+                  <apex:inputHidden id="maxprice" value="{!FCPwrapper.flexiblecontractprice.Max_Price__c}"/>
+                  <apex:outputField value="{!FCPwrapper.flexiblecontractprice.Max_Price__c}"/>
+              </apex:column>
+
+              
+              
+              <apex:column headerValue="Offer Price" style="width:70px;">
+                    <apex:inputfield id="offerprice" value="{!FCPwrapper.flexiblecontractprice.Sales_Price__c}"  style="width:50px;" onchange="JavaScript:ValidatePrice('{!$Component.costprice}','{!$Component.offerprice}','{!$Component.minprice}','{!$Component.maxprice}','{!$Component.margininput}','{!$Component.marginoutput}');"/>
+                    <!--<apex:inputfield id="masspriceupdateflag" value="{!FCPwrapper.flexiblecontractprice.mass_price_change__c}"/>-->
+                    <apex:image url="{!$Resource.MassPriceUpdateFlag}" width="15" height="15" rendered="{!FCPwrapper.flexiblecontractprice.mass_price_change__c}"/>
+               </apex:column>
+              <apex:column headerValue="% Margin">
+                <apex:inputHidden id="margininput" value="{!FCPwrapper.flexiblecontractprice.Margin2__c}"/>
+                <apex:outputfield id="marginoutput" value="{!FCPwrapper.flexiblecontractprice.Margin2__c}"/>%
+               </apex:column>
+              <apex:column headerValue="S Book" value="{!FCPwrapper.flexiblecontractprice.S_Book__c}" style="color:blue;"/>
+              <!--<apex:column headerValue="SSP" value="{!FCPwrapper.flexiblecontractprice.Suggested_Price__c}" style="color:#E8A02C;"/>-->
+              <apex:column headerValue="Q Book" value="{!FCPwrapper.flexiblecontractprice.Q_Book__c}" style="color:#E8A02C;"/>
+              <apex:column headerValue="Status" value="{!FCPwrapper.flexiblecontractprice.Status__c}">
+               <apex:facet name="footer">
+                <apex:outputPanel style="verical-align:middle;">
+                <apex:commandLink value="First"  style="text-decoration : none">
+                
+                </apex:commandLink>
+                &nbsp;
+                <apex:commandLink style="text-decoration : none">
+                <apex:outputPanel style="verical-align:middle;">
+            <apex:image url="{!$Resource.previous}" style="height:12px;"/>Previous
+            </apex:outputPanel>
+                </apex:commandlink>&nbsp;&nbsp;
+                <apex:commandLink style="text-decoration : none">Next
+                <apex:image url="{!$Resource.Next}" style="height:12px;"/>
+                 </apex:commandlink>&nbsp;
+                <apex:commandLink style="text-decoration : none">Last</apex:commandlink>&nbsp;
+                </apex:outputPanel>
+          </apex:facet>
+          
+              </apex:column>
+          </apex:pageBlockTable>
+        <apex:pageMessage severity="INFO" strength="2" summary="No selected FCPs for the contract." rendered="{!IF(FCPWrapperList.size > 0 , false, true)}"/>
+        </apex:pageBlockSection>
+        </div>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

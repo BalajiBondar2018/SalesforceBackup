@@ -1,0 +1,60 @@
+<apex:page controller="ExcelController" contenttype="application/vnd.ms-excel#AccountList.xls">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<style> 
+    br {mso-data-placement:same-cell;}
+    td {font-size: xx-small;}
+</style>
+</head>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <table border="0">
+        <tbody>
+         <tr>
+              <td style="border:none;width:20px;">&nbsp;</td>
+              <td style="font-weight:bold;background-color:gray;border: thin solid black;">Account Type</td>
+              <td style="font-weight:bold;background-color:gray;border: thin solid black;">Account Id</td>
+              <td style="font-weight:bold;background-color:gray;border: thin solid black;">Account Name</td>
+              <td style="font-weight:bold;background-color:gray;border: thin solid black;">Account Type1</td>
+              <td style="font-weight:bold;background-color:gray;border: thin solid black;">Account Id1</td>
+              <td style="font-weight:bold;background-color:gray;border: thin solid black;">Account Name1</td>
+        </tr>
+        <apex:repeat value="{!AccountList}" var="alist">
+            <tr>
+                <td style="border:none;">&nbsp;</td>
+                <td style="border: thin solid black;">Personal Account</td>
+                <td style="border: thin solid black;">{!alist.Id}</td>
+                <td style="border: thin solid black;">{!alist.Name}</td>
+                <td style="border: thin solid black;">Personal Account</td>
+                <td style="border: thin solid black;">{!alist.Id}</td>
+                <td style="border: thin solid black;">{!alist.Name}</td>
+            </tr>
+        </apex:repeat>
+        </tbody>
+    </table>
+    &nbsp;
+        <table border="0">
+        <tbody>
+         <tr>
+          <td style="border:none;">&nbsp;</td>
+          <td style="font-weight:bold;background-color:gray;border: thin solid black;">Opportunity Id</td>
+          <td style="font-weight:bold;background-color:gray;border: thin solid black;">Opportunity Name</td>
+          <td style="font-weight:bold;background-color:gray;border: thin solid black;">Account Id</td>
+          <td style="font-weight:bold;background-color:gray;border: thin solid black;">Amount</td>
+          <td style="font-weight:bold;background-color:gray;border: thin solid black;">StageName</td>
+        </tr>
+        <apex:repeat value="{!OpportunityList}" var="olist">
+            <tr>
+                <td style="border:none;">&nbsp;</td>
+                <td style="border: thin solid black;">{!olist.Id}</td>
+                <td style="border: thin solid black;">{!olist.Name}</td>
+                <td style="border: thin solid black;">{!olist.AccountId}</td>
+                <td style="border: thin solid black;">{!olist.Amount}</td>
+                <td style="border: thin solid black;">{!olist.StageName}</td>
+            </tr>
+        </apex:repeat>
+        </tbody>
+    </table>
+
+   
+</apex:page>

@@ -1,0 +1,54 @@
+<apex:page controller="PopupTest">  
+<style>
+.HoverPopup {
+    position: relative;
+    z-index: 0;
+    }
+ 
+.HoverPopup:hover {
+    background-color: #eeeeee;
+    Text-decoration: none;
+    z-index: 50;
+    }
+ 
+.HoverPopup div {
+    position: absolute;
+    visibility: hidden;
+    }
+ 
+.HoverPopup:hover div {
+    visibility: visible;
+    top: 20px;
+    left: 0px;
+    border: 1px solid black;
+    background-color: #eeeeee;
+    padding: 10px;
+    color: black;
+    Text-decoration: none;
+    white-space: pre;
+    }
+</style>
+<apex:form >
+<apex:pageBlock >
+<apex:pageblocktable styleclass="list" value="{!accounts}" var="acc">
+  <apex:column headervalue="Contact Name">
+    <apex:outputlink onmouseout="this.nextSibling.style.visibility='hidden';" onmouseover="this.nextSibling.style.visibility='visible';" style="z-index: 0;" value="/{!acc.Id}">
+      {!acc.Name}
+    </apex:outputlink><div style="background-color: #eeeeee; border: 1px solid black; padding: 10px; position: absolute; visibility: hidden; z-index: 50;"><apex:outputtext value="{!acc.Id}"></apex:outputtext></div>
+  </apex:column>
+  </apex:pageblocktable>
+</apex:pageBlock>
+</apex:form>>
+
+<!--
+<apex:form >  
+    <apex:repeat value="{!accounts}" var="acc">                              
+            
+      <a href="/{!acc.Id}" id="{!acc.Id}" onblur="LookupHoverDetail.getHover('{!acc.Id}').hide();" onfocus="LookupHoverDetail.getHover('{!acc.Id}', '/{!acc.Id}/m?retURL=%2F{!acc.Id}&isAjaxRequest=1').show();" onmouseout="LookupHoverDetail.getHover('{!acc.Id}').hide();" onmouseover="LookupHoverDetail.getHover('{!acc.Id}', '/{!acc.Id}/m?retURL=%2F{!acc.Id}&isAjaxRequest=1').show();">
+      {!acc.Name}
+      </a>
+      <br/>  
+    </apex:repeat>  
+</apex:form>
+-->  
+</apex:page>

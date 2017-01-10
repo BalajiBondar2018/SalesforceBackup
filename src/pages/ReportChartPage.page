@@ -1,0 +1,7 @@
+<apex:page >
+<apex:form >
+<apex:outputPanel layout="block" id="chart">
+    <analytics:reportChart reportId="00O90000008pYJ6"/>
+</apex:outputPanel>
+</apex:form>
+</apex:page>

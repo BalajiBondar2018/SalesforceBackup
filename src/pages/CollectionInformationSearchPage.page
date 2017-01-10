@@ -1,0 +1,497 @@
+<apex:page standardController="Collection__c" extensions="CollectionInformationSearchExtension">
+
+    <style type="text/css">
+        .custPopup{
+            background-color: white;
+            border-width: 0px;
+            border-style: solid;
+            border-radius: 3px;
+            z-index: 9999;
+            left: 30%;
+            padding:0px;
+            position: absolute;
+            /* These are the 3 css properties you will need to change so the popup
+            displays in the center of the screen. First set the width. Then set
+            margin-left to negative half of what the width is. You can add
+            the height property for a fixed size pop up if you want.*/
+            width: 700px;
+            margin-left: -100px;
+            top:5px;
+        }
+        .popupBackground{
+            background-color:black;
+            opacity: 0.20;
+            filter: alpha(opacity = 20);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9998;
+        }
+
+    </style>
+
+
+<apex:form id="ConsumerSerachForm">
+
+    <apex:outputPanel id="tstpopupNotes">
+        <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayPopUp}"/>
+            <apex:outputPanel styleClass="custPopup" layout="block" rendered="{!displayPopUp}">
+                <apex:pageBlock >
+                
+                <apex:pageBlockButtons location="Bottom">
+                    <apex:commandButton value="Close" action="{!closePopup}" rerender="tstpopupNotes"/>
+                <apex:actionStatus id="processingstatus" startText="Processing..."></apex:actionStatus>
+                </apex:pageBlockButtons>
+                     <apex:pageBlockTable id="PBTableConsumerSearch" value="{!contactList}" var="contactobj">
+                        <apex:column width="60%" headervalue="Collection Notes">
+                            <apex:outputField value="{!contactobj.FirstName}"/>
+                      </apex:column>
+                    </apex:pageBlockTable>                
+    
+                </apex:pageBlock>            
+            </apex:outputPanel>
+    </apex:outputPanel>
+    
+    
+
+
+
+<apex:outputPanel id="tstpopup">
+    <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayPopUp}"/>
+        <apex:outputPanel styleClass="custPopup" layout="block" rendered="{!displayPopUp}">
+            <apex:pageBlock >
+            
+            <apex:pageBlockButtons location="Bottom">
+                <apex:commandButton value="Close" action="{!closePopup}" rerender="tstpopup"/>
+            <apex:actionStatus id="processingstatus" startText="Processing..."></apex:actionStatus>
+            
+            </apex:pageBlockButtons>
+            
+
+            <apex:pageBlockTable id="PBTableConsumerSearch" value="{!contactList}" var="contactobj">
+                <apex:column width="60%" headervalue="Consumer Information">
+                    <div style="background-color: #DCDFE6;height:17px;padding-left: .1cm; padding-top: .1cm;">
+                    <apex:outputLabel >Consumer Name:</apex:outputLabel>&nbsp;{!contactobj.FirstName}&nbsp;{!contactobj.LastName}</div> 
+                    <apex:pageBlockSection >
+                    <apex:outputField value="{!contactobj.FirstName}"/>
+                    <apex:outputField value="{!contactobj.LastName}"/>
+                    <apex:outputField value="{!contactobj.FirstName}"/>
+                    
+                    <apex:outputField value="{!contactobj.FirstName}"/>
+                    <apex:outputField value="{!contactobj.LastName}"/>
+                    
+                    <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Test</apex:outputLabel>
+                    <apex:outputField value="{!contactobj.FirstName}"/>
+                    </apex:pageBlockSectionItem>
+                    
+                    
+                                   
+                   <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Add1</apex:outputLabel>
+                        <apex:outputPanel > 
+                            <apex:outputField value="{!contactobj.FirstName}"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    
+                    
+                     <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Add2</apex:outputLabel>
+                        <apex:outputPanel > 
+                            <apex:outputField value="{!contactobj.FirstName}"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    
+                   
+                   
+                    <apex:pageBlockSectionItem >
+                    <apex:outputLabel >City</apex:outputLabel>
+                        <apex:outputPanel > 
+                            <apex:outputField value="{!contactobj.FirstName}"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                   
+                   
+                   
+                    <apex:pageBlockSectionItem >
+                    <apex:outputLabel >State</apex:outputLabel>
+                        <apex:outputPanel > 
+                            <apex:outputField value="{!contactobj.FirstName}"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    
+                   
+                     <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Zip</apex:outputLabel>
+                        <apex:outputPanel > 
+                            <apex:outputField value="{!contactobj.FirstName}"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    <apex:outputLabel ></apex:outputLabel>
+                    
+                    <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Id Type 1</apex:outputLabel>
+                        <apex:outputPanel > 
+                            <apex:outputField value="{!contactobj.Id_Type_1__c}"/>&nbsp;<apex:outputField value="{!contactobj.Id_Type_1__c}"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >Id Value 1</apex:outputLabel>
+                        <apex:outputField value="{!contactobj.FirstName}"/>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Id Type 2</apex:outputLabel>
+                        <apex:outputPanel > 
+                            <apex:outputField value="{!contactobj.Id_Type_1__c}"/>&nbsp;<apex:outputField value="{!contactobj.Id_Type_1__c}"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >Id Value 2</apex:outputLabel>
+                        <apex:outputField value="{!contactobj.FirstName}"/>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Id Type 3</apex:outputLabel>
+                        <apex:outputPanel > 
+                            <apex:outputField value="{!contactobj.Id_Type_1__c}"/>&nbsp;<apex:outputField value="{!contactobj.Id_Type_1__c}"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >Id Value 3</apex:outputLabel>
+                        <apex:outputField value="{!contactobj.FirstName}"/>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Id Type 4</apex:outputLabel>
+                        <apex:outputPanel > 
+                            <apex:outputField value="{!contactobj.Id_Type_1__c}"/>&nbsp;<apex:outputField value="{!contactobj.Id_Type_1__c}"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >Id Value 4</apex:outputLabel>
+                        <apex:outputField value="{!contactobj.FirstName}"/>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Id Type 5</apex:outputLabel>
+                        <apex:outputPanel > 
+                            <apex:outputField value="{!contactobj.Id_Type_1__c}"/>&nbsp;<apex:outputField value="{!contactobj.Id_Type_1__c}"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                     
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >Id Value 5</apex:outputLabel>
+                        <apex:outputField value="{!contactobj.FirstName}"/>
+                    </apex:pageBlockSectionItem>
+                    
+                    
+                    <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Phone Type 1</apex:outputLabel>
+                        <apex:outputPanel > 
+                            <apex:outputField value="{!contactobj.FirstName}"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Phone Value 1</apex:outputLabel>
+                        <apex:outputPanel > 
+                            <apex:outputField value="{!contactobj.FirstName}"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Phone Type 2</apex:outputLabel>
+                        <apex:outputPanel > 
+                            <apex:outputField value="{!contactobj.FirstName}"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Phone Value 2</apex:outputLabel>
+                        <apex:outputPanel > 
+                            <apex:outputField value="{!contactobj.FirstName}"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Phone Type 3</apex:outputLabel>
+                        <apex:outputPanel > 
+                            <apex:outputField value="{!contactobj.FirstName}"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Phone Value 3</apex:outputLabel>
+                        <apex:outputPanel > 
+                            <apex:outputField value="{!contactobj.FirstName}"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    
+                        <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Phone Type 4</apex:outputLabel>
+                        <apex:outputPanel > 
+                            <apex:outputField value="{!contactobj.FirstName}"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Phone Value 4</apex:outputLabel>
+                        <apex:outputPanel > 
+                            <apex:outputField value="{!contactobj.FirstName}"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                
+                    </apex:pageBlockSection>
+                   
+               </apex:column>
+
+                </apex:pageBlockTable>
+                
+            
+            
+            </apex:pageBlock>            
+        </apex:outputPanel>
+</apex:outputPanel>
+
+<br/>
+<apex:pageBlock >
+<apex:pageBlockButtons location="bottom" rendered="{!showConsumerSearchResultFlag}">
+
+<apex:commandButton value="Save"/>
+
+
+</apex:pageBlockButtons>
+<apex:pageBlockSection title="Specify Search Criteria"></apex:pageBlockSection>
+<table>
+<tr>
+    <td><b>Field</b></td>
+    <td><b>Operator</b></td>
+    <td><b>Value</b></td>
+    <td></td>
+
+</tr>
+<tr>
+    <td>
+    <apex:selectList size="1">
+        <apex:selectOption itemLabel="--None--" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="FirstName" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="LastName" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Tracking Number" itemValue="None"></apex:selectOption>            
+        <apex:selectOption itemLabel="Check Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Denial Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Amount" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Log Number/Ref Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Banking #(Routing #/Account#)" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Social Security Number" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Driver's License Number" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Telecheck Track Id" itemValue="None"></apex:selectOption>
+  
+      </apex:selectList>
+    </td>
+    <td>
+    <apex:selectList size="1">
+        <apex:selectOption itemLabel="--None--" itemValue="None"></apex:selectOption>
+    </apex:selectList>
+    </td>
+    <td><apex:inputText style="height:17px;"/></td>
+    <td>AND</td>
+</tr>
+
+<tr>
+    <td>
+    <apex:selectList size="1">
+        <apex:selectOption itemLabel="--None--" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="FirstName" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="LastName" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Tracking Number" itemValue="None"></apex:selectOption>            
+        <apex:selectOption itemLabel="Check Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Denial Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Amount" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Log Number/Ref Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Banking #(Routing #/Account#)" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Social Security Number" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Driver's License Number" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Telecheck Track Id" itemValue="None"></apex:selectOption>
+
+    </apex:selectList>
+    </td>
+    <td>
+    <apex:selectList size="1">
+        <apex:selectOption itemLabel="--None--" itemValue="None"></apex:selectOption>
+    </apex:selectList>
+    </td>
+    <td><apex:inputText style="height:17px;"/></td>
+    <td>AND</td>
+</tr>
+
+
+<tr>
+    <td>
+    <apex:selectList size="1">
+       <apex:selectOption itemLabel="--None--" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="FirstName" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="LastName" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Tracking Number" itemValue="None"></apex:selectOption>            
+        <apex:selectOption itemLabel="Check Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Denial Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Amount" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Log Number/Ref Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Banking #(Routing #/Account#)" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Social Security Number" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Driver's License Number" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Telecheck Track Id" itemValue="None"></apex:selectOption>
+
+    </apex:selectList>
+    </td>
+    <td>
+    <apex:selectList size="1">
+        <apex:selectOption itemLabel="--None--" itemValue="None"></apex:selectOption>
+    </apex:selectList>
+    </td>
+    <td><apex:inputText style="height:17px;"/></td>
+    <td>AND</td>
+</tr>
+
+
+<tr>
+    <td>
+    <apex:selectList size="1">
+        <apex:selectOption itemLabel="--None--" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="FirstName" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="LastName" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Tracking Number" itemValue="None"></apex:selectOption>            
+        <apex:selectOption itemLabel="Check Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Denial Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Amount" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Log Number/Ref Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Banking #(Routing #/Account#)" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Social Security Number" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Driver's License Number" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Telecheck Track Id" itemValue="None"></apex:selectOption>
+
+    </apex:selectList>
+    </td>
+    <td>
+    <apex:selectList size="1">
+        <apex:selectOption itemLabel="--None--" itemValue="None"></apex:selectOption>
+    </apex:selectList>
+    </td>
+    <td><apex:inputText style="height:17px;"/></td>
+    <td>AND</td>
+</tr>
+
+<tr>
+    <td>
+    <apex:selectList size="1">
+       <apex:selectOption itemLabel="--None--" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="FirstName" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="LastName" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Tracking Number" itemValue="None"></apex:selectOption>            
+        <apex:selectOption itemLabel="Check Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Denial Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Amount" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Log Number/Ref Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Banking #(Routing #/Account#)" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Social Security Number" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Driver's License Number" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Telecheck Track Id" itemValue="None"></apex:selectOption>
+    </apex:selectList>
+    </td>
+    <td>
+    <apex:selectList size="1">
+        <apex:selectOption itemLabel="--None--" itemValue="None"></apex:selectOption>
+    </apex:selectList>
+    </td>
+    <td><apex:inputText style="height:17px;"/></td>
+    <td></td>
+</tr>
+
+<tr>
+    <td></td>
+    <td></td>
+<td></td>
+<td><apex:commandbutton value="Search" action="{!SearchClick}" reRender="ConsumerSerachForm"/>
+<apex:commandbutton value="cancel" action="{!CancelClick}" reRender="ConsumerSerachForm"/>
+</td>
+
+</tr>
+
+
+
+
+</table>
+
+
+<apex:pageBlockSection title="Collection Search Result" rendered="{!showConsumerSearchResultFlag}" collapsible="false"></apex:pageBlockSection>
+<apex:pageBlockTable id="PBTableConsumerSearch" value="{!contactList}" var="contactobj" rendered="{!showConsumerSearchResultFlag}">
+
+
+<apex:column headerValue="Action" width="3%">
+<apex:inputCheckbox />
+</apex:column>
+
+<apex:column headerValue="Check Date">
+<apex:outputField value="{!contactobj.Id}"/>
+</apex:column>
+
+<apex:column headerValue="Check Type">
+<apex:outputField value="{!contactobj.Id}"/>
+</apex:column>
+
+<apex:column headerValue="Check Amount">
+<apex:outputField value="{!contactobj.FirstName}"/>
+</apex:column>
+<apex:column headerValue="Reason Code">
+<apex:outputField value="{!contactobj.LastName}"/>
+</apex:column>
+<apex:column headerValue="Email">
+<apex:outputField value="{!contactobj.Email}" style="width:200px;"/>
+</apex:column>
+<apex:column headerValue="Fax">
+<apex:outputField value="{!contactobj.Fax}" style="width:110px;"/>
+</apex:column>
+<apex:column headerValue="Phone">
+<apex:outputField value="{!contactobj.Fax}" style="width:110px;"/>
+</apex:column>
+<apex:column headerValue="Department">
+<apex:outputField value="{!contactobj.Fax}" style="width:110px;"/>
+</apex:column>
+<apex:column headerValue="Owner">
+<apex:outputField value="{!contactobj.Fax}" style="width:110px;"/>
+</apex:column>
+<apex:column headerValue="Owner">
+<apex:outputField value="{!contactobj.Fax}" style="width:110px;"/>
+</apex:column>
+<apex:column headerValue="Owner">
+<apex:outputField value="{!contactobj.Fax}" style="width:110px;"/>
+</apex:column>
+<apex:column headerValue="Owner">
+<apex:outputField value="{!contactobj.Fax}" style="width:110px;"/>
+</apex:column>
+<apex:column headerValue="Owner">
+<apex:outputField value="{!contactobj.Fax}" style="width:110px;"/>
+</apex:column>
+<apex:column headerValue="Owner">
+<apex:outputField value="{!contactobj.Fax}" style="width:110px;"/>
+</apex:column>
+<apex:column headerValue="Owner">
+<apex:outputField value="{!contactobj.Fax}" style="width:110px;"/>
+</apex:column>
+<apex:column headerValue="Consumer" style="text-align:center;" width="30px">
+    <apex:commandLink action="{!showPopup}" rerender="tstpopup"><apex:image url="{!$Resource.Search}"  width="25" height="25"/></apex:commandLink>
+</apex:column>
+
+</apex:pageBlockTable>
+
+
+
+</apex:pageBlock>
+</apex:form>
+</apex:page>

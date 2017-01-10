@@ -1,0 +1,59 @@
+<apex:page controller="SetController_Controller">
+    
+    <apex:form >
+        <apex:pageBlock id="pb">
+        <apex:pageBlockButtons >
+            <apex:commandButton value="Save" action="{!SaveBtnClick}" reRender="pb" status="ProcessingStatus"/>
+            <apex:commandButton value="Delete"/>
+            
+            <apex:actionStatus id="ProcessingStatus" startText="Processing..."></apex:actionStatus>
+        </apex:pageBlockButtons>
+             <apex:pageBlockTable value="{!contactWrapperList}" var="c">
+                <apex:column >
+                <apex:facet name="header">
+                <apex:inputCheckbox />
+                </apex:facet>
+                <apex:inputCheckbox value="{!c.selected}">
+                    <!--
+                    <apex:actionSupport event="onchange" action="{!UpdateSelectedContactOnChange}" reRender="pb">
+                        <apex:param name="ContactId" value="{!c.con.Id}"/>
+                    </apex:actionSupport>
+                    -->
+                </apex:inputCheckbox>
+                
+                </apex:column>
+                <apex:column value="{!c.con.Id}"/>
+                
+                <apex:column headerValue="FirstName">
+                    <apex:inputField value="{!c.con.FirstName}"/>
+                </apex:column>
+                <apex:column headerValue="LastName">
+                    <apex:inputField value="{!c.con.LastName}"/>
+                </apex:column>
+                
+                
+                <apex:column headerValue="Home Phone" value="{!c.con.HomePhone}"/>
+                <apex:column headerValue="Created by" value="{!c.con.CreatedById}"/>
+                <apex:column headerValue="Updated By" value="{!c.con.LastModifiedById}">
+                <apex:facet name="footer">
+                
+              <apex:panelGrid columns="7" style="vertical-align:text-middle;">
+                 <apex:commandButton status="fetchStatus" reRender="pb" value="<<" action="{!setCon.first}" disabled="{!!setCon.hasPrevious}" title="First Page"/>
+                 <apex:commandButton status="fetchStatus" reRender="pb" value="<" action="{!setCon.previous}" disabled="{!!setCon.hasPrevious}" title="Previous Page"/>
+                 <apex:commandButton status="fetchStatus" reRender="pb" value=">" action="{!setCon.next}" disabled="{!!setCon.hasNext}" title="Next Page"/> 
+                 <apex:commandButton status="fetchStatus" reRender="pb" value=">>" action="{!setCon.last}" disabled="{!!setCon.hasNext}" title="Last Page"/>
+                 <apex:outputText >({!IF(setCon.PageNumber == 1,1,((setCon.PageNumber -1) * setCon.PageSize)+1)}-{!IF(setCon.resultSize < setCon.PageSize,setCon.resultSize,setCon.PageNumber * setCon.pageSize)})&nbsp; of {!noOfRecords}</apex:outputText> 
+                 <!--<apex:commandButton status="fetchStatus" reRender="pb" value="Refresh" action="{!refresh}" title="Refresh Page"/>                 -->
+                 <apex:outputPanel style="color:#4AA02C;font-weight:bold"> 
+                 <apex:actionStatus id="fetchStatus" startText="Fetching..." stopText=""/> 
+                 </apex:outputPanel> 
+                 </apex:panelGrid> 
+                </apex:facet>
+                </apex:column>
+
+            </apex:pageBlockTable>
+           
+        </apex:pageBlock>
+    </apex:form> 
+    
+</apex:page>

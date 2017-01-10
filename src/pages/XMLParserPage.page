@@ -1,0 +1,21 @@
+<apex:page controller="XMLParserController" >
+<!--
+public static dom.XmlNode getElementsByTagName(dom.XmlNode parentNode, String tag) {
+    dom.XmlNode desiredNode = null;
+    try {
+        List<dom.XmlNode> children = parentNode.getChildElements();
+        for ( Integer i = 0; i < children.size(); i++ ) {
+            dom.XmlNode child = children.get(i);
+            // If node is found, exit the loop
+            if ( child.getName().equalsIgnoreCase(tag) ) {
+                desiredNode = child;
+                i = children.size();
+            }
+        }
+    } catch (Exception e) { }
+    return desiredNode;
+}
+
+
+-->
+</apex:page>

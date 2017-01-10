@@ -1,0 +1,57 @@
+<apex:page >
+   <script type="text/javascript">
+    function renderReportFrame(myIframe, reportId, hideHeader, hideTitle, hideProgressIndicator, hideFilters, hideTagbar) {
+        if (myIframe != null) {
+            myIframe = myIframe.childNodes[0];
+
+            if (myIframe != null) {
+                myIframe.onload = function() {
+                alert('Onload called.');
+                    var phHeader = this.contentWindow.document.getElementById("phHeader");
+                    var tabNavigation = this.contentWindow.document.getElementById("tabNavigation");
+                    var section_header = this.contentWindow.document.getElementById("section_header");
+                    var progressIndicator = null;
+                    var progressIndicatorList = this.contentWindow.document.getElementsByClassName("progressIndicator");
+                    if (progressIndicatorList!=null) progressIndicator = progressIndicatorList[0];
+
+                    var bFilterReport = null;
+                    var bFilterReportList = this.contentWindow.document.getElementsByClassName("bFilterReport");
+                    if (bFilterReportList!=null) bFilterReport = bFilterReportList[0];
+
+                    var bPageTitle = null;
+                    var bPageTitleList = this.contentWindow.document.getElementsByClassName("bPageTitle");
+                    if (bPageTitleList!=null) bPageTitle = bPageTitleList[0];
+
+                    if (hideHeader!=null && hideHeader==true) {
+                        phHeader.style.cssText = "display: none;";
+                        tabNavigation.style.cssText = "display: none;";
+                    }
+                    if (hideTitle!=null && hideTitle==true) {
+                        bPageTitle.style.cssText = "display: none;";
+                    }
+                    if (hideProgressIndicator!=null && hideProgressIndicator==true) {
+                        progressIndicator.style.cssText = "display: none;";
+                    }
+                    if (hideFilters!=null && hideFilters==true) {
+                        bFilterReport.style.cssText = "display: none;";
+                    }
+                    if (hideTagbar!=null && hideTagbar==true) {
+                        section_header.style.cssText = "display: none;";
+                    }
+
+                };
+            myIframe.src = "/" + reportId;
+            alert(myIframe.src);
+            }
+        }
+    }
+  </script>
+
+  <apex:outputPanel id="theReportPanel" layout="block">
+    <apex:iframe id="theReportFrame" scrolling="true"/>
+  </apex:outputPanel>
+
+  <script type="text/javascript">
+      renderReportFrame(document.getElementById("{!$Component.theReportPanel}"), "00O90000002dnz4", true, true, true, true, true, true);
+  </script>
+</apex:page>

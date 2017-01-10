@@ -1,0 +1,17 @@
+<apex:component controller="EmailFCPlistController" access="global">
+    <table width="580" border="1" cellspacing="0" cellpadding="0">
+        <tr>
+            <td width="240" height="23" align="center" valign="middle" bgcolor="#FFFFFF" style="font-size: 12px; font-family:Arial; color:#000;"><strong>Product code</strong></td>
+            <td width="280" align="center" valign="middle" bgcolor="#FFFFFF" style="font-size: 12px; font-family:Arial; color:#000;"><strong>Description</strong></td>
+            <td width="60" align="center" valign="middle" bgcolor="#FFFFFF" style="font-size: 12px; font-family:Arial; color:#000;"><strong>Price</strong></td>
+        </tr>
+        
+        <apex:repeat value="{!Flexible_Contract_Price}" var="s_FCP">
+        <tr>
+            <td align="left" valign="top" bgcolor="#FFFFFF" style="font-size: 12px; font-family:Arial; color:#000">{!s_FCP.Product__r.Name}</td>
+            <td align="left" valign="top" bgcolor="#FFFFFF" style="font-size: 12px; font-family:Arial; color:#000">{!s_FCP.Product__r.Description}</td>
+            <td align="left" valign="top" bgcolor="#FFFFFF" style="font-size: 12px; font-family:Arial;  color:#000">{!s_FCP.CurrencyIsoCode}&nbsp;{!s_FCP.Sales_Price__c}</td>
+        </tr>
+    </apex:repeat>
+    </table>
+</apex:component>

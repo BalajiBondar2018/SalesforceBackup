@@ -1,0 +1,53 @@
+<apex:page controller="TimeTrackerController" tabStyle="Case" sidebar="false" action="{!InitFunction}">
+<apex:form >
+<apex:pageblock >
+<center>
+<table style="text-align:left;width:80%;background-color:#FFFFFF; border: solid gray 1px;" >
+<tr>
+<td colspan="7">
+
+<table border="0" width="100%">
+    <tr>
+        <td>
+        <apex:commandLink action="{!PreviousWeek}" value="< previous week" style="text-decoration:none;"/>
+        </td>
+        
+        <td style="text-align:center;">
+        <apex:outputLabel value="{!todayStr}"/>
+        </td>
+        
+        <td style="text-align:right;">
+        <apex:commandLink action="{!NextWeek}" value="Next week >" style="text-decoration:none;"/>
+        </td>
+    </tr>
+</table>
+
+<br/>
+
+</td>
+</tr>
+
+
+
+
+
+
+<tr> 
+<apex:repeat value="{!weekDateList}" var="wdate">
+<td>{!currentMonthStr}&nbsp;&nbsp;{!wdate}</td>
+</apex:repeat>
+</tr>
+<tr>
+<apex:repeat value="{!weekDaysList}" var="wday">
+<td><b>{!wday}</b></td>
+</apex:repeat>
+</tr>
+</table>
+</center>
+</apex:pageblock>
+
+<apex:pageblock >
+</apex:pageblock>
+
+</apex:form>
+</apex:page>

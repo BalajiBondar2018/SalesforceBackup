@@ -1,0 +1,9 @@
+<apex:page standardController="Product2" sidebar="false" showHeader="true">
+<apex:form >
+<apex:pageBlock Title="Product Edit">
+<apex:pageBlockSection title="Product Information" collapsible="false">
+<apex:inputField value="{!Product2.Name}"/>
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

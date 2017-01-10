@@ -1,0 +1,140 @@
+<apex:page standardController="Furnisher__c" extensions="SearchFurnisherExtension">
+
+<apex:includeScript value="{!URLFOR($Resource.JQuery, '/jquery-ui-1.9.2.custom/js/jquery-1.8.3.js')}"  />
+<apex:includeScript value="{!URLFOR($Resource.JQuery, '/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js')}"  />
+<apex:stylesheet value="{!URLFOR($Resource.JQuery, '/jquery-ui-1.9.2.custom/css/ui-lightness/jquery-ui-1.9.2.custom.css')}"  />
+
+<!--
+<script src="//ajax.googleapis.com/ajax/libs/jquery/latest/jquery.js"></script>
+<script>
+
+    function buttonsEnabled(enabled) {
+        alert('buttonsEnabled called.');
+        // retrieve all of the buttons or links on the page
+        // with the css class of btn
+        alert(enabled);
+        alert(document.getElementById('{!$Component.FurnisherSerachForm.theCommandLink}'));
+        
+        //document.getElementById('{!$Component.FurnisherSerachForm.theCommandLink}').style.display = 'none';
+        //var $buttons = jQuery('.btn');
+         
+        if (enabled === false) {
+            // add the btnDisabled class to give it the look of being disabled
+            // add the disabled attribute to actually disable interactability
+            alert('enable false');
+            //alert(document.getElementById('{!$Component.theCommandLink}'));
+            //$buttons.toggleClass('btnDisabled', true).attr('disabled', 'disabled');
+           //document.getElementById('{!$Component.FurnisherSerachForm.theCommandLink}').disabled = true;
+           //document.getElementById('{!$Component.FurnisherSerachForm.theCommandLink}').visibility = 'hidden'; 
+           
+        } else {
+            alert('enable true');
+             alert(document.getElementById('{!$Component.theCommandLink}'));
+            // remove the css class and the disabled attribute
+           // $buttons.toggleClass('btnDisabled', false).attr('disabled', null);
+           //document.getElementById('{!$Component.FurnisherSerachForm.theCommandLink}').disabled = true;
+        } 
+    }
+
+    function doSomeWork() {
+        alert('doSomeWork');
+        // first, call the action function to post the form
+        doSomeWorkActionFunction();
+        //setTimeout('doSomeWorkActionFunction()', 2000);
+
+        // second, disable the buttons
+        buttonsEnabled(false);
+        
+        // third, return false to prevent the click from
+        // posting the form a second time
+        return false;
+    }
+
+</script>
+-->
+
+<apex:form id="FurnisherSerachForm">
+<!--
+<apex:commandButton id="theCommandLink" value="Test Redirect"  onclick="return doSomeWork();"/>
+<apex:actionFunction name="doSomeWorkActionFunction" action="{!TestRedirect}" oncomplete="buttonsEnabled(true);" rerender="FurnisherSerachForm"></apex:actionFunction> 
+
+
+<apex:commandButton id="theCommandLink" value="Test Redirect" action="{!TestRedirect}"/>
+--> 
+          
+
+<apex:sectionHeader title="Case 00123345" subtitle="Search Furnisher Information"/>
+<apex:commandLink value="<< back to case 324324234"/>
+<apex:pageBlock >
+
+<apex:pageBlockSection title="Furnisher Search Criteria" collapsible="false" columns="2">
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Furnisher Id</apex:outputLabel>
+        <apex:outputPanel >
+            <apex:inputText />&nbsp;
+            <apex:commandButton value="Search" immediate="true" action="{!SearchClick}" rerender="FurnisherSerachForm" status="actionstatuspanel"/>
+            <apex:commandButton value="Cancel" action="{!CancelClick}" reRender="FurnisherSerachForm" status="actionstatuspanel"/>
+            <!--
+            <apex:commandButton value="Test Redirect" onclick="doSomeWorkActionFunction();" reRender="FurnisherSerachForm" status="actionstatuspanel"/> 
+            <apex:actionFunction name="doSomeWorkActionFunction" action="{!TestRedirect}"></apex:actionFunction> 
+             
+            
+            <apex:commandButton value="Test Redirect" action="{!TestRedirect}" reRender="FurnisherSerachForm" status="actionstatuspanel"/>
+            <apex:actionStatus id="saveStatus">
+                <apex:facet name="stop">
+                    <apex:commandButton value="Save" action="{!TestRedirect}" reRender="FurnisherSerachForm" status="saveStatus" />
+                </apex:facet>
+                <apex:facet name="start">
+                    <apex:commandButton value="Saving..." disabled="true" status="saveStatus"/>
+                </apex:facet>
+            </apex:actionStatus>
+            -->
+            
+            
+            
+    </apex:outputPanel>
+</apex:pageBlockSectionItem>
+</apex:pageBlockSection>
+
+<apex:pageBlockSection title="Funisher Search Result" rendered="{!showConsumerSearchResultFlag }" columns="1" collapsible="false">
+
+<apex:pageBlockTable value="{!contactList}" var="contact">
+    <apex:column headerValue="Action">
+    <apex:commandButton value="Link To Case"  action="{!LinkToCaseClick}"/>
+    </apex:column>
+        <apex:column headerValue="Furnisher Name" value="{!contact.LastName}"/>    
+        <apex:column headerValue="Contact Name" value="{!contact.FirstName}"/>
+        <apex:column headerValue="Contact Email" value="{!contact.FirstName}"/>
+        <apex:column headerValue="Addr 1" value="{!contact.MailingStreet}"/>
+        <apex:column headerValue="Addr 2" value="{!contact.MailingStreet}"/>
+        <apex:column headerValue="City" value="{!contact.MailingCity}"/>
+        <apex:column headerValue="State" value="{!contact.MailingState}"/>
+        <apex:column headerValue="Zip" value="{!contact.MailingPostalCode}"/>
+        <apex:column headerValue="Phone Type 1" value="{!contact.Phone_Type_1__c}"/>
+        <apex:column headerValue="Phone Value 1" value="{!contact.Phone_Value_1__c}"/>
+        <apex:column headerValue="Phone Type 2" value="{!contact.Phone_Type_2__c}"/>
+        <apex:column headerValue="Phone Value 2" value="{!contact.Phone_Value_2__c}"/>
+</apex:pageBlockTable>
+</apex:pageBlockSection>
+
+
+</apex:PageBlock>
+
+<apex:outputpanel >
+    <apex:actionstatus id="actionstatuspanel">
+        <apex:facet name="start">
+            <div class="waitingSearchDiv" id="el_loading" style="background-color: #DCD6D6;
+                   height: 100%;opacity:0.65;width:100%;"> 
+                <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+                    <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                    <span class="waitingDescription">Loading...</span>
+                </div>
+            </div>
+        </apex:facet>
+    </apex:actionstatus>
+</apex:outputpanel>
+
+
+</apex:form>
+ 
+</apex:page>

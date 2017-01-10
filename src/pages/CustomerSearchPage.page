@@ -1,0 +1,46 @@
+<apex:page standardController="Case" extensions="CustomerSearchExtension">
+  <apex:form id="form">
+ <apex:sectionHeader title="Case# {!caseObj.CaseNumber}" subtitle="Customer Search"/>
+<apex:pageBlock >
+<apex:pageBlockButtons location="bottom">
+<apex:commandButton value="Search"/>
+<apex:commandButton value="Cancel"/>
+</apex:pageBlockButtons>
+<apex:pageBlockSection columns="1" collapsible="false">
+<apex:outputPanel >
+<b>Customer Name</b> &nbsp;<apex:inputText value="{!caseObj.account.Name}"/>
+</apex:outputPanel>
+</apex:pageBlockSection>
+</apex:pageBlock>
+
+ 
+ 
+
+ <apex:inputhidden id="caseIdfield" value="{!caseId}" />
+ 
+ <apex:actionFunction name="updateCaseId" reRender="form">
+       <apex:param name="selectedcaseid" value="" assignTo="{!caseId}"/>
+   </apex:actionFunction>
+ 
+  <apex:includeScript value="/support/console/25.0/integration.js"/>
+ <script type="text/javascript">
+    window.onload = function() { 
+        //alert('CustomerSearchExtension onload called');
+        testGetFocusedPrimaryTabObjectId();
+    }
+    
+    function testGetFocusedPrimaryTabObjectId() {
+    sforce.console.getFocusedPrimaryTabObjectId(showObjectId);
+    }
+    var showObjectId = function showObjectId(result) {
+    //Display the object ID
+    //alert('showObjectId called');
+    //alert('Object ID: ' + result.id);
+    document.getElementById('{!$Component.caseIdfield}').value = result.id;
+    updateCaseId(result.id);
+    };
+    </script>
+ 
+ 
+ </apex:form>
+</apex:page>

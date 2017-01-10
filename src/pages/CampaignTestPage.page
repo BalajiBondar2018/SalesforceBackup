@@ -1,0 +1,3 @@
+<apex:page standardController="CampaignMember" extensions="UpdateCampaignMemberClass" sidebar="false" showHeader="false" >
+ Campaign Name:{!CampaignMember.Campaign.Name}
+ </apex:Page>

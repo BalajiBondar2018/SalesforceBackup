@@ -1,0 +1,75 @@
+<apex:page standardController="Letter__c" extensions="AgentLetterExtension">
+<apex:sectionHeader title="Letter Template" subtitle="Create PDF Letter"/>
+<apex:form id="LetterTemplate3Form">
+<apex:commandLink value="<< Back To Home"/>
+<apex:pageBlock >
+    <apex:pageBlockButtons location="bottom">
+        <apex:commandButton value="Previous" action="{!Previous3BtnClick}"/>
+        <apex:commandButton value="Next" action="{!Next3BtnClick}"/>
+    </apex:pageBlockButtons>
+    
+    <apex:pageBlockSection title="Letter Choice Information" columns="1">
+    <apex:pageBlockSectionItem >
+        
+        <apex:outputLabel >Section 1</apex:outputLabel>
+        <apex:outputPanel layout="block" style="vertical-align:top">
+            <apex:inputTextarea cols="70" rows="4" />
+           
+        </apex:outputPanel>
+        
+    </apex:pageBlockSectionItem>
+    
+    
+        <apex:pageBlockSectionItem >
+        <apex:outputPanel >
+        <apex:outputLabel >Section 2</apex:outputLabel><br/>
+        
+        </apex:outputPanel>
+        <apex:inputTextarea cols="70" rows="4" />
+    </apex:pageBlockSectionItem>
+    
+        <apex:pageBlockSectionItem >
+        <apex:outputPanel >
+        <apex:outputLabel >Section 3</apex:outputLabel><br/>
+       
+        </apex:outputPanel>
+        <apex:inputTextarea cols="70" rows="4" />
+    </apex:pageBlockSectionItem>
+    
+        <apex:pageBlockSectionItem >
+        <apex:outputPanel >
+        <apex:outputLabel >Section 4</apex:outputLabel><br/>
+        
+        </apex:outputPanel>
+        <apex:inputTextarea cols="70" rows="4" />
+    </apex:pageBlockSectionItem>
+    
+        <apex:pageBlockSectionItem >
+        <apex:outputPanel >
+        <apex:outputLabel >Section 5</apex:outputLabel><br/>
+       
+        </apex:outputPanel>
+        <apex:inputTextarea cols="70" rows="4" />
+    </apex:pageBlockSectionItem>
+    
+        <apex:pageBlockSectionItem >
+        <apex:outputPanel >
+        <apex:outputLabel >Section 6</apex:outputLabel><br/>
+       
+        </apex:outputPanel>
+        <apex:inputTextarea cols="70" rows="4" />
+    </apex:pageBlockSectionItem>
+    
+        <apex:pageBlockSectionItem >
+        <apex:outputPanel >
+        <apex:outputLabel >Section 7</apex:outputLabel><br/>
+       
+        </apex:outputPanel>
+        <apex:inputTextarea cols="70" rows="4" />
+    </apex:pageBlockSectionItem>
+    
+    </apex:pageBlockSection>
+    
+</apex:pageBlock>
+</apex:form>
+</apex:page>

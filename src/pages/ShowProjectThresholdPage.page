@@ -1,0 +1,227 @@
+<apex:page standardController="Account" extensions="ShowProjectThresholdController" showHeader="false" sidebar="false"> 
+
+    
+    <style>
+      div.tooltip {
+        //width: 50px;
+        float: center;
+      }
+      div.tooltip:hover {
+        text-decoration: none;
+      } /*BG color is a must for IE6*/
+      div.tooltip span {
+        display: none;
+        padding: 2px 2px;
+        margin-left: -3px;
+        margin-top: -18px;
+        width: 50px;
+      }
+      div.tooltip:hover span {
+        display: inline;
+        position: absolute;
+        border: 1px solid #cccccc;
+        background: #DCE1E3;
+        color: #000000;
+      }
+    </style>
+
+     <table width="100%" border="0" >
+     <!-- Main Table -->
+     <tr>
+     <td width="75%" style="vertical-align: text-top;">
+         <table  class="table1" width="80%" border="0" cellspacing="1.2" cellpadding="5" style="text-align:center;margin-left:8%;">
+                <tr style="font-weight:bold;">
+                    <td style="border-left: thin solid gray;border-top: thin solid gray;text-align:right;border-right: thin solid gray;border-bottom: thin solid gray;width:10%">Week</td>
+                    <td style="background-color:red;">50-54</td>
+                    <td style="background-color:#F56467;">55-59</td>
+                    <td style="background-color:#E6E68C;">60-64</td>
+                    <td style="background-color:#F2F187;">65-69</td>
+                    <td style="background-color:#EBF0EE;">70-74</td>
+                    <td style="background-color:#DFF5E4;">75-79</td>
+                    <td style="background-color:#C9F5D3;">80-84</td>
+                    <td style="background-color:#AAE68E;">85-89</td>
+                    <td style="background-color:#549C65;width:10%">90+</td>
+                </tr>
+                <apex:outputPanel rendered="{!(thresholdWrapperList.size == 0)}">
+                    <tr>
+                        <td colspan="10">
+                            No record to display
+                        </td>
+                    </tr>
+                </apex:outputPanel>
+                    <apex:repeat value="{!thresholdWrapperList}" var="thresholdWrapperObj">
+                        <tr >
+                            <td style="border-left: thin solid gray;border-top: thin solid gray;text-align:right;;border-right: thin solid gray;border-bottom: thin solid gray;">
+                               <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                   <apex:param value="{!thresholdWrapperObj.weekstartDate}"/>
+                               </apex:outputText>
+                               
+                            </td>
+                            <td style="background-color:red;">
+                                <apex:image url="{!$Resource.rightarrow5}" width="18" height="18"  rendered="{!thresholdWrapperObj.show5054ContinousRightArrowFlag}"/>
+                                <apex:image url="{!$Resource.leftarrow5}" width="18" height="18" rendered="{!thresholdWrapperObj.show5054ContinousLeftArrowFlag}"/>
+                                <!--<apex:image url="{!$Resource.leftarrow5}" rendered="{!NOT(thresholdWrapperObj.show5054CellFlag)}"/>-->
+                               <apex:outputPanel rendered="{!thresholdWrapperObj.show5054CellFlag}">
+                                   <div class="tooltip" style="display:inline">
+                                   <apex:image url="{!$Resource.Next5}" width="14" height="14" rendered="{!thresholdWrapperObj.show5054RightArrowFlag}"/>
+                                   <apex:image url="{!$Resource.Previous5}" width="14" height="14" rendered="{!thresholdWrapperObj.show5054LeftArrowFlag}"/>
+                                   <apex:image url="{!$Resource.Up5}" width="14" height="14" rendered="{!thresholdWrapperObj.show5054TopArrowFlag}"/>
+                                   <span>{!thresholdWrapperObj.ThresholdValue}</span>
+                                   </div>
+                                   
+                               </apex:outputPanel>
+                            </td>
+                            <td style="background-color:#F56467;">
+                              <apex:image url="{!$Resource.rightarrow5}"  width="18" height="18"  rendered="{!thresholdWrapperObj.show5559ContinousRightArrowFlag}"/>
+                                <apex:image url="{!$Resource.leftarrow5}"  width="18" height="18"  rendered="{!thresholdWrapperObj.show5559ContinousLeftArrowFlag}"/>
+                               <apex:outputPanel rendered="{!thresholdWrapperObj.show5559CellFlag}">
+                                   <div class="tooltip" style="display:inline">
+                                   <apex:image url="{!$Resource.Next5}" width="14" height="14" rendered="{!thresholdWrapperObj.show5559RightArrowFlag}"/>
+                                   <apex:image url="{!$Resource.Previous5}" width="14" height="14" rendered="{!thresholdWrapperObj.show5559LeftArrowFlag}"/>
+                                   <apex:image url="{!$Resource.Up5}" width="14" height="14" rendered="{!thresholdWrapperObj.show5559TopArrowFlag}"/>
+                                   <span>{!thresholdWrapperObj.ThresholdValue}</span>
+                                   </div>
+                               </apex:outputPanel>
+                            </td>
+                            <td style="background-color:#E6E68C;">
+                                <apex:image url="{!$Resource.rightarrow5}" width="18" height="18"  rendered="{!thresholdWrapperObj.show6064ContinousRightArrowFlag}"/>
+                                <apex:image url="{!$Resource.leftarrow5}"  width="18" height="18"  rendered="{!thresholdWrapperObj.show6064ContinousLeftArrowFlag}"/>
+                                <apex:outputPanel rendered="{!thresholdWrapperObj.show6064CellFlag}">
+                                   <div class="tooltip" style="display:inline">
+                                   <apex:image url="{!$Resource.Next5}" width="14" height="14" rendered="{!thresholdWrapperObj.show6064RightArrowFlag}"/>
+                                   <apex:image url="{!$Resource.Previous5}" width="14" height="14" rendered="{!thresholdWrapperObj.show6064LeftArrowFlag}"/>
+                                   <apex:image url="{!$Resource.Up5}" width="14" height="14" rendered="{!thresholdWrapperObj.show6064TopArrowFlag}"/>
+                                   <span>{!thresholdWrapperObj.ThresholdValue}</span>
+                                   </div>
+                               </apex:outputPanel>
+                            </td>
+                            <td style="background-color:#F2F187;">
+                               <apex:image url="{!$Resource.rightarrow5}" width="18" height="18" rendered="{!thresholdWrapperObj.show6569ContinousRightArrowFlag}"/>
+                                <apex:image url="{!$Resource.leftarrow5}" width="18" height="18" rendered="{!thresholdWrapperObj.show6569ContinousLeftArrowFlag}"/>
+                              
+                              <apex:outputPanel rendered="{!thresholdWrapperObj.show6569CellFlag}">
+                                   <div class="tooltip" style="display:inline">
+                                   <apex:image url="{!$Resource.Next5}" width="14" height="14" rendered="{!thresholdWrapperObj.show6569RightArrowFlag}"/>
+                                   <apex:image url="{!$Resource.Previous5}" width="14" height="14" rendered="{!thresholdWrapperObj.show6569LeftArrowFlag}"/>
+                                   <apex:image url="{!$Resource.Up5}" width="14" height="14" rendered="{!thresholdWrapperObj.show6569TopArrowFlag}"/>
+                               <span>{!thresholdWrapperObj.ThresholdValue}</span>
+                                   </div>
+                               </apex:outputPanel>
+                            </td>
+                            <td style="background-color:#EBF0EE;">
+                                <apex:image url="{!$Resource.rightarrow5}" width="18" height="18" rendered="{!thresholdWrapperObj.show7074ContinousRightArrowFlag}"/>
+                                <apex:image url="{!$Resource.leftarrow5}" width="18" height="18" rendered="{!thresholdWrapperObj.show7074ContinousLeftArrowFlag}"/>
+                              
+                              <apex:outputPanel rendered="{!thresholdWrapperObj.show7074CellFlag}">
+                                   <div class="tooltip" style="display:inline">
+                                   <apex:image url="{!$Resource.Next5}" width="14" height="14" rendered="{!thresholdWrapperObj.show7074RightArrowFlag}"/>
+                                   <apex:image url="{!$Resource.Previous5}" width="14" height="14" rendered="{!thresholdWrapperObj.show7074LeftArrowFlag}"/>
+                                   <apex:image url="{!$Resource.Up5}" width="14" height="14" rendered="{!thresholdWrapperObj.show7074TopArrowFlag}"/>
+                               <span>{!thresholdWrapperObj.ThresholdValue}</span>
+                                   </div>
+                               </apex:outputPanel>
+                            </td>
+                            <td style="background-color:#DFF5E4;">
+                                <apex:image url="{!$Resource.rightarrow5}" width="18" height="18" rendered="{!thresholdWrapperObj.show7579ContinousRightArrowFlag}"/>
+                                <apex:image url="{!$Resource.leftarrow5}" width="18" height="18" rendered="{!thresholdWrapperObj.show7579ContinousLeftArrowFlag}"/>
+                              
+                               <apex:outputPanel rendered="{!thresholdWrapperObj.show7579CellFlag}">
+                                   <div class="tooltip" style="display:inline">
+                                   <apex:image url="{!$Resource.Next5}" width="14" height="14" rendered="{!thresholdWrapperObj.show7579RightArrowFlag}"/>
+                                   <apex:image url="{!$Resource.Previous5}" width="14" height="14" rendered="{!thresholdWrapperObj.show7579LeftArrowFlag}"/>
+                                   <apex:image url="{!$Resource.Up5}" width="14" height="14" rendered="{!thresholdWrapperObj.show7579TopArrowFlag}"/>
+                               <span>{!thresholdWrapperObj.ThresholdValue}</span>
+                                   </div>
+                               </apex:outputPanel>
+                            </td>
+                            <td style="background-color:#C9F5D3;">
+                                      <apex:image url="{!$Resource.rightarrow5}" width="18" height="18" rendered="{!thresholdWrapperObj.show8084ContinousRightArrowFlag}"/>
+                                <apex:image url="{!$Resource.leftarrow5}" width="18" height="18" rendered="{!thresholdWrapperObj.show8084ContinousLeftArrowFlag}"/>
+                              
+                      
+                               <apex:outputPanel rendered="{!thresholdWrapperObj.show8084CellFlag}">
+                                   <div class="tooltip" style="display:inline">
+                                   <apex:image url="{!$Resource.Next5}" width="14" height="14" rendered="{!thresholdWrapperObj.show8084RightArrowFlag}"/>
+                                   <apex:image url="{!$Resource.Previous5}" width="14" height="14" rendered="{!thresholdWrapperObj.show8084LeftArrowFlag}"/>
+                                   <apex:image url="{!$Resource.Up5}" width="14" height="14" rendered="{!thresholdWrapperObj.show8084TopArrowFlag}"/>
+                               <span>{!thresholdWrapperObj.ThresholdValue}</span>
+                                   </div>
+                               </apex:outputPanel>
+                            </td>
+                            <td style="background-color:#AAE68E;">
+                                         <apex:image url="{!$Resource.rightarrow5}" width="18" height="18" rendered="{!thresholdWrapperObj.show8589ContinousRightArrowFlag}"/>
+                                <apex:image url="{!$Resource.leftarrow5}" width="18" height="18" rendered="{!thresholdWrapperObj.show8589ContinousLeftArrowFlag}"/>
+                         
+                              <apex:outputPanel rendered="{!thresholdWrapperObj.show8589CellFlag}">
+                                   <div class="tooltip" style="display:inline">
+                                   <apex:image url="{!$Resource.Next5}" width="14" height="14" rendered="{!thresholdWrapperObj.show8589RightArrowFlag}"/>
+                                   <apex:image url="{!$Resource.Previous5}" width="14" height="14" rendered="{!thresholdWrapperObj.show8589LeftArrowFlag}"/>
+                                   <apex:image url="{!$Resource.Up5}" width="14" height="14" rendered="{!thresholdWrapperObj.show8589TopArrowFlag}"/>
+                               <span>{!thresholdWrapperObj.ThresholdValue}</span>
+                                   </div>
+                               </apex:outputPanel>
+                            </td>
+                            <td style="background-color:#549C65;">
+                                             <apex:image url="{!$Resource.rightarrow5}" width="18" height="18" rendered="{!thresholdWrapperObj.show90ContinousRightArrowFlag}"/>
+                                <apex:image url="{!$Resource.leftarrow5}" width="18" height="18" rendered="{!thresholdWrapperObj.show90ContinousLeftArrowFlag}"/>
+                        
+                               <apex:outputPanel rendered="{!thresholdWrapperObj.show90CellFlag}">
+                                   <div class="tooltip" style="display:inline">
+                                   <apex:image url="{!$Resource.Next5}" width="14" height="14" rendered="{!thresholdWrapperObj.show90RightArrowFlag}"/>
+                                   <apex:image url="{!$Resource.Previous5}" width="14" height="14" rendered="{!thresholdWrapperObj.show90LeftArrowFlag}"/>
+                                   <apex:image url="{!$Resource.Up5}" width="14" height="14" rendered="{!thresholdWrapperObj.show90TopArrowFlag}"/>
+                               <span>{!thresholdWrapperObj.ThresholdValue}</span>
+                                   </div>
+                               </apex:outputPanel>
+                            </td>
+                        </tr>
+                    </apex:repeat> 
+            </table>
+    </td>
+     <!-- Legand Table -->
+     <td width="25%" style="vertical-align:top;">
+            <table width="100%" border="0" cellspacing="2" cellpadding="3"> 
+                <tr>
+                    <td style="background-color:red;width:20%"></td>
+                    <td>-ve project health impact(50-54)</td>
+                </tr>
+                <tr>
+                    <td style="background-color:#F56467;;width:20%"></td>
+                    <td>-ve project health impact(55-59)</td>
+                </tr>
+                 <tr>
+                    <td style="background-color:#E6E68C;;width:20%"></td>
+                    <td>-ve project health impact(60-64)</td>
+                </tr>
+                
+                 <tr>
+                    <td style="background-color:#F2F187;;width:20%"></td>
+                    <td>-ve project health impact(65-69)</td>
+                </tr>
+                
+                 <tr>
+                    <td style="background-color:#EBF0EE;;width:20%"></td>
+                    <td>Project improvment(70-74)</td>
+                </tr>
+                <tr>
+                    <td style="background-color:#DFF5E4;;width:20%"></td>
+                    <td>Project improvment(75-79)</td>
+                </tr>
+                <tr>
+                    <td style="background-color:#C9F5D3;;width:20%"></td>
+                    <td>Project improvment(80-84)</td>
+                </tr>
+                <tr>
+                    <td style="background-color:#AAE68E;;width:20%"></td>
+                    <td>Project improvment(85-89)</td>
+                </tr>
+                <tr>
+                    <td style="background-color:#549C65;;width:20%"></td>
+                    <td>Project improvment(90+)</td>
+                </tr>
+            </table>
+     </td>
+     </tr>
+     </table>
+  
+</apex:page>

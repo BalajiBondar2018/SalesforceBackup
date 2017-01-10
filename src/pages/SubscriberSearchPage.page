@@ -1,0 +1,57 @@
+<apex:page standardController="Subscriber__c" extensions="SubscriberSearchController" tabStyle="Search_Subscriber__tab">
+ <apex:form id="ConsumerSerachForm">
+<apex:sectionHeader title="Search" subtitle="Subscriber Information"/>
+<apex:pageBlock >
+<apex:pageBlockSection title="Subscriber Search Criteria" collapsible="false" columns="2">
+
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Subscriber Name</apex:outputLabel>
+    <apex:inputText />
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >
+    <apex:outputLabel >Subscriber Zip</apex:outputLabel>
+    <apex:inputText />
+</apex:pageBlockSectionItem>
+
+
+
+
+<apex:outputPanel style="text-align:center;">
+    <table style="border:1px;width:100%;text-align:right;">
+        <tr>
+            <td>
+                <apex:commandButton value="Search" immediate="true" action="{!SearchClick}" rerender="ConsumerSerachForm"/>
+                <apex:commandButton value="Cancel"/>
+            </td>
+        </tr>
+    </table>
+</apex:outputPanel>
+
+</apex:pageBlockSection>
+
+<apex:outputPanel rendered="{!showConsumerSearchResultFlag }">
+<apex:pageBlockSection title="Subscriber Search Result" collapsible="false"></apex:pageBlockSection>
+<apex:pageBlockTable value="{!contactList}" var="contact">
+    <apex:column headerValue="Action" style="width:15px;">
+    <apex:commandButton value="Link To Case"/>
+    </apex:column>
+        <apex:column headerValue="Subscriber Id" value="{!contact.Id}"/>
+        <apex:column headerValue="Subscriber Name" value="{!contact.FirstName}"/>    
+        <apex:column headerValue="Contact Name" value="{!contact.FirstName} {!contact.LastName}"/>
+        <apex:column headerValue="Contact Email" value="{!contact.Email}"/>
+        <apex:column headerValue="Addr 1" value="{!contact.FirstName}"/>
+        <apex:column headerValue="Addr 2" value="{!contact.FirstName}"/>
+        <apex:column headerValue="City" value="{!contact.MailingCity}"/>
+        <apex:column headerValue="State" value="{!contact.FirstName}"/>
+        <apex:column headerValue="Zip" value="{!contact.MailingPostalCode}"/>
+        <apex:column headerValue="Phone Type" value="{!contact.Phone_Type_1__c}"/>
+        <apex:column headerValue="Phone Value" value="{!contact.Phone_Value_1__c}"/>
+
+</apex:pageBlockTable>
+</apex:outputPanel>
+
+</apex:PageBlock>
+</apex:form>
+ 
+</apex:Page>

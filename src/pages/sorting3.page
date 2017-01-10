@@ -1,0 +1,25 @@
+<apex:page controller="aaSorterContact">
+<apex:form >
+<apex:pageBlock >
+    <apex:pageBlockSection columns="1" ID="AjaxTable">
+        <apex:datatable value="{!List}" var="acc" Border="1" cellspacing="1" cellpadding="5">
+            <apex:column >
+            <apex:facet name="header">
+                <apex:commandButton action="{!SortByName}" value="Sort By Name" rerender="AjaxTable" status="sortingstatus">
+                    <apex:actionStatus Id="sortingstatus" startText="Processing..."></apex:actionStatus>
+                </apex:commandButton>
+            </apex:facet>
+            <apex:outputText value="{!acc.Name}" />
+            </apex:column>
+            
+            <apex:column >
+            <apex:facet name="header">
+                <apex:commandButton action="{!SortByPhone}" value="Sort By Phone" rerender="AjaxTable" />
+            </apex:facet>
+                <apex:outputText value="{!acc.Phone}" />
+            </apex:column>
+        </apex:datatable>
+    </apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

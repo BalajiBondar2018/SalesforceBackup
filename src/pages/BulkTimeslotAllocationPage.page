@@ -1,0 +1,181 @@
+<apex:page sidebar="false" tabStyle="Account" controller="BulkTimeslotAllocationController">
+<!-- CSS goes in the document HEAD or added to your external stylesheet -->
+<style type="text/css">
+table.eventtable {
+    font-family: verdana,arial,sans-serif;
+    font-size:11px;
+    border-width: 1px;
+    border-color: #C9CCD1;
+    border-collapse: collapse;
+    width:100%;
+}
+table.eventtable th {
+    font-family: verdana,arial,sans-serif;
+    font-size:10px;
+    padding: 5px;
+    background-color:#E6E7ED;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #B6B8BA;
+    text-align:center;
+}
+table.eventtable tr {
+    text-align:center;
+    vertical-align:middle;
+  }
+table.eventtable td {
+    padding: 4px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #C9CCD1;
+    
+}
+table.eventtable tr:hover {
+background-color: #E3EEFC;
+} 
+
+
+</style>
+<apex:form id="appointmentform">
+<apex:sectionHeader title="Bulk Timeslot Allocation"/>
+    <apex:commandLink value="<<Back to Home"/>
+    <apex:pageBlock >
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton value="Save"/>
+            <apex:commandButton value="Cancel"/>
+        </apex:pageBlockButtons>
+        <apex:pageBlockSection title="Timeslot Allocation" collapsible="false"></apex:pageBlockSection>
+            <table width="100%" style="background-color:#C8C9CC;" cellspacing="2" cellpadding="" border="0">
+                <tr>
+                    
+                    <td style="width:8%">
+                        <apex:outputLabel styleClass="labelCol">Start Period</apex:outputLabel>&nbsp;
+                    </td>
+                    <td style="width:7%">
+                        <c:noDateLink >
+                            <apex:inputtext />
+                        </c:noDateLink>
+                    </td>
+                    <td style="width:7%">
+                        <apex:outputLabel styleClass="labelCol">End Period</apex:outputLabel>&nbsp;
+                    </td>
+                    <td style="width:5%">
+                        <c:noDateLink >
+                            <apex:inputtext />
+                        </c:noDateLink>
+                    </td>
+                    <td style="width:5%">
+                        <apex:outputLabel styleClass="labelCol">Status</apex:outputLabel>&nbsp;
+                    </td>
+
+                    <td>
+                        <apex:selectList value="{!countries}" size="1">
+            <apex:selectOptions value="{!items}"/>
+        </apex:selectList>                    </td>
+                </tr>
+            
+            
+            
+            
+            <tr>
+                    
+                    <td style="width:8%">
+                        <apex:outputLabel styleClass="labelCol">Field Agents</apex:outputLabel>&nbsp;
+                    </td>
+                    <td style="width:7%" colspan="5">
+                                <apex:panelGrid columns="3" id="abcd">
+            <apex:selectList id="sel1" value="{!leftselected}" multiselect="true" style="width:100px" size="3">
+                <apex:selectOptions value="{!unselectedvalues}" />
+            </apex:selectList>
+                <apex:panelGroup >
+                    
+                    <apex:commandButton value=">>">
+                        <apex:actionSupport event="onclick" action="{!selectclick}" reRender="abcd"/>
+                    </apex:commandButton>
+                    <br/>
+                    <apex:commandButton value="<<">
+                        <apex:actionSupport event="onclick" action="{!unselectclick}" reRender="abcd"/>
+                    </apex:commandButton>
+                </apex:panelGroup>
+            <apex:selectList id="sel2" value="{!rightselected}" multiselect="true" style="width:100px" size="3">
+                <apex:selectOptions value="{!SelectedValues}" />
+            </apex:selectList>
+        </apex:panelGrid>
+
+                    
+                    </td>
+                                    </tr>
+            
+            
+
+            
+            
+            
+            
+
+            
+            </table>
+        
+        <apex:pageBlockSection title="Timeslot Information" collapsible="false"></apex:pageBlockSection>
+            <table class="eventtable"> 
+            
+            <tr>
+                <th>09.00</th>
+                <th>09.30</th>
+                <th>10.00</th>
+                <th>10.30</th>
+                <th>11.00</th>
+                <th>11.30</th>
+                <th>12.00</th>
+                <th>12.30</th>
+                <th>01.00</th>
+                <th>01.30</th>
+                <th>02.00</th>
+                <th>02.30</th>
+                <th>03.00</th>
+                <th>03.30</th>
+                <th>04.00</th>
+                <th>04.30</th>
+                <th>05.00</th>
+                <th>05.30</th>
+                <th>06.00</th>
+                <th>06.30</th>
+                <th>07.00</th>
+                <th>07.30</th>
+                <th>08.00</th>
+            </tr>
+            
+            <tr style="text-align:center;font-weight:bold;">
+            <td colspan="7">(AM)</td>
+            <td colspan="17">(PM)</td>
+            </tr>
+            
+            <tr>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                 <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+                <td><apex:inputCheckbox /></td>
+            </tr>
+        </table>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

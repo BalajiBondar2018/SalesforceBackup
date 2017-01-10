@@ -1,0 +1,49 @@
+<apex:page tabStyle="Account" standardController="Account">
+<apex:sectionHeader title="Global Search" subtitle="Lead/Account/Contact"/>
+<apex:form >
+<apex:pageBlock title="Search Criteria">
+<apex:pageBlockButtons location="bottom">
+<apex:commandButton value="Search"/>
+<apex:commandButton value="Cancel"/>
+</apex:pageBlockButtons>
+    <apex:pageBlockSection >
+        <apex:pageBlockSectionItem >
+        <apex:outputLabel >Search</apex:outputLabel>
+        <apex:inputText style="width:300px;"/>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+        <apex:outputLabel >&nbsp;</apex:outputLabel>
+        <apex:outputLabel >&nbsp;</apex:outputLabel>
+
+        </apex:pageBlockSectionItem>
+
+        <apex:pageBlockSectionItem >
+        <apex:outputLabel >Object</apex:outputLabel>
+        <apex:inputField value="{!account.Object__c}"/>
+        </apex:pageBlockSectionItem>
+        
+        <apex:pageBlockSectionItem >
+        <apex:outputLabel >Field</apex:outputLabel>
+        <apex:inputField value="{!account.Fields__c}"/>
+        </apex:pageBlockSectionItem>
+
+        <apex:pageBlockSectionItem >
+        <apex:outputLabel >Region</apex:outputLabel>
+        <apex:inputField value="{!account.Regions__c}"/>
+        </apex:pageBlockSectionItem>
+
+    </apex:pageBlockSection>
+</apex:pageBlock>
+
+<apex:pageBlock title="Search Result">
+
+<apex:pageBlockSection title="Lead[0]">
+</apex:pageBlockSection>
+<apex:pageBlockSection title="Account[0]">
+</apex:pageBlockSection>
+
+<apex:pageBlockSection title="Contact[0]">
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

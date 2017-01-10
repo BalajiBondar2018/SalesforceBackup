@@ -1,0 +1,55 @@
+<apex:page controller="MobileHybridAccountDetailController" sidebar="false">
+
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+<apex:form >
+<div data-role="page" data-back-btn-text="previous">
+<div data-role="header" data-position="inline" data-theme="c" > 
+    <a href="index.html" data-role="button" data-theme="c">Back</a>
+    <h1>Account Name</h1>
+    <a href="index.html" data-icon="gear" class="ui-btn-right">Options</a>
+</div>
+
+<div data-role="content" data-theme="c">
+<div class="ui-grid-a" >
+    <div class="ui-block-a"><strong>Account Name</strong>Test Name</div>
+    <div class="ui-block-b"><strong>Lead Source</strong>Test Source</div>
+    
+    <div class="ui-block-a"><strong>Account Name</strong>Test Name</div>
+    <div class="ui-block-b"><strong>Lead Source</strong>Test Source</div>
+
+    <div class="ui-block-a"><strong>Account Name</strong>Test Name</div>
+    <div class="ui-block-b"><strong>Lead Source</strong>Test Source</div>
+
+
+</div><!-- /grid-a -->
+
+<div class="content-primary">
+        <ul data-role="listview">
+            <li><a href="index.html">Contact <span class="ui-li-count">12</span></a></li>
+            <li><a href="index.html">Opportunity <span class="ui-li-count">0</span></a></li>
+            <li><a href="index.html">Notes <span class="ui-li-count">4</span></a></li>
+            <li><a href="index.html">Attachment <span class="ui-li-count">4</span></a></li>
+        </ul>
+        </div><!--/content-primary -->      
+
+
+
+</div>
+          
+<div data-role="footer" data-theme="c">
+<h4>Page Footer</h4>
+</div><!-- /footer -->
+</div><!-- /page -->
+
+</apex:form>
+
+
+
+
+
+
+
+
+</apex:page>

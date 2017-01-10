@@ -1,0 +1,184 @@
+<apex:page tabStyle="Case" standardController="Case" extensions="GenerateLetterExtension" cache="false">
+    <apex:includescript value="{!URLFOR($Resource.CkEditor, 'ckeditor/ckeditor.js')}" />
+    
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"/>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    
+    <script>
+        function ReloadCkEditor(){
+            for(name in CKEDITOR.instances){
+                delete CKEDITOR.instances[name];
+            }
+             
+            CKEDITOR.replaceAll();
+            CKEDITOR.config.width = 800;
+            CKEDITOR.config.height = 800;
+            CKEDITOR.config.extraPlugins = 'justify';
+            //CKEDITOR.config.extraPlugins = 'onchange';
+            //CKEDITOR.config.minimumChangeMilliseconds = 100; 
+                  
+            for (var i in CKEDITOR.instances) {
+                CKEDITOR.instances[i].on('change', function() {
+                  // alert('onchange called');
+                  //alert(document.getElementById('{!$Component.generateCaseLetterForm.generateCaseLetterPBlock.customRichTextArea}').value);
+                  //alert(CKEDITOR.instances['{!$Component.generateCaseLetterForm.generateCaseLetterPBlock.customRichTextArea}'].getData());
+                  //alert(document.getElementById('{!$Component.generateCaseLetterForm.generateCaseLetterPBlock.customRichTextArea}').value);
+                });
+            }
+        }
+        
+        
+        function OpenModalDialogBox(letterHTMLBodyStr){
+            //alert(letterHTMLBodyStr);
+            letterHTMLBodyStr = escape(letterHTMLBodyStr);
+            var j$ = jQuery.noConflict(); 
+            var currentUrl = window.location.href; 
+            //var hostIndex = currentUrl.indexOf(window.location.host+'/')+(window.location.host+'/').length; 
+            //var accountId = currentUrl.substring(hostIndex,hostIndex+15); 
+            var randomNo =  Math.round(Math.random() * 10000000);
+            j$(function(){ 
+            /*Insert the jQuery style sheets in the Head.*/         
+            /*Insert the Modal dialog along with the VF as an iframe inside the div.*/ 
+            
+            
+            j$("head").after( 
+                j$("<link>",{rel:"stylesheet",href:"https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css"})
+            ); 
+            
+            j$("body").after( 
+            j$("<div>",{id:"modalDiv",      
+             style:"display:none;" 
+            }).append( 
+            j$("<iframe>",{id:"valueID",
+            src:"/apex/GenerateLetterPDFPage?letterHTMLbody="+letterHTMLBodyStr+"&cacheControl=" + Math.round(Math.random() * 10000000), 
+            height:630, 
+            width:920, 
+            frameBorder:0}) 
+            )); 
+            /*Initialize the Dialog window.*/ 
+            j$("#modalDiv").dialog({ 
+            autoOpen: false, 
+            height: 690, 
+            width: 950, 
+            modal:true
+            }); 
+            }); 
+            
+            j$("#modalDiv").dialog('option','title','Letter Preview'+ Math.round(Math.random() * 10000000)).dialog('open');
+            
+            return false;
+        }
+        
+        function BtnClick(letterHTMLBodyStr){
+            //alert('letterHTMLBodyStr called');
+            //letterHTMLBodyStr = escape(letterHTMLBodyStr);
+            //alert(letterHTMLBodyStr);
+            
+            document.getElementById('{!$Component.generateCaseLetterForm.generateCaseLetterPBlock.customRichTextArea}').value = CKEDITOR.instances['{!$Component.generateCaseLetterForm.generateCaseLetterPBlock.customRichTextArea}'].getData(); 
+            refershPage();
+            //passStringToController();
+            
+            
+            //var updatedLetterHTMLStr = CKEDITOR.instances['{!$Component.generateCaseLetterForm.generateCaseLetterPBlock.customRichTextArea}'].getData();
+            //updatedLetterHTMLStr = escape(updatedLetterHTMLStr ); 
+            //window.open('/apex/GenerateLetterPDFPage?letterHTMLbody='+updatedLetterHTMLStr ,'_blank','top=100,left=250,height=750,width=650');
+       }
+       
+    </script>
+    
+    
+    <apex:form id="generateCaseLetterForm">
+        
+<!--{!letterbodyStr}-->
+
+
+<!-- Hidden field to store a new value of the variable -->
+<apex:inputHidden value="{!letterbodyStr}" id="myHiddenField"/>
+
+<!-- Action function for the rerendering -->
+<apex:actionFunction name="refershPage" rerender="myHiddenField" status="actionstatuspanel"/>
+<!--<apex:actionFunction name="passStringToController" action="{!generateLetterPDFClick}" />-->
+
+
+<apex:inputHidden value="{!letterbodyStr}" id="theField"/>
+<script> var theField = document.getElementById('{!$Component.generateCaseLetterForm.generateCaseLetterPBlock.customRichTextArea}').value; </script>
+
+        <apex:sectionHeader title="Case#000034567" subtitle="Generate Case Letter"/>
+        <apex:commandLink value="<< Back To Case#000034567"/>
+        <apex:pageBlock id="generateCaseLetterPBlock">
+        <apex:pageBlockButtons location="top">
+            <!--
+            <apex:commandButton value="Preview"  action="{!generateLetterPDFClick}" disabled="{!selectedLetter == '' || selectedLetter == 'select'}"/>
+            <a href="/apex/GenerateLetterPDFPage" class="btn" style="text-decoration:none" onclick="window.open(this.href, 'Letter Preview', 'height=400,width=300'); return false;" >Pure HTML version, should be a popup</a>
+           <apex:commandButton value="Preview3" onclick="return OpenModalDialogBox('{!letterbodyStr}');"  disabled="{!selectedLetter == '' || selectedLetter == 'select'}"/>     
+           <apex:commandButton value="Preview1"   oncomplete="BtnClick('{!letterbodyStr}');"  disabled="{!selectedLetter == '' || selectedLetter == 'select'}"/>
+           <apex:commandLink value="Preview (New Tab)" action="{!generateLetterPDFClick}" onclick="return confirm('Have you saved changes before preview?')"  styleClass="btn" immediate="true" target="_blank" style="text-decoration:none"/>
+           -->
+            <apex:commandButton value="Refresh" onclick="BtnClick('{!letterbodyStr}');"  rerender="generateCaseLetterForm" status="actionstatuspanel"  oncomplete="ReloadCkEditor();"/>
+            
+            <!--
+            <apex:param name="LetterBodyStr123" value="{!letterbodyStr}" assignTo="{!letterbodyStr}" />
+            </apex:commandLink>
+            -->
+            <apex:commandButton value="Generate PDF" action="{!GenerateAndAttachClick}" onclick="return confirm('Have you refreshed window to update changes?')"  disabled="{!selectedLetter == '' || selectedLetter == 'select'}"/>
+            <apex:commandButton value="Cancel" action="{!CancelClick}" oncomplete="ReloadCkEditor();" status="actionstatuspanel" reRender="generateCaseLetterForm"  disabled="{!selectedLetter == '' || selectedLetter == 'select'}"/>
+        </apex:pageBlockButtons>
+        
+        <apex:pageBlockSection id="selectLetterPBSection" title="Select Letter Template" collapsible="false">
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Select Letter Template</apex:outputLabel>
+                <apex:outputPanel >
+                <apex:selectList size="1" value="{!selectedLetter}">
+                    <apex:actionSupport event="onchange"  action="{!FetchLetterContent}" oncomplete="ReloadCkEditor();" reRender="generateCaseLetterForm" status="actionstatuspanel"/>
+                    <apex:selectOptions value="{!Letters}"/>
+                </apex:selectList>
+                </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+            
+             <apex:pageBlockSectionItem >
+                <apex:outputLabel ></apex:outputLabel>
+                <apex:outputLabel ></apex:outputLabel>
+            </apex:pageBlockSectionItem>           
+        </apex:pageBlockSection>
+      
+        <apex:pageBlockSection title="Fetch TCK Information" collapsible="false" rendered="{!showFetchTCKInfoFlag}">
+        <apex:pageBlockSectionItem >
+                <apex:outputLabel >Select Section</apex:outputLabel>
+                <apex:outputPanel >
+                <apex:selectList size="1" style="height:21px;" value="{!selectedTCKSection}">
+                    <apex:selectOption itemLabel="--Select Section--" itemValue="Select"></apex:selectOption>
+                    <apex:selectOption itemLabel="Collection Information" itemValue="SelectLetter"></apex:selectOption>
+                    <apex:selectOption itemLabel="Furnisher Information" itemValue="SelectLetter"></apex:selectOption>
+                </apex:selectList>&nbsp;
+                <apex:commandButton value="Overwrite Information"  style="height:21px;" action="{!OverwriteInformationBtnClick}" oncomplete="ReloadCkEditor();" reRender="generateCaseLetterForm" status="actionstatuspanel"/>
+                </apex:outputPanel>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+            <apex:outputLabel ></apex:outputLabel>
+            <apex:outputLabel ></apex:outputLabel>
+            </apex:pageBlockSectionItem>
+        </apex:pageBlockSection> 
+        
+        <apex:pageBlockSection id="CKEditorPBSection" title="Update Letter Content" collapsible="false" rendered="{!showUpdateLetterContentFlag}" columns="1"></apex:pageBlockSection>
+            <apex:inputTextarea id="customRichTextArea" value="{!letterbodyStr}" richText="false" styleClass="ckeditor" rendered="{!showUpdateLetterContentFlag}"/>
+        
+        </apex:pageBlock>
+
+    </apex:form>
+    
+    <apex:outputpanel >
+        <apex:actionstatus id="actionstatuspanel">
+            <apex:facet name="start">
+                <div class="waitingSearchDiv" id="el_loading" style="background-color: #DCD6D6;
+                       height: 100%;opacity:0.65;width:100%;"> 
+                    <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+                        <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                        <span class="waitingDescription">Loading...</span>
+                    </div>
+                </div>
+            </apex:facet>
+        </apex:actionstatus>
+    </apex:outputpanel>
+    
+</apex:page>

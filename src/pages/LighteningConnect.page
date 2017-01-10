@@ -1,0 +1,31 @@
+<apex:page controller="LighteningConnectController" tabStyle="Lead">
+ <apex:form >
+     <apex:pageBlock >
+     <apex:pageBlockSection title="Category Information" collapsible="false"></apex:pageBlockSection>
+     <apex:pageBlockTable value="{!CategoriesList}" var="categoryObj" title="Category Information">
+         <apex:column headerValue="Category Id">
+             <apex:outputText value="{!categoryObj.CategoryID__c}"  style="width:100px;"/>
+         </apex:column>
+         <apex:column headerValue="Category Name">
+             <apex:outputText value="{!categoryObj.CategoryName__c}"/>
+         </apex:column>
+         <apex:column headerValue="Category Description">
+             <apex:outputText value="{!categoryObj.OfficeDepot__Description__c }" style="width:400px;"/>
+         </apex:column>
+     </apex:pageBlockTable>
+     
+     <apex:pageBlockSection title="Order Information" collapsible="false"></apex:pageBlockSection>
+     <apex:pageBlockTable value="{!OrdersList}" var="orderObj">
+        <apex:column value="{!orderObj.CustomerID__c}"/>
+        <apex:column value="{!orderObj.EmployeeID__c}"/>
+        <apex:column value="{!orderObj.OrderID__c}"/>
+        <apex:column value="{!orderObj.Freight__c}"/>
+        <apex:column value="{!orderObj.OrderDate__c}"/>
+        <apex:column value="{!orderObj.RequiredDate__c}"/>
+        <apex:column headerValue="Shipping Address" value="{!orderObj.ShipAddress__c},{!orderObj.ShipCity__c},{!orderObj.ShipCountry__c},{!orderObj.ShipName__c},{!orderObj.ShippedDate__c},{!orderObj.ShipPostalCode__c},{!orderObj.ShipRegion__c}"/>
+        <apex:column value="{!orderObj.ShipVia__c}"/>
+     </apex:pageBlockTable>
+     
+     </apex:pageBlock>
+ </apex:form>
+</apex:page>

@@ -1,0 +1,71 @@
+<apex:page controller="Paging5Controller" standardStylesheets="false" tabStyle="Case">
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" />
+    <apex:includeScript value="{!URLFOR($Resource.dataTables, '/DataTables-1.10.4/media/js/jquery.dataTables.min.js')}" />
+    <apex:stylesheet value="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css"/>
+    
+    <apex:form id="form">
+    
+        <apex:pageBlock id="accountPBTable">
+        <apex:pageBlockButtons location="top">
+            <apex:commandButton style="height:20px;" value="ShowResult" action="{!ShowResultClick}" reRender="accountPBTable" oncomplete="addDataTable()" status="actionstatuspanel"/>
+        </apex:pageBlockButtons>
+             <apex:pageBlockSection title="Search Result" columns="1">
+             <apex:pageblocktable id="example" value="{!accountWrapperList}" var="r" styleClass="dataTable" border="1px;">
+                  
+                  <apex:column style="width: 3px;" headerValue="Action">
+                      <apex:inputCheckbox value="{!r.isselected}"/>
+                  </apex:column>
+                  
+                  <apex:column headerValue="Id">     
+                       <apex:outputText value="{!r.accountObj.Id}"/>
+                    </apex:column>
+                  <apex:column headerValue="Name" >     
+                       <apex:outputText value="{!r.accountObj.Name}"/>
+                    </apex:column>
+                      <apex:column headerValue="Ownerid" >     
+                       <apex:outputText value="{!r.accountObj.OwnerId}"/>
+                    </apex:column>
+                    <apex:column headerValue="Phone" value="{!r.accountObj.Phone}"/>
+                    <apex:column headerValue="Fax" value="{!r.accountObj.Fax}"/>
+                      <apex:column headerValue="Created Date" >     
+                       <apex:outputText value="{!r.accountObj.CreatedDate}"/>
+                    </apex:column>
+             </apex:pageblocktable>
+             </apex:pageBlockSection>
+        </apex:pageBlock>
+       </apex:form>
+       
+    <script type="text/javascript" language="javascript">
+        var j$ = jQuery.noConflict();
+        
+        // Add when page loads
+        addDataTable();
+                
+        function addDataTable() {
+            j$('table.dataTable').dataTable({
+            sPaginationType: "full_numbers",
+            "aaSorting": [],
+            "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [-1,-7] }]        
+            });
+        }
+
+    </script>
+
+
+<apex:outputpanel >
+        <apex:actionstatus id="actionstatuspanel">
+            <apex:facet name="start">
+                <div class="waitingSearchDiv" id="el_loading" style="background-color: #DCD6D6;
+                       height: 100%;opacity:0.65;width:100%;"> 
+                    <div class="waitingHolder" style="top: 80px; width: 91px;">
+                        <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                        <span class="waitingDescription">Processing...</span>
+                    </div>
+                </div>
+            </apex:facet>
+        </apex:actionstatus>
+    </apex:outputpanel>
+
+
+
+</apex:page>

@@ -1,0 +1,10 @@
+<apex:page showHeader="false" sidebar="false" standardController="Collection__c" extensions="PaymentTransactionExtension">
+    <apex:form >
+        <apex:commandLink value="<< back to Collection#123456"/>
+        <apex:pageBlock >
+            <apex:pageBlockSection title="Payment Information">
+            
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form> 
+</apex:page>

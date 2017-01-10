@@ -1,0 +1,60 @@
+<apex:page standardController="Account" extensions="manageSurchangeExtension">
+<apex:form id="surchargeform">
+<apex:sectionHeader title="Mange Surcharges" subtitle="{!account.Name}"/>
+<apex:commandLink value="<<Back to {!account.Name}"/>
+<apex:pageBlock >
+<apex:pageMessages />
+<apex:pageBlockSection title="Add/Edit/Delete Surcharge(s)">
+    <apex:pageBlockTable value="{!surchargeList}" var="scharge">
+    <apex:column headerValue="Surchange">
+    <apex:inputField value="{!scharge.Surchange__c}"/>
+    <apex:facet name="footer">
+<apex:selectList id="surcharges" value="{!surchargestr}" size="1" required="true">
+  <apex:selectOptions value="{!Surcharges}"/>
+</apex:selectList>
+
+        </apex:facet>
+
+    </apex:column>
+    <apex:column headerValue="Percentage">
+    <apex:inputField value="{!scharge.Percentage__c}" style="width:50px;"/>
+        <apex:facet name="footer">
+            <apex:inputText style="width:50px" value="{!surchargeper}"/>    
+        </apex:facet>
+    </apex:column>
+    
+    <apex:column headerValue="Amount">
+    <apex:outputText style="width:50px;">$ {!scharge.Amount__c}</apex:outputText>
+        <apex:facet name="footer">
+            <apex:outputText style="width:50px"/>    
+        </apex:facet>
+    </apex:column>
+
+    
+    
+    
+    <apex:column headerValue="Action">
+        <apex:commandButton value="Delete" action="{!DeleteBtnClick}" reRender="surchargeform">
+                <apex:param name="surchargeId" value="{!scharge.Id}"/>                                
+        </apex:commandButton>
+        
+        <apex:commandButton value="Update" action="{!UpdateBtnClick}" reRender="surchargeform">
+                <apex:param name="surchargeId" value="{!scharge.Id}"/>                                
+        </apex:commandButton>
+        
+        
+        
+        
+        
+    <apex:facet name="footer">
+    <apex:commandButton value="Add" action="{!AddBtnClick}" reRender="surchargeform" disabled="{!IF(totalsurchargeper>=100,true,false)}"/>
+    </apex:facet>
+    </apex:column>
+
+
+    </apex:pageBlockTable>
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+
+</apex:page>

@@ -1,0 +1,86 @@
+<apex:page >
+<head>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
+        <style>
+           .red{
+            color:red;
+            }
+        .form-area
+            {
+            background-color: #FAFAFA;
+            padding: 10px 40px 60px;
+                margin: 10px 0px 60px;
+            border: 1px solid GREY;
+            }
+        </style>
+        
+        <script>
+       j$ = jQuery.noConflict();
+        
+         j$(document).ready(function(){ 
+        alert("test");
+     j$('#characterLeft').text('140 characters left');
+     j$('#message').keydown(function () {
+        var max = 140;
+        var len =  j$(this).val().length;
+        if (len >= max) {
+             j$('#characterLeft').text('You have reached the limit');
+            j$('#characterLeft').addClass('red');
+            j$('#btnSubmit').addClass('disabled');            
+        } 
+        else {
+            var ch = max - len;
+            j$('#characterLeft').text(ch + ' characters left');
+           j$('#btnSubmit').removeClass('disabled');
+            j$('#characterLeft').removeClass('red');            
+        }
+    });    
+});
+
+        </script>
+        
+    </head>
+     <apex:form >
+    <div class="container">
+<div class="col-md-5">
+    <div class="form-area">  
+       
+        <br style="clear:both"/>
+                    <h3 style="margin-bottom: 25px; text-align: center;">Contact Form</h3>
+                    <div class="form-group">
+                       <input type="text" class="form-control" id="name" name="name" placeholder="Name" required="true"/> 
+                    </div>
+                           
+                    <div class="form-group">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i></span>
+                      <input id="email" name="email" class="form-control" placeholder="Inserici email@" required="" type="text"/>
+                    </div>   
+                       
+                    </div>
+                    
+                             
+        
+                    <div class="form-group">
+                       <div class="input-group">
+              <span class="input-group-addon"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span></span>
+              <input id="tel" name="tel" class="form-control" placeholder="Phone Number" required="" type="text"/>
+            </div> 
+                    </div> 
+                    <div class="form-group">
+                       <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required="true"/> 
+                    </div>
+                    <div class="form-group">
+                    <textarea class="form-control" type="textarea" id="message" placeholder="Message" maxlength="140" rows="7"></textarea>
+                     <span class="help-block"><p id="characterLeft" class="help-block ">You have reached the limit</p></span>                   
+                    </div>
+            
+                <center> <button type="button" id="submit" name="submit" class="btn btn-primary pull-right">Submit Form</button> </center>
+
+    </div>
+</div>
+</div>
+        </apex:form>
+</apex:page>

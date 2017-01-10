@@ -1,0 +1,14 @@
+<apex:page controller="TCController">
+<apex:form >
+<apex:commandButton value="Show" action="{!ShowTCClick}"/>
+<apex:outputText value="{!TermAndConditionBody}" escape="false"/>
+</apex:form>
+
+<html xmlns:w="urn:schemas-microsoft-com:office:word">
+<apex:outputText value="{!TermAndConditionBody}" escape="false"/>
+<body>
+//All your code Goes Here
+</body>
+</html>
+
+</apex:page>

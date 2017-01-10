@@ -1,0 +1,49 @@
+<apex:page standardController="Lead">
+
+<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"/>
+<script>
+    j$ = jQuery.noConflict();
+    
+    function showLoadingDiv() {
+        var newHeight = j$("[id$=lead-edit-section] .pbSubsection").css("height");//Just shade the body, not the header
+        j$("[id$=loading-curtain-div]").css("background-color", "black").css("opacity", 0.35).css("height", newHeight).css("width", "80%");
+    }
+    function hideLoadingDiv() {
+        j$("[id$=loading-curtain-div]").css("background-color", "black").css("opacity", "1").css("height", "0px").css("width", "80%");
+    }
+    
+</script>
+<style>
+    #loading-curtain-div {
+        height:0px;
+        width:100%;
+        position:absolute;
+        z-index:5;
+        //-webkit-transition: all 0.30s ease-out;
+        //-moz-transition: all 0.30s ease-out;
+    }
+</style>
+
+<apex:form id="page-form">
+
+    <apex:pageMessages />
+    <apex:actionRegion >
+    <apex:pageBlock id="lead-edit-block">
+        <apex:actionStatus id="save-lead-status" onstart="showLoadingDiv();" onstop="hideLoadingDiv();"/>
+        <apex:pageBlockButtons >
+            <apex:commandButton action="{!save}" value="Save" status="save-lead-status" rerender="page-form"/>
+        </apex:pageBlockButtons>
+        
+        <apex:pageBlockSection title="Lead Edit" columns="2" collapsible="false" id="lead-edit-section">
+            <div id="loading-curtain-div"/>
+            <apex:pageblockSectionItem ></apex:pageblockSectionItem>
+            <apex:inputField value="{!lead.FirstName}"/>
+            <apex:inputField value="{!lead.LastName}"/>
+            <apex:inputField value="{!lead.Street}"/>
+            <apex:inputField value="{!lead.City}"/>
+            <apex:inputField value="{!lead.State}"/>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    </apex:actionRegion>
+</apex:form>
+</apex:page>

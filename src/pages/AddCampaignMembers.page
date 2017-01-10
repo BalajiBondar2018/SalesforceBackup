@@ -1,0 +1,238 @@
+<apex:page standardController="Campaign" extensions="AddCampaignMembersExtension">
+  <apex:sectionHeader title="{!campaignObj.Name}" subtitle="Add contacts"/>
+  <apex:form id="form">
+      <apex:commandLink value="<< back to {!campaignObj.Name}"/>
+      <apex:pageBlock >
+      <apex:pageBlockSection title="Upload the File" columns="1">
+          <apex:pageBlockSectionItem >
+          <apex:pageMessage severity="INFO" strength="1" summary="Please upload an account reference .csv file in the prescribed format."></apex:pageMessage>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+              <apex:outputlabel value="File"/>
+              <apex:outputPanel >
+                  <apex:inputFile value="{!contactblob}" size="30"></apex:inputFile>
+                  <apex:commandButton value="Upload" action="{!UploadBtnClick}"/>
+              </apex:outputPanel>
+          </apex:pageBlockSectionItem>
+      </apex:pageBlockSection>
+      
+      <apex:pageBlockSection title="Choose Contact Filter Criteria" columns="1" rendered="{!showContactListFlag}">
+      <apex:outputPanel >
+        <table width="50%" border="0" style="">
+        <tr>
+        <td width="30%">
+        <apex:outputLabel value="Field" style="font-weight:bold;"/>
+        </td>
+        
+        <td width="30%">
+        <apex:outputLabel value="Operator" style="font-weight:bold;"/>
+        </td>
+        
+        <td width="30%">
+        <apex:outputLabel value="Value" style="font-weight:bold;"/>
+        </td>
+        
+        <td width="10%">
+        &nbsp;
+        </td>
+        </tr>
+        
+        <tr>
+        <td width="30%">
+        <apex:selectList size="1" style="width:200px;">
+            <apex:selectOption itemLabel="--None--" itemValue="None"/>
+            <apex:selectOption itemLabel="Name" itemValue="Name"/>
+            <apex:selectOption itemLabel="Role" itemValue="Role"/>
+            <apex:selectOption itemLabel="Active" itemValue="Active"/>
+            <apex:selectOption itemLabel="Account Name" itemValue="AccountName"/>
+        </apex:selectList>
+        </td>
+        
+        <td width="30%">
+        <apex:selectList size="1" style="width:150px;">
+            <apex:selectOption itemLabel="--None--" itemValue="None"/>
+            <apex:selectOption itemLabel="equals" itemValue="Equal To"/>
+            <apex:selectOption itemLabel="not equal to" itemValue="Not Equal To"/>
+            <apex:selectOption itemLabel="Contains" itemValue="Contains"/>
+        </apex:selectList>
+        </td>
+        
+        <td width="30%">
+        <apex:inputText />
+        </td>
+        
+        <td width="10%">
+        <apex:outputLabel value="AND"/>
+        </td>
+        
+        </tr>
+        
+        
+        <tr>
+        <td width="30%">
+        <apex:selectList size="1" style="width:200px;">
+            <apex:selectOption itemLabel="--None--" itemValue="None"/>
+            <apex:selectOption itemLabel="Name" itemValue="Name"/>
+            <apex:selectOption itemLabel="Role" itemValue="Role"/>
+            <apex:selectOption itemLabel="Active" itemValue="Active"/>
+        </apex:selectList>
+        </td>
+        
+        <td width="30%">
+        <apex:selectList size="1" style="width:150px;">
+            <apex:selectOption itemLabel="--None--" itemValue="None"/>
+            <apex:selectOption itemLabel="equals" itemValue="Equal To"/>
+            <apex:selectOption itemLabel="not equal to" itemValue="Not Equal To"/>
+            <apex:selectOption itemLabel="Contains" itemValue="Contains"/>
+        </apex:selectList>
+        </td>
+        
+        <td width="30%">
+        <apex:inputText />
+        </td>
+        
+        <td width="10%">
+        <apex:outputLabel value="AND"/>
+        </td>
+        
+        </tr>
+        <tr>
+        <td width="30%">
+        <apex:selectList size="1" style="width:200px;">
+            <apex:selectOption itemLabel="--None--" itemValue="None"/>
+            <apex:selectOption itemLabel="Name" itemValue="Name"/>
+            <apex:selectOption itemLabel="Role" itemValue="Role"/>
+            <apex:selectOption itemLabel="Active" itemValue="Active"/>
+        </apex:selectList>
+        </td>
+        
+        <td width="30%">
+        <apex:selectList size="1" style="width:150px;">
+            <apex:selectOption itemLabel="--None--" itemValue="None"/>
+            <apex:selectOption itemLabel="equals" itemValue="Equal To"/>
+            <apex:selectOption itemLabel="not equal to" itemValue="Not Equal To"/>
+            <apex:selectOption itemLabel="Contains" itemValue="Contains"/>
+        </apex:selectList>
+        </td>
+        
+        <td width="30%">
+        <apex:inputText />
+        </td>
+        
+        <td width="10%">
+        <apex:outputLabel value="AND"/>
+        </td>
+        
+        </tr>
+        <tr>
+        <td width="30%">
+        <apex:selectList size="1" style="width:200px;">
+            <apex:selectOption itemLabel="--None--" itemValue="None"/>
+            <apex:selectOption itemLabel="Name" itemValue="Name"/>
+            <apex:selectOption itemLabel="Role" itemValue="Role"/>
+            <apex:selectOption itemLabel="Active" itemValue="Active"/>
+        </apex:selectList>
+        </td>
+        
+        <td width="30%">
+        <apex:selectList size="1" style="width:150px;">
+            <apex:selectOption itemLabel="--None--" itemValue="None"/>
+            <apex:selectOption itemLabel="equals" itemValue="Equal To"/>
+            <apex:selectOption itemLabel="not equal to" itemValue="Not Equal To"/>
+            <apex:selectOption itemLabel="Contains" itemValue="Contains"/>
+        </apex:selectList>
+        </td>
+        
+        <td width="30%">
+        <apex:inputText />
+        </td>
+        
+        <td width="10%">
+        <apex:outputLabel value="AND"/>
+        </td>
+        
+        </tr>
+        <tr>
+        <td width="30%">
+        <apex:selectList size="1" style="width:200px;">
+            <apex:selectOption itemLabel="--None--" itemValue="None"/>
+            <apex:selectOption itemLabel="Name" itemValue="Name"/>
+            <apex:selectOption itemLabel="Role" itemValue="Role"/>
+            <apex:selectOption itemLabel="Active" itemValue="Active"/>
+        </apex:selectList>
+        </td>
+        
+        <td width="30%">
+        <apex:selectList size="1" style="width:150px;">
+            <apex:selectOption itemLabel="--None--" itemValue="None"/>
+            <apex:selectOption itemLabel="equals" itemValue="Equal To"/>
+            <apex:selectOption itemLabel="not equal to" itemValue="Not Equal To"/>
+            <apex:selectOption itemLabel="Contains" itemValue="Contains"/>
+        </apex:selectList>
+        </td>
+        
+        <td width="30%">
+        <apex:inputText />
+        </td>
+        
+        <td width="10%">
+        &nbsp;
+        </td>
+        
+        </tr>
+        
+        <tr>
+            <td width="30%">&nbsp;</td>
+            <td width="30%">&nbsp;</td>
+            <td width="30%" style="text-align:right;"><apex:commandLink value="Clear Filters"/></td>
+            <td width="10%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="30%"><apex:commandButton value="Go!"/></td>
+            <td width="30%">&nbsp;</td>
+            <td width="30%">&nbsp;</td>
+            <td width="10%">&nbsp;</td>
+        </tr>
+        
+        </table>
+    </apex:outputPanel>
+    <apex:pageBlockSection title="Select & Add Contacts" collapsible="false"></apex:pageBlockSection>
+    <apex:outputPanel >
+          <table width="100%" style="background-color:#C8C9CC;text-align:center;" cellspacing="0" cellpadding="0">
+              <tr><td>
+                  <apex:commandButton value="Add"/>
+                  <apex:commandButton value="Cancel"/>
+              </td></tr>
+          </table>
+    </apex:outputPanel>
+          
+      <apex:pageBlockTable value="{!ContactList}" var="clist">
+      <apex:column width="3%">
+        <apex:facet name="header">
+            <apex:inputCheckbox onclick="checkAll(this);"> 
+                <apex:actionSupport event="onclick" />
+            </apex:inputCheckbox>
+        </apex:facet>
+        <apex:inputCheckbox id="checkedone"/>
+        <apex:facet name="footer">&nbsp;</apex:facet>
+      </apex:column>
+      <apex:column headerValue="Account Name">
+      <apex:commandLink value="{!clist.Account.Name}"/>
+      </apex:column>
+      <apex:column headerValue="FirstName" value="{!clist.FirstName}"/>
+      <apex:column headerValue="LastName" value="{!clist.LastName}"/>
+      <apex:column headerValue="Phone" value="{!clist.Phone}"/>
+      <apex:column headerValue="Email" value="{!clist.Email}" width="10%">
+      <apex:facet name="footer">
+        <apex:outputPanel style="font-size:smaller;text-align:right;">
+            <apex:commandLink value="<<Previous " style="text-decoration: none"/>
+            Page 1 of 10
+            <apex:commandLink value=" Next>>" style="text-decoration: none"/>
+        </apex:outputPanel>
+      </apex:facet>
+      </apex:column>
+      </apex:pageBlockTable>
+      </apex:pageBlockSection>
+      </apex:pageBlock>
+  </apex:form>
+</apex:page>

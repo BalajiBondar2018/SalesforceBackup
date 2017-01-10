@@ -1,0 +1,461 @@
+<apex:page standardController="Account_Plan__c" extensions="AccountPlanPage2Extension"  tabStyle="Account_Plan__tab" action="{!OnLoad}">
+
+<style>
+.HoverPopup {
+    position: relative;
+    z-index: 0;
+    }
+ 
+.HoverPopup:hover {
+    background-color: #eeeeee;
+    Text-decoration: none;
+    z-index: 50;
+    }
+ 
+.HoverPopup div {
+    position: absolute;
+    visibility: hidden;
+    }
+ 
+.HoverPopup:hover div {
+    visibility: visible;
+    top: 20px;
+    left: 0px;
+    border: 1px solid black;
+    background-color: #eeeeee;
+    padding: 10px;
+    color: black;
+    Text-decoration: none;
+    white-space: pre;
+    }
+</style>
+
+
+<script>
+
+    function OpenPDFVFPage(accountplanObjId, accountObjId){
+        //alert('OpenPDFVFPage()');
+        //alert(accountplanObjId);
+        //alert(accountObjId);
+        var url='/apex/AccountPlanPDF?Id='+accountplanObjId+'&retURL='+accountObjId;
+        newWin=window.open(url, 'Popup','height=1000,width=1400,left=50,top=100,resizable=no,scrollbars=yes,toolbar=no,status=no');
+        newWin.focus();
+        return false;
+    }
+</script>
+
+
+<apex:sectionHeader title="Account Plan" subtitle="Update Account,Contact & Opportunity Information"/>
+<apex:form id="accountplanForm">
+    <apex:image url="{!$Resource.AccountPlan}" rendered="{!showAccountPlanFlag}"/>
+    <apex:image url="{!$Resource.Objective}" rendered="{!showObjectiveFlag}"/>
+    <apex:image url="{!$Resource.Account}" rendered="{!showAccountFlag}"/>
+    <apex:image url="{!$Resource.Contact}" rendered="{!showContactFlag}"/>
+    <apex:image url="{!$Resource.Opportunity}" rendered="{!showOpportunityFlag}"/>
+    <apex:image url="{!$Resource.Submit}" rendered="{!showSubmitFlag}"/>
+    
+    <br/><br/>
+    <apex:pagemessages />
+    <apex:commandLink value="<<back to {!accountPlanObj.Name}" action="{!BackToAccountPlanBtnClick}" immediate="true"/>
+    <apex:pageBlock >
+        <apex:pageBlockButtons id="accountplanbuttonsection">
+            <apex:commandButton value="Quick Save" action="{!QuickSaveBtnClick}" Rerender="accountplanForm" status="processingStatus" rendered="{!IF(accountPlanObj.Request_Status__c=='', true , false)}"/>
+            <apex:commandButton value="Previous" action="{!PreviousBtnClick}" Rerender="accountplanForm" status="processingStatus" disabled="{!NOT(!showAccountPlanFlag)}"/>
+            <apex:commandButton value="Next" action="{!NextBtnClick}" Rerender="accountplanForm" status="processingStatus" disabled="{!NOT(!showSubmitFlag)}"   rendered="{!IF(accountPlanObj.Request_Status__c!='', true , false)}" />
+            <apex:commandButton value="Save & Next" action="{!SaveAndNextBtnClick}" Rerender="accountplanForm" status="processingStatus" disabled="{!NOT(!showSubmitFlag)}" rendered="{!IF(accountPlanObj.Request_Status__c == '', true , false)}" />
+            <apex:commandButton value="Submit" action="{!SubmitforApprovalBtnClick}" Rerender="accountplanForm,accountplanbuttonsection" status="processingStatus" rendered="{!showSubmitFlag}" disabled="{!IF(accountPlanObj.Request_Status__c=='', false, true)}" />
+            <apex:commandButton value="Account Plan PDF" onClick="OpenPDFVFPage('{!accountplanObj.Id}','{!accountClonewrapperObj.accountclone.Ref_Account__r.Id}')" rendered="{!showSubmitFlag}"/>
+            <apex:image value="{!$Resource.RecordLockImage}"  rendered="{!IF(accountPlanObj.Request_Status__c=='', false, true)}" />
+            <apex:actionStatus id="processingStatus" startText="Processing..."/>
+        </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Account Plan Information" columns="2" rendered="{!showAccountPlanFlag}">
+                <apex:inputField value="{!accountPlanObj.Name}"/>
+                <apex:outputText label="Requested On" value="{0,date,MM'/'dd'/'yyyy}">
+                    <apex:param value="{!accountPlanObj.Requested_On__c}" /> 
+                </apex:outputText>
+                
+                <apex:inputField value="{!accountPlanObj.Account_Plan_Name__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', true , false)}"/>
+                <apex:outputField value="{!accountPlanObj.Account_Plan_Name__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', false ,true)}"/>
+                <apex:outputField value="{!accountPlanObj.Request_Status__c}"/>
+                <apex:outputText label="Created Date" value="{0,date,MM'/'dd'/'yyyy}">
+                    <apex:param value="{!accountPlanObj.CreatedDate}" /> 
+                </apex:outputText>
+                <apex:outputText label="Approved/Rejected On" value="{0,date,MM'/'dd'/'yyyy}">
+                    <apex:param value="{!accountPlanObj.Approved_Rejected_On__c}" /> 
+                </apex:outputText>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Objective Information" rendered="{!showObjectiveFlag}">
+                <apex:inputField value="{!objectiveObj.Objective_Type__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', true , false)}"/>
+                <apex:outputField value="{!objectiveObj.Objective_Type__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', false ,true)}"/>
+                <apex:inputField value="{!objectiveObj.Description__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', true , false)}"/>
+                <apex:outputField value="{!objectiveObj.Description__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', false ,true)}"/>                
+            </apex:pageBlockSection>
+            
+            
+            
+            <apex:pageBlockSection title="Account Information" rendered="{!showAccountFlag}">
+               <apex:pageBlockSectionItem >
+                <apex:outputLabel >Account Name</apex:outputLabel>
+                <apex:outputPanel >
+                    <table>
+                            <tr>
+                                <td>
+                                    <apex:inputtext value="{!accountClonewrapperObj.accountclone.Name__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', true , false)}"/>
+                                    <apex:outputtext value="{!accountClonewrapperObj.accountclone.Name__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', false ,true)}"/>&nbsp;
+                                </td>
+                                <td>
+                                    <apex:outputlink onmouseout="this.nextSibling.style.visibility='hidden';" onmouseover="this.nextSibling.style.visibility='visible';" style="z-index: 50;" value="/{!accountClonewrapperObj.account.Name}">
+                                        <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(accountClonewrapperObj.accountclone.Name__c != accountClonewrapperObj.account.Name, true, false)}"/>    
+                                    </apex:outputlink>
+                                    
+                                    <div style="background-color: #eeeeee; border: 1px solid black; padding: 5px; position: absolute; visibility: hidden; z-index: 50;"><apex:outputtext value="{!accountClonewrapperObj.account.Name}"></apex:outputtext></div>
+        
+                                </td>
+                            </tr>
+                    </table>
+                </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                <apex:outputLabel >Account Number</apex:outputLabel>
+                <apex:outputPanel >
+                        <table>
+                                <tr>
+                                    <td>
+                                        <apex:inputtext value="{!accountClonewrapperObj.accountclone.AccountNumber__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', true , false)}"/>
+                                        <apex:outputtext value="{!accountClonewrapperObj.accountclone.AccountNumber__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', false ,true)}"/>
+                                    </td>
+                                    <td>
+                                        <apex:outputlink onmouseout="this.nextSibling.style.visibility='hidden';" onmouseover="this.nextSibling.style.visibility='visible';" style="z-index: 0;" value="/{!accountClonewrapperObj.account.AccountNumber}">
+                                            <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(accountClonewrapperObj.accountclone.AccountNumber__c != accountClonewrapperObj.account.AccountNumber, true, false)}"/>    
+                                        </apex:outputlink><div style="background-color: #eeeeee; border: 1px solid black; padding: 5px; position: absolute; visibility: hidden; z-index: 50;"><apex:outputtext value="{!accountClonewrapperObj.account.AccountNumber}"></apex:outputtext></div>    
+                                    </td>
+                                </tr>
+                        </table>
+                </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+            
+                 <apex:pageBlockSectionItem >
+                <apex:outputLabel >Account Owner</apex:outputLabel>
+                <apex:outputPanel >
+                    <table>
+                            <tr>
+                                <td>
+                                    <apex:inputfield value="{!accountClonewrapperObj.accountclone.Owner__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', true , false)}"/>
+                                    <apex:outputtext value="{!accountClonewrapperObj.accountclone.Owner__r.Name}" rendered="{!IF(accountPlanObj.Request_Status__c=='', false ,true)}"/>
+                                </td>
+                                <td>
+                                    <apex:outputlink onmouseout="this.nextSibling.style.visibility='hidden';" onmouseover="this.nextSibling.style.visibility='visible';" style="z-index: 0;" value="/{accountClonewrapperObj.account.OwnerId}">
+                                        <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(accountClonewrapperObj.accountclone.Owner__c != accountClonewrapperObj.account.OwnerId, true, false)}"/>    
+                                    </apex:outputlink><div style="background-color: #eeeeee; border: 1px solid black; padding: 5px; position: absolute; visibility: hidden; z-index: 50;"><apex:outputtext value="{!accountClonewrapperObj.account.OwnerId}"></apex:outputtext></div>    
+                                </td>
+                            </tr>
+                    </table>
+                </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Contact Information" rendered="{!showContactFlag}">
+                <apex:repeat value="{!contactClonewrapperObjList}" var="conwrapper">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="LastName"/>
+                        <apex:outputPanel >
+                            <table>
+                                <tr>
+                                    <td>
+                                        <apex:inputfield value="{!conwrapper.contactclone.LastName__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', true , false)}"/>
+                                        <apex:outputtext value="{!conwrapper.contactclone.LastName__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', false ,true)}"/>
+                                    </td>
+                                    <td>
+                                        <apex:outputlink onmouseout="this.nextSibling.style.visibility='hidden';" onmouseover="this.nextSibling.style.visibility='visible';" style="z-index: 0;" value="/{conwrapper.contact.LastName}">
+                                            <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(conwrapper.contactclone.LastName__c != conwrapper.contact.LastName, true, false)}"/>    
+                                        </apex:outputlink><div style="background-color: #eeeeee; border: 1px solid black; padding: 5px; position: absolute; visibility: hidden; z-index: 500;"><apex:outputtext value="{!conwrapper.contact.LastName}"></apex:outputtext></div>        
+                                    </td>
+                                </tr>
+                            </table>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="FirstName"/>
+                            <apex:outputPanel >
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <apex:inputfield value="{!conwrapper.contactclone.FirstName__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', true , false)}"/>
+                                            <apex:outputtext value="{!conwrapper.contactclone.FirstName__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', false ,true)}"/>
+                                        </td>
+                                        <td>
+                                            <apex:outputlink onmouseout="this.nextSibling.style.visibility='hidden';" onmouseover="this.nextSibling.style.visibility='visible';" style="z-index: 0;" value="/{conwrapper.contact.FirstName}">
+                                            <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(conwrapper.contactclone.FirstName__c != conwrapper.contact.FirstName, true, false)}"/>
+                                            </apex:outputlink>
+                                            
+                                            <div style="background-color: #eeeeee; border: 1px solid black; padding: 5px; position: absolute; visibility: hidden; z-index: 500;"><apex:outputtext value="{!conwrapper.contact.FirstName}"></apex:outputtext></div>    
+                                        </td>
+                                    </tr>
+                                </table>
+                            </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Email"/>
+                        <apex:outputPanel >
+                             <table>
+                              <tr>
+                                  <td>
+                                    <apex:inputfield value="{!conwrapper.contactclone.Email__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', true , false)}"/>
+                                    <apex:outputtext value="{!conwrapper.contactclone.Email__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', false ,true)}"/>
+                                    </td>
+                                  <td>
+                                    <apex:outputlink onmouseout="this.nextSibling.style.visibility='hidden';" onmouseover="this.nextSibling.style.visibility='visible';" style="z-index: 0;" value="/{conwrapper.contact.Email}">
+                                    <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(conwrapper.contactclone.Email__c != conwrapper.contact.Email, true, false)}"/>
+                                    </apex:outputlink><div style="background-color: #eeeeee; border: 1px solid black; padding: 5px; position: absolute; visibility: hidden; z-index: 500;"><apex:outputtext value="{!conwrapper.contact.Email}"></apex:outputtext></div>                    
+                                    </td>
+                              </tr>
+                              </table>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Phone"/>
+                        <apex:outputPanel >
+                            <table>
+                              <tr>
+                                  <td>
+                                    <apex:inputfield value="{!conwrapper.contactclone.Phone__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', true , false)}"/>
+                                    <apex:outputtext value="{!conwrapper.contactclone.Phone__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', false ,true)}"/>
+                                  </td>
+                                  <td>
+                                    <apex:outputlink onmouseout="this.nextSibling.style.visibility='hidden';" onmouseover="this.nextSibling.style.visibility='visible';" style="z-index: 0;" value="/{conwrapper.contact.Phone}">
+                                    <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(conwrapper.contactclone.Phone__c != conwrapper.contact.Phone, true, false)}"/>
+                                    </apex:outputlink><div style="background-color: #eeeeee; border: 1px solid black; padding: 5px; position: absolute; visibility: hidden; z-index: 500;"><apex:outputtext value="{!conwrapper.contact.Phone}"></apex:outputtext></div>                                
+                                  </td>
+                              </tr>
+                              </table>
+                        </apex:outputPanel>    
+                    </apex:pageBlockSectionItem>
+                </apex:repeat>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Opportunity Information" columns="1" rendered="{!showOpportunityFlag}">
+                    
+                    <apex:pageBlockSection title="Pipeline(All open opps)" columns="1" rendered="{!(openopportunityClonewrapperObjList.size == 0)}">
+                           <apex:pageMessage severity="INFO" strength="2" title="There is no open opportunity."/>
+                    </apex:pageBlockSection>
+                    
+                    <apex:pageBlockSection title="Pipeline(All open opps)" columns="2" rendered="{!(openopportunityClonewrapperObjList.size != 0)}">
+                    <apex:repeat value="{!openopportunityClonewrapperObjList}" var="openoppwrapper">
+                        <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Opportunity Name"/>
+                        <apex:outputPanel >
+                            <table>
+                                  <tr>
+                                      <td>
+                                        <apex:inputfield value="{!openoppwrapper.opportunityclone.Opportunity_Name__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', true , false)}"/>
+                                        <apex:outputtext value="{!openoppwrapper.opportunityclone.Opportunity_Name__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', false ,true)}"/>
+                                      </td>
+                                      <td>
+                                        <apex:outputlink onmouseout="this.nextSibling.style.visibility='hidden';" onmouseover="this.nextSibling.style.visibility='visible';" style="z-index: 0;" value="/{openoppwrapper.Opportunity.Name}">
+                                            <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(openoppwrapper.opportunityclone.Opportunity_Name__c != openoppwrapper.opportunity.Name, true, false)}"/>    
+                                        </apex:outputlink><div style="background-color: #eeeeee; border: 1px solid black; padding: 5px; position: absolute; visibility: hidden; z-index: 500;"><apex:outputtext value="{!openoppwrapper.Opportunity.Name}"></apex:outputtext></div>                             
+                                      </td>
+                                  </tr>
+                            </table>
+                        </apex:outputPanel>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Stage"/>
+                        <apex:outputPanel >
+                            <table>
+                                  <tr>
+                                      <td>
+                                        <apex:inputfield value="{!openoppwrapper.opportunityclone.Stage__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', true , false)}"/>
+                                        <apex:outputtext value="{!openoppwrapper.opportunityclone.Stage__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', false ,true)}"/>&nbsp;
+                                      </td>
+                                      <td>
+                                        <apex:outputlink onmouseout="this.nextSibling.style.visibility='hidden';" onmouseover="this.nextSibling.style.visibility='visible';" style="z-index: 0;" value="/{openoppwrapper.Opportunity.StageName}">
+                                            <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(openoppwrapper.opportunityclone.Stage__c != openoppwrapper.opportunity.StageName, true, false)}"/>
+                                        </apex:outputlink><div style="background-color: #eeeeee; border: 1px solid black; padding: 5px; position: absolute; visibility: hidden; z-index: 500;"><apex:outputtext value="{!openoppwrapper.Opportunity.StageName}"></apex:outputtext></div>                                
+                                      </td>
+                                  </tr>
+                            </table>    
+                        </apex:outputPanel>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Product"/>
+                        <apex:outputPanel >
+                            <table>
+                                  <tr>
+                                      <td>
+                                        <apex:inputfield value="{!openoppwrapper.opportunityclone.Product__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', true , false)}"/>
+                                         <apex:outputtext value="{!openoppwrapper.opportunityclone.Product__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', false ,true)}"/>
+                                      </td>
+                                      <td>
+                                        <apex:outputlink onmouseout="this.nextSibling.style.visibility='hidden';" onmouseover="this.nextSibling.style.visibility='visible';" style="z-index: 0;" value="/{openoppwrapper.Opportunity.Product__c}">
+                                        <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(openoppwrapper.opportunityclone.Product__c != openoppwrapper.opportunity.Product__c, true, false)}"/>
+                                        </apex:outputlink><div style="background-color: #eeeeee; border: 1px solid black; padding: 5px; position: absolute; visibility: hidden; z-index: 500;"><apex:outputtext value="{!openoppwrapper.Opportunity.Product__c}"></apex:outputtext></div>                               
+                                      </td>
+                                  </tr>
+                            </table>
+                        </apex:outputPanel>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Quantity"/>
+                        <apex:outputPanel >
+                            <table>
+                                  <tr>
+                                      <td>
+                                            <apex:inputfield value="{!openoppwrapper.opportunityclone.Quantity__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', true , false)}"/>
+                                            <apex:outputfield value="{!openoppwrapper.opportunityclone.Quantity__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', false ,true)}"/>
+                                      </td>
+                                      <td>
+                                            <apex:outputlink onmouseout="this.nextSibling.style.visibility='hidden';" onmouseover="this.nextSibling.style.visibility='visible';" style="z-index: 0;" value="/{openoppwrapper.Opportunity.TotalOpportunityQuantity}">
+                                            <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(openoppwrapper.opportunityclone.Quantity__c != openoppwrapper.opportunity.TotalOpportunityQuantity, true, false)}"/>
+                                            </apex:outputlink><div style="background-color: #eeeeee; border: 1px solid black; padding: 5px; position: absolute; visibility: hidden; z-index: 500;"><apex:outputtext value="{!openoppwrapper.Opportunity.TotalOpportunityQuantity}"></apex:outputtext></div>                             
+                                      </td>
+                                  </tr>
+                            </table>    
+                        </apex:outputPanel>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Closed Date"/>
+                        <apex:outputPanel >
+                            <table>
+                                  <tr>
+                                      <td>
+                                            <apex:inputfield value="{!openoppwrapper.opportunityclone.Closed_Date__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', true , false)}"/>
+                                            <apex:outputText value="{0,date,MM'/'dd'/'yyyy}" rendered="{!IF(accountPlanObj.Request_Status__c=='', false ,true)}">
+                                                <apex:param value="{!openoppwrapper.opportunityclone.Closed_Date__c}"/> 
+                                            </apex:outputText>
+                                      </td>
+                                      <td>
+                                            <apex:outputlink onmouseout="this.nextSibling.style.visibility='hidden';" onmouseover="this.nextSibling.style.visibility='visible';" style="z-index: 0;" value="/{openoppwrapper.Opportunity.CloseDate}">
+                                            <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(openoppwrapper.opportunityclone.Closed_Date__c != openoppwrapper.opportunity.CloseDate, true, false)}"/>
+                                            </apex:outputlink><div style="background-color: #eeeeee; border: 1px solid black; padding: 5px; position: absolute; visibility: hidden; z-index: 500;"><apex:outputtext value="{!openoppwrapper.Opportunity.CloseDate}"></apex:outputtext></div>                                
+                                      </td>
+                                  </tr>
+                            </table>
+                        </apex:outputPanel>
+                        </apex:pageBlockSectionItem>
+                    </apex:repeat>
+                    </apex:pageBlockSection>
+                    
+                    
+                    <apex:pageBlockSection title="Closed opps(Last 12 months)" columns="1" rendered="{!(closedopportunityClonewrapperObjList.size == 0)}">
+                           <apex:pageMessage severity="INFO" strength="2" title="There is no closed opportunity."/>
+                    </apex:pageBlockSection>
+                    
+                    <apex:pageBlockSection title="Closed opps(Last 12 months)" columns="2" rendered="{!(closedopportunityClonewrapperObjList.size != 0)}">
+                    <apex:repeat value="{!closedopportunityClonewrapperObjList}" var="closedoppwrapper">
+                        <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Opportunity Name"/>
+                        <apex:outputPanel >
+                            <table>
+                                  <tr>
+                                      <td>
+                                            <apex:inputfield value="{!closedoppwrapper.opportunityclone.Opportunity_Name__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', true , false)}"/>
+                                            <apex:outputtext value="{!closedoppwrapper.opportunityclone.Opportunity_Name__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', false ,true)}"/>
+                                      </td>
+                                      <td>
+                                            <apex:outputlink onmouseout="this.nextSibling.style.visibility='hidden';" onmouseover="this.nextSibling.style.visibility='visible';" style="z-index: 0;" value="/{closedoppwrapper.opportunity.Name}">
+                                            <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(closedoppwrapper.opportunityclone.Opportunity_Name__c != closedoppwrapper.opportunity.Name, true, false)}"/>
+                                            </apex:outputlink><div style="background-color: #eeeeee; border: 1px solid black; padding: 5px; position: absolute; visibility: hidden; z-index: 500;"><apex:outputtext value="{!closedoppwrapper.opportunity.Name}"></apex:outputtext></div>                               
+                                      </td>
+                                  </tr>
+                            </table>
+                        </apex:outputPanel>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Stage"/>
+                        <apex:outputPanel >
+                        <table>
+                              <tr>
+                                  <td>
+                                    <apex:inputfield value="{!closedoppwrapper.opportunityclone.Stage__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', true , false)}"/>
+                                    <apex:outputtext value="{!closedoppwrapper.opportunityclone.Stage__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', false ,true)}"/>&nbsp;
+                                  </td>
+                                  <td>
+                                    <apex:outputlink onmouseout="this.nextSibling.style.visibility='hidden';" onmouseover="this.nextSibling.style.visibility='visible';" style="z-index: 0;" value="/{closedoppwrapper.opportunity.StageName}">
+                                      <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(closedoppwrapper.opportunityclone.Stage__c != closedoppwrapper.opportunity.StageName, true, false)}"/>    
+                                    </apex:outputlink>
+                                    <div style="background-color: #eeeeee; border: 1px solid black; padding: 5px; position: absolute; visibility: hidden; z-index: 500;"><apex:outputtext value="{!closedoppwrapper.opportunity.StageName}"></apex:outputtext></div>                              
+                                  </td>
+                              </tr>
+                        </table>
+                        </apex:outputPanel>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Product"/>
+                        <apex:outputPanel >
+                            <table>
+                                  <tr>
+                                      <td>
+                                        <apex:inputfield value="{!closedoppwrapper.opportunityclone.Product__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', true , false)}"/>
+                                        <apex:outputtext value="{!closedoppwrapper.opportunityclone.Product__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', false ,true)}"/>
+                                      </td>
+                                      <td>
+                                        <apex:outputlink onmouseout="this.nextSibling.style.visibility='hidden';" onmouseover="this.nextSibling.style.visibility='visible';" style="z-index: 0;" value="/{closedoppwrapper.opportunity.Product__c}">
+                                          <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(closedoppwrapper.opportunityclone.Product__c != closedoppwrapper.opportunity.Product__c, true, false)}"/>
+                                        </apex:outputlink><div style="background-color: #eeeeee; border: 1px solid black; padding: 5px; position: absolute; visibility: hidden; z-index: 500;"><apex:outputtext value="{!closedoppwrapper.opportunity.Product__c}"></apex:outputtext></div>                             
+                                      </td>
+                                  </tr>
+                            </table>
+                        </apex:outputPanel>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Quantity"/>
+                        <apex:outputPanel >
+                            <table>
+                                  <tr>
+                                      <td>
+                                        <apex:inputfield value="{!closedoppwrapper.opportunityclone.Quantity__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', true , false)}"/>
+                                        <apex:outputtext value="{!closedoppwrapper.opportunityclone.Quantity__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', false ,true)}"/>
+                                      </td>
+                                      <td>
+                                        <apex:outputlink onmouseout="this.nextSibling.style.visibility='hidden';" onmouseover="this.nextSibling.style.visibility='visible';" style="z-index: 0;" value="/{closedoppwrapper.opportunity.TotalOpportunityQuantity}">
+                                          <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(closedoppwrapper.opportunityclone.Quantity__c != closedoppwrapper.opportunity.TotalOpportunityQuantity, true, false)}"/>
+                                        </apex:outputlink><div style="background-color: #eeeeee; border: 1px solid black; padding: 5px; position: absolute; visibility: hidden; z-index: 500;"><apex:outputtext value="{!closedoppwrapper.opportunity.TotalOpportunityQuantity}"></apex:outputtext></div>                               
+                                      </td>
+                                  </tr>
+                            </table>
+                        </apex:outputPanel>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Closed Date"/>
+                        <apex:outputPanel >
+                            <table>
+                                  <tr>
+                                      <td>
+                                        <apex:inputfield value="{!closedoppwrapper.opportunityclone.Closed_Date__c}" rendered="{!IF(accountPlanObj.Request_Status__c=='', true , false)}"/>
+                                        <apex:outputText value="{0,date,MM'/'dd'/'yyyy}" rendered="{!IF(accountPlanObj.Request_Status__c=='', false ,true)}">
+                                            <apex:param value="{!closedoppwrapper.opportunityclone.Closed_Date__c}" /> 
+                                        </apex:outputText>
+                                      </td>
+                                      <td>
+                                        <apex:outputlink onmouseout="this.nextSibling.style.visibility='hidden';" onmouseover="this.nextSibling.style.visibility='visible';" style="z-index: 0;" value="/{closedoppwrapper.opportunity.CloseDate}">
+                                          <apex:image url="{!$Resource.UpdateIcon}" rendered="{!IF(closedoppwrapper.opportunityclone.Closed_Date__c != closedoppwrapper.opportunity.CloseDate, true, false)}"/>
+                                        </apex:outputlink><div style="background-color: #eeeeee; border: 1px solid black; padding: 5px; position: absolute; visibility: hidden; z-index: 500;"><apex:outputtext value="{!closedoppwrapper.opportunity.CloseDate}"></apex:outputtext></div>                              
+                                      </td>
+                                  </tr>
+                            </table>
+                        </apex:outputPanel>
+                        </apex:pageBlockSectionItem><br/>
+                    </apex:repeat>
+                    </apex:pageBlockSection>
+                    
+                    <apex:pageBlockSection title="Performance Summary" collapsible="false">            
+                        <apex:outputField value="{!accountPlanObj.account__r.Last_Month__c}"/>
+                        <apex:outputField value="{!accountPlanObj.account__r.YTD__c}"/>
+                        <apex:outputField value="{!accountPlanObj.account__r.Rolling_12_Months__c}"/>        
+                    </apex:pageBlockSection>
+            </apex:pageBlockSection>
+    
+            <apex:pageBlockSection title="Submit for Approval" rendered="{!showSubmitFlag}" columns="1">
+                <apex:pageMessage strength="2" severity="INFO" title="Submit Action(s)">
+                    1. The Acount Plan will be sent to Line Manager for approval.<br/>
+                    2. Account plan will be locked for further changes once submitted.<br/>
+                    3. You can download the Account Plan PDF by clicking on 'Account Plan PDF' button.<br/>
+                    4. After Approval, changes will be commited to the Account.<br/>
+                </apex:pageMessage>
+             </apex:pageBlockSection>
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

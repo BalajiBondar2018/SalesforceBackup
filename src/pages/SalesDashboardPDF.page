@@ -1,0 +1,91 @@
+<apex:page standardController="Account" renderAs="PDF" extensions="SalesDashboardPDFExtension" showHeader="false" sidebar="false">       
+ <apex:form style="margin-left:1%;width:98%">
+    <table border="0" width="100%" style="font-family:calibri;font-size:x-small;vertical-align:text-top;" cellspacing="0" cellpadding="0">
+        <tr>
+            <td width="70%">
+                <apex:image url="{!$Resource.BarclayCardsLogo}" width="120" height="40"/>
+            </td>
+            <td width="29%" style="text-align:right;">
+                {!accountObj.Name}<br/>
+                {!accountObj.BillingStreet} ,<br/>
+                {!accountObj.BillingCity} , {!accountObj.BillingState} , <br/>
+                {!accountObj.BillingCountry},{!accountObj.BillingPostalCode}.
+                
+            </td>    
+            <td width="1%">&nbsp;</td>
+        </tr>
+    </table>
+    <br/>
+    
+    <h4>Sales Performance</h4>
+    <table border="0" width="100%" cellspacing="0" cellpadding="5" style="font-family:calibri;font-size:xx-small;vertical-align:text-top;">
+    <tr>
+        <td  colspan="4"><hr style="height:1px;border-width:0;color:gray;background-color:gray"/></td>
+    </tr>
+    
+    <tr>
+        <td  colspan="4" style="text-align:left;background-color:gray;color:white;font-weight:bold;">Travel</td>
+    </tr>
+    <tr>
+        <td style="text-align:right;width:20%;font-weight:bold">TMC</td><td style="text-align:left;width:35%">{!accountObj.TMC__c}</td>
+        <td style="text-align:right;width:20%;font-weight:bold">Expense Management Provider</td><td style="text-align:left;width:35%">{!accountObj.Expense_Management_Provider__c}</td>
+    </tr>
+    <tr>
+        <td style="text-align:right;width:20%;font-weight:bold">Total Travel Spend(Air)</td><td style="text-align:left;width:35%">{!accountObj.Total_Travel_Spend__c }</td>
+        <td style="text-align:right;width:20%;font-weight:bold">Number of Traverllers/Claimants</td><td style="text-align:left;width:35%">{!accountObj.number_of_Traverllers_Claimants__c}</td>
+    </tr>
+     
+    <tr>
+        <td style="text-align:right;width:20%;font-weight:bold">Total Travel Spend(Rail)</td><td style="text-align:left;width:35%">{!accountObj.TMC__c}</td>
+        <td style="text-align:right;width:20%;font-weight:bold">Competitor Information</td><td style="text-align:left;width:35%">{!accountObj.Expense_Management_Provider__c}</td>
+    </tr>
+    
+    <tr>
+        <td style="text-align:right;width:20%;font-weight:bold">Total Travel Spend(Hotel)</td><td style="text-align:left;width:35%">{!accountObj.TMC__c}</td>
+        <td style="text-align:right;width:20%;font-weight:bold">Decision Making </td><td style="text-align:left;width:35%">{!accountObj.Expense_Management_Provider__c}</td>
+    </tr>
+     
+    <tr>
+        <td style="text-align:right;width:20%;font-weight:bold">Short Term Objective</td><td style="text-align:left;width:35%">{!accountObj.TMC__c}</td>
+        <td style="text-align:right;width:20%;font-weight:bold">Travel Info</td><td style="text-align:left;width:35%">{!accountObj.Expense_Management_Provider__c}</td>
+    </tr>
+    
+    <tr>
+        <td style="text-align:right;width:20%;font-weight:bold">Long Term Objective</td><td style="text-align:left;width:35%">{!accountObj.TMC__c}</td>
+        <td style="text-align:right;width:20%;font-weight:bold">Top 5/10 cardable Supplier + Spend</td><td style="text-align:left;width:35%">{!accountObj.Expense_Management_Provider__c}</td>
+    </tr>
+     
+     
+     
+     
+     <tr>
+        <td  colspan="4" style="text-align:left;background-color:gray;color:white;font-weight:bold;">B2B</td>
+    </tr>
+    <tr>
+        <td style="text-align:right;width:20%;font-weight:bold">ERP</td><td style="text-align:left;width:35%">{!accountObj.ERP__c}</td>
+        <td style="text-align:right;width:20%;font-weight:bold">Expense Management Provider</td><td style="text-align:left;width:35%">{!accountObj.B2B_Expense_Management_Provider__c}</td>
+    </tr>
+    
+    <tr>
+        <td style="text-align:right;width:20%;font-weight:bold">P2P Processes</td><td style="text-align:left;width:35%">{!accountObj.ERP__c}</td>
+        <td style="text-align:right;width:20%;font-weight:bold">Competitor Information</td><td style="text-align:left;width:35%">{!accountObj.B2B_Expense_Management_Provider__c}</td>
+    </tr>
+    
+    <tr>
+        <td style="text-align:right;width:20%;font-weight:bold">Spend profile of the company</td><td style="text-align:left;width:35%">{!accountObj.ERP__c}</td>
+        <td style="text-align:right;width:20%;font-weight:bold">Decision Making</td><td style="text-align:left;width:35%">{!accountObj.B2B_Expense_Management_Provider__c}</td>
+    </tr>
+    
+    <tr>
+        <td style="text-align:right;width:20%;font-weight:bold">Short Term Objective</td><td style="text-align:left;width:35%">{!accountObj.ERP__c}</td>
+        <td style="text-align:right;width:20%;font-weight:bold"></td><td style="text-align:left;width:35%"></td>
+    </tr>
+ 
+    <tr>
+        <td style="text-align:right;width:20%;font-weight:bold">Long Term Objective</td><td style="text-align:left;width:35%">{!accountObj.ERP__c}</td>
+        <td style="text-align:right;width:20%;font-weight:bold"></td><td style="text-align:left;width:35%"></td>
+    </tr>
+    
+    </table> 
+ </apex:form>
+</apex:page>

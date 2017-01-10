@@ -1,0 +1,30 @@
+<apex:page >
+  <apex:includeScript value="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js"/>
+  <script>
+    jQuery(document).ready(function($) {
+      // Pull 10 Accounts via the REST API
+      $.ajax('/services/data/v28.0/query?q=SELECT+Name+FROM+Account+LIMIT+10',
+        {
+          beforeSend: function(xhr) {
+            // Set the OAuth header from the session ID
+            xhr.setRequestHeader('Authorization', 'Bearer {!$Api.Session_ID}');
+          },
+          success: function(response) {
+            // We got 'em - append our records to the HTML list
+            $.each(response.records, function(index, record) {
+              $('#accountList').append('<li>'+record.Name+'</li>');
+            });
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            // Oops - what went wrong?
+            alert(jqXHR.status + ': ' + errorThrown);
+          }
+        }
+      );
+    });
+  </script>
+  <h1>Test REST API Without Proxy</h1>
+  <p>10 Accounts:</p>
+  <ul id="accountList">
+  </ul>
+</apex:page>

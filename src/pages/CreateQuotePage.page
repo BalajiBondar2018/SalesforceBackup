@@ -1,0 +1,287 @@
+<apex:page standardController="Opportunity" extensions="CreateQuoteExtension">
+<apex:sectionHeader title="{!opportunity.Name}" subtitle="Quick Quote Creation"/>
+<apex:form id="form">
+<apex:commandLink >
+<apex:outputLabel value="<< Back to {!opportunity.Name}"></apex:outputLabel>
+</apex:commandLink>https://c.ap1.visual.force.com/s.gif
+    <apex:pageBlock >
+    <apex:pageBlockButtons >
+    <apex:commandButton value="Quick Save"/>
+    <apex:commandButton value="Save"/>
+    <apex:commandButton value="Cancel"/>
+    </apex:pageBlockButtons>
+    <apex:pageBlockSection title="Customer Information">
+    <apex:pageBlockSectionItem >
+    <apex:outputLabel >Customer Name</apex:outputLabel>
+    <apex:outputLabel />
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+    <apex:outputLabel >SCV Code</apex:outputLabel>
+    <apex:outputLabel />
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+    <apex:outputLabel >Customer Name</apex:outputLabel>
+    <apex:outputLabel />
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+    <apex:outputLabel >SCV Code</apex:outputLabel>
+    <apex:outputLabel />
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+    <apex:outputLabel >Customer Name</apex:outputLabel>
+    <apex:outputLabel />
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+    <apex:outputLabel >SCV Code</apex:outputLabel>
+    <apex:outputLabel />
+    </apex:pageBlockSectionItem>
+    </apex:pageBlockSection>
+    <apex:pageBlockSection title="Opportunity Information">
+    <apex:pageBlockSectionItem >
+    <apex:outputLabel >Customer Name</apex:outputLabel>
+    <apex:outputLabel />
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+    <apex:outputLabel >SCV Code</apex:outputLabel>
+    <apex:outputLabel />
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+    <apex:outputLabel >Customer Name</apex:outputLabel>
+    <apex:outputLabel />
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+    <apex:outputLabel >SCV Code</apex:outputLabel>
+    <apex:outputLabel />
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+    <apex:outputLabel >Customer Name</apex:outputLabel>
+    <apex:outputLabel />
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+    <apex:outputLabel >SCV Code</apex:outputLabel>
+    <apex:outputLabel />
+    </apex:pageBlockSectionItem>
+    </apex:pageBlockSection>
+    <apex:pageBlockSection title="Select Defining Parameter(s)">
+        <apex:pageBlockSectionItem >
+        <apex:outputLabel value="Commodity Type"/>
+        <apex:selectList size="5" style="width:200px">
+        </apex:selectList>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+        <apex:outputLabel value="Quote Effective From"/>
+        <apex:inputText />
+        </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+       
+       
+        
+       
+        
+        
+       
+    
+    <apex:pageBlockSection columns="1" title="Select Trade Direction(s)">
+    <apex:pageBlockSectionItem >
+    <apex:outputPanel >
+    <table style="width:100%" border="0" cellspacing="2" cellpadding="2">
+    <tr>
+    <td>
+    <apex:outputLabel style="font-weight:bold">Receipt</apex:outputLabel>&nbsp;&nbsp;
+    <apex:inputText style="width:120px;"/>
+    </td>
+    <td>
+    <apex:outputLabel style="font-weight:bold">Destination</apex:outputLabel>&nbsp;&nbsp;
+    <apex:inputText style="width:120px;"/>
+    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    <tr style="text-align:center;">
+    <td>
+    <apex:commandButton value="Add"/>
+    <apex:commandButton value="Remove"/>
+    </td>
+    <td>
+       <apex:commandButton value="Add"/>
+    <apex:commandButton value="Remove"/>
+    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    <tr>
+    <td style="width:20%">
+     <apex:selectList style="width:100%" size="7">
+        </apex:selectList>
+    </td>
+    <td style="width:20%">
+     <apex:selectList size="7" style="width:100%">
+        </apex:selectList>
+    </td>
+    <td style="width:7%">
+        <apex:selectcheckboxes layout="pagedirection">
+            <apex:selectOption itemLabel="20 Dry" itemValue="20 Dry"></apex:selectOption>
+            <apex:selectOption itemLabel="40 Dry" itemValue="20 Dry"></apex:selectOption>
+            <apex:selectOption itemLabel="45 Dry" itemValue="20 Dry"></apex:selectOption>
+            <apex:selectOption itemLabel="NOR" itemValue="NOR"></apex:selectOption>
+        </apex:selectcheckboxes>
+    
+    </td>
+    <td style="width:7%">
+     <apex:selectCheckboxes layout="pagedirection">
+            <apex:selectOption itemLabel="Dry" itemValue="Dry"></apex:selectOption>
+            <apex:selectOption itemLabel="Reefer" itemValue="Reefer"></apex:selectOption>
+        </apex:selectCheckboxes>
+    </td>
+    <td style="width:5%;vertical-align:middle;text-align:center;">
+    <apex:commandButton value=">>"/><br/>
+    <apex:commandButton value="<<"/>
+    </td>
+    <td style="width:50%">
+     <apex:selectList size="7" style="width:100%">
+        </apex:selectList>
+    </td>
+    </tr>
+    
+    <tr>
+    <td>
+    </td>
+    <td>
+    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td style="text-align:right;"><apex:commandButton value="Add Rates to the Quotes" reRender="form" status="processwaitingStatus" style="margin-left:5px;"/></td>
+    </tr>
+    </table>
+       
+        </apex:outputPanel>
+        </apex:pageBlockSectionItem>
+    </apex:pageBlockSection>
+    
+   
+    
+    <apex:pageBlockSection title="Mass Update Trade Direction(s)" columns="1" collapsible="true">
+    <apex:pageBlockSection columns="1">
+    <apex:tabPanel id="updateSurchangesTabPanel">
+    <apex:tab label="BAS" reRender="updateSurchangesTabPanel">
+<apex:outputPanel >
+            <apex:outputLabel style="labelCol"><b>Enter BAS</b></apex:outputLabel>&nbsp;
+            <apex:inputText style="width:50px;"/>&nbsp;
+            <apex:selectList size="1">
+            <apex:selectOption itemLabel="Increase" itemValue="Increase"/>
+            <apex:selectOption itemLabel="Decrease" itemValue="Decrease"/>
+            </apex:selectList>&nbsp;
+            <apex:commandButton value="Update" status="waitingStatus" reRender="selectedtradedirectionpblocksection"/>
+        </apex:outputPanel>
+    
+    </apex:tab>
+    <apex:tab name="Mass Update Surcharge(s)" label="Surcharge(s)" reRender="updateSurchangesTabPanel">
+    <apex:outputPanel >
+            <apex:outputLabel style="labelCol"><b>Select Surcharge</b></apex:outputLabel>&nbsp;
+            <apex:selectList size="1">
+            <apex:selectOption itemLabel="MBF" itemValue="MBF"/>
+            <apex:selectOption itemLabel="WSC" itemValue="WSC"/>
+            <apex:selectOption itemLabel="FTS" itemValue="FTS"/>
+            <apex:selectOption itemLabel="EXP" itemValue="EXP"/>
+            </apex:selectList>&nbsp;
+            <apex:inputText style="width:50px;"/>&nbsp;
+            <apex:selectList size="1">&nbsp;
+            <apex:selectOption itemLabel="Increase" itemValue="Increase"/>
+            <apex:selectOption itemLabel="Decrease" itemValue="Decrease"/>
+            </apex:selectList>&nbsp;
+            <apex:commandButton value="Update" status="waitingStatus" reRender="selectedtradedirectionpblocksection"/>
+        </apex:outputPanel>
+    </apex:tab>
+    </apex:tabPanel>
+    
+    </apex:pageBlockSection>
+    </apex:pageBlockSection>
+    
+    <apex:pageBlockSection title="Selected Trade Direction(s) with Price" columns="1" collapsible="false">
+    </apex:pageBlockSection>
+    <table width="100%" class="list" border="1" cellspacing="0" cellpadding="0">
+          <thead>
+            <!--Account Header Row-->
+            <tr class='headerRow'>
+            <th class='headerRow' scope="col"><apex:inputCheckbox /></th>
+            <th class='headerRow' scope="col">Trade Direction</th>
+            <th class='headerRow' scope="col">Receipt Location</th>
+            <th class='headerRow' scope="col">Deliver Location</th>
+            <th class='headerRow' scope="col">Container Type</th>
+            <th class='headerRow' scope="col">Container Size</th>
+            <th class='headerRow' scope="col">BAS</th>
+            <th class='headerRow' scope="col">Min BAS</th>
+            <th class='headerRow' scope="col">Suggested BAS</th>
+            <th class='headerRow' scope="col">Total Price</th>
+            <th class='headerRow' scope="col"></th>
+            </tr>
+           </thead>
+    <apex:repeat value="{!accountList}" var="alist">
+    <tr  class=" dataRow odd">
+    <td><apex:inputCheckbox /></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td style="width:2%;">
+    <apex:commandLink reRender="form" status="tablewaitingStatus"><apex:image url="{!$Resource.down}" style="width:17px;height:17px;" rendered="true"/></apex:commandLink>
+    <apex:commandLink reRender="form" status="tablewaitingStatus"><apex:image url="{!$Resource.up}" style="width:17px;height:17px;" rendered="false"/></apex:commandLink>
+    </td>
+    </tr>
+    </apex:repeat>
+    </table>
+    <apex:outputPanel >
+    <table style="background-color:#DEC247;width:100%;text-align:right;">
+    <tr><td style="height:20px;color:white;font-weight:bold;">
+    <apex:outputLabel value="<<"></apex:outputLabel>
+    1 of 5
+    <apex:outputLabel value=">>"></apex:outputLabel>
+    &nbsp;&nbsp;&nbsp;
+    </td></tr>
+    </table>
+    </apex:outputPanel>
+   
+    </apex:pageBlock>
+</apex:form>
+<!--Action Status presentation-->
+        <apex:actionStatus id="processwaitingStatus">
+            <apex:facet name="start">
+                <div class="waitingSearchDiv waitingSearchDivOpacity"
+                    style="width: 100%; height: 100%; display: block;" />
+                <div id="00B80000007AEEH_loading" class="waitingSearchDiv"
+                    style="width: 100%; height: 100%; display: block;">
+                <div class="waitingHolder" style="top: 600px; width: 110px;">
+                <img class="waitingImage" src="/img/loading.gif" />
+                <span class="waitingDescription">Processing...</span> 
+                </div>
+                </div>
+            </apex:facet>
+            <apex:facet name="stop"></apex:facet>
+        </apex:actionStatus>
+        
+        <!--Action Status presentation-->
+        <apex:actionStatus id="tablewaitingStatus">
+            <apex:facet name="start">
+                <div class="waitingSearchDiv waitingSearchDivOpacity"
+                    style="width: 100%; height: 100%; display: block;" />
+                <div id="00B80000007AEEH_loading" class="waitingSearchDiv"
+                    style="width: 100%; height: 100%; display: block;">
+                <div class="waitingHolder" style="top: 850px; width: 110px;">
+                <img class="waitingImage" src="/img/loading.gif" />
+                <span class="waitingDescription">Processing...</span> 
+                </div>
+                </div>
+            </apex:facet>
+            <apex:facet name="stop"></apex:facet>
+        </apex:actionStatus>
+</apex:page>

@@ -1,0 +1,19 @@
+<apex:page standardController="Account" extensions="TestController">
+<script>
+function addnumbers(num1 , num2){
+var total;
+total = num1 + num2;
+
+var teststring = 'TestString';
+teststring = teststring.substring(0,3);
+
+return total;
+
+}
+
+</script>
+
+<apex:form >
+<apex:commandButton onclick=" return addnumbers(5, 7);" value="add"/>
+</apex:form>
+</apex:page>

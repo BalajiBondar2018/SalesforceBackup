@@ -1,0 +1,39 @@
+<apex:component controller="AuthSubTokenCompContrller">
+    <!--  controller provides the method for getconvertTokenToSession 
+    This converts a token into a sesstoken and stores it in the current page
+    removing the one-time use token from the querystring in the process
+    -->
+
+    <apex:attribute name="scope"
+        description="The scope url sent to Google Data API" type="String"
+        required="true" />
+
+    <apex:outputPanel rendered="{!AND($CurrentPage.parameters.token == null,  $CurrentPage.parameters.sesstoken == null)}">
+        <script> 
+     
+    var forceReDirect = '/_ui/core/google/GoogleAuthSubCallback?url=' ;
+    var googleRedir = 'https://www.google.com/accounts/AuthSubRequest?next=';
+    var next = window.location.pathname;
+                    
+    // destination (relateive path) that will capture the token and store it for your app   
+    // you can pass your own query string parms
+    var myApp = encodeURIComponent( next ); 
+    var nextUrl = window.location.protocol + '//' + window.location.host + 
+                forceReDirect + myApp ;  
+    var tokenRequestUrl  = googleRedir + encodeURIComponent( nextUrl ) + 
+                "&session=1&secure=0&scope={!scope}";
+    window.location.href = tokenRequestUrl; // go there now
+</script>
+    </apex:outputPanel>
+
+    <apex:outputPanel rendered="{!AND( $CurrentPage.parameters.token != null , $CurrentPage.parameters.sesstoken == null)}">
+        <script>
+         window.location.href = "{!convertTokenToSession}"; 
+        </script>
+    </apex:outputPanel>
+
+    <apex:outputPanel rendered="{!$CurrentPage.parameters.sesstoken != null}" id="session">
+        <!--  this panel was used for debugging  -->
+    </apex:outputPanel>
+
+</apex:component>

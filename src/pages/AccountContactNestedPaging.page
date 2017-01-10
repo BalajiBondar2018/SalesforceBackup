@@ -1,0 +1,9 @@
+<apex:page standardController="Account" extensions="AccountContactNestedPagingExtension">
+<apex:form id="form">
+    <apex:pageBlock title="Account Contact">
+        <apex:DataTable value="{!AccountContactWrapperList}" var="accountwrapper">
+        <apex:column value="{!accountwrapper.account.Name}"/> 
+        </apex:DataTable>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

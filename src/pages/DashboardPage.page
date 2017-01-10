@@ -1,0 +1,18 @@
+<apex:page controller="PieChartController" title="Pie Chart">
+    <apex:pageBlock title="Sales Dashboard">
+        <apex:pageBlockSection columns="2">
+            <apex:pageBlockSectionItem >
+                <apex:chart height="200" width="300" data="{!pieData}" name="Test Dashboard1" >
+                    <apex:pieSeries dataField="data" labelField="name" tips="true"/>
+                    <apex:legend position="right"/>
+                </apex:chart>    
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:chart height="200" width="300" data="{!pieData}" name="Test Dashboard" >
+                    <apex:pieSeries dataField="data" labelField="name" tips="true"/>
+                    <apex:legend position="right"/>
+                </apex:chart>    
+            </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>

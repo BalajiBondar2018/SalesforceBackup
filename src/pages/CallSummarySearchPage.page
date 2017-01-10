@@ -1,0 +1,204 @@
+<apex:page standardController="Case" extensions="CallSummarySearchExtension">
+
+<apex:form id="ConsumerSerachForm">
+<br/>
+<apex:pageBlock >
+<apex:pageBlockSection title="Specify Search Criteria"></apex:pageBlockSection>
+<table>
+<tr>
+    <td><b>Field</b></td>
+    <td><b>Operator</b></td>
+    <td><b>Value</b></td>
+    <td></td>
+
+</tr>
+<tr>
+    <td>
+    <apex:selectList size="1">
+        <apex:selectOption itemLabel="--None--" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="FirstName" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="LastName" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Tracking Number" itemValue="None"></apex:selectOption>            
+        <apex:selectOption itemLabel="Check Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Denial Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Amount" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Log Number/Ref Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Banking #(Routing #/Account#)" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Social Security Number" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Driver's License Number" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Telecheck Track Id" itemValue="None"></apex:selectOption>
+  
+      </apex:selectList>
+    </td>
+    <td>
+    <apex:selectList size="1">
+        <apex:selectOption itemLabel="--None--" itemValue="None"></apex:selectOption>
+    </apex:selectList>
+    </td>
+    <td><apex:inputText style="height:17px;"/></td>
+    <td>AND</td>
+</tr>
+
+<tr>
+    <td>
+    <apex:selectList size="1">
+        <apex:selectOption itemLabel="--None--" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="FirstName" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="LastName" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Tracking Number" itemValue="None"></apex:selectOption>            
+        <apex:selectOption itemLabel="Check Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Denial Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Amount" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Log Number/Ref Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Banking #(Routing #/Account#)" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Social Security Number" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Driver's License Number" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Telecheck Track Id" itemValue="None"></apex:selectOption>
+
+    </apex:selectList>
+    </td>
+    <td>
+    <apex:selectList size="1">
+        <apex:selectOption itemLabel="--None--" itemValue="None"></apex:selectOption>
+    </apex:selectList>
+    </td>
+    <td><apex:inputText style="height:17px;"/></td>
+    <td>AND</td>
+</tr>
+
+
+<tr>
+    <td>
+    <apex:selectList size="1">
+       <apex:selectOption itemLabel="--None--" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="FirstName" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="LastName" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Tracking Number" itemValue="None"></apex:selectOption>            
+        <apex:selectOption itemLabel="Check Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Denial Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Amount" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Log Number/Ref Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Banking #(Routing #/Account#)" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Social Security Number" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Driver's License Number" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Telecheck Track Id" itemValue="None"></apex:selectOption>
+
+    </apex:selectList>
+    </td>
+    <td>
+    <apex:selectList size="1">
+        <apex:selectOption itemLabel="--None--" itemValue="None"></apex:selectOption>
+    </apex:selectList>
+    </td>
+    <td><apex:inputText style="height:17px;"/></td>
+    <td>AND</td>
+</tr>
+
+
+<tr>
+    <td>
+    <apex:selectList size="1">
+        <apex:selectOption itemLabel="--None--" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="FirstName" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="LastName" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Tracking Number" itemValue="None"></apex:selectOption>            
+        <apex:selectOption itemLabel="Check Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Denial Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Amount" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Log Number/Ref Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Banking #(Routing #/Account#)" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Social Security Number" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Driver's License Number" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Telecheck Track Id" itemValue="None"></apex:selectOption>
+
+    </apex:selectList>
+    </td>
+    <td>
+    <apex:selectList size="1">
+        <apex:selectOption itemLabel="--None--" itemValue="None"></apex:selectOption>
+    </apex:selectList>
+    </td>
+    <td><apex:inputText style="height:17px;"/></td>
+    <td>AND</td>
+</tr>
+
+<tr>
+    <td>
+    <apex:selectList size="1">
+       <apex:selectOption itemLabel="--None--" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="FirstName" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="LastName" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Tracking Number" itemValue="None"></apex:selectOption>            
+        <apex:selectOption itemLabel="Check Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Denial Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Amount" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Log Number/Ref Number" itemValue="None"></apex:selectOption>                
+        <apex:selectOption itemLabel="Banking #(Routing #/Account#)" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Social Security Number" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Driver's License Number" itemValue="None"></apex:selectOption>
+        <apex:selectOption itemLabel="Telecheck Track Id" itemValue="None"></apex:selectOption>
+    </apex:selectList>
+    </td>
+    <td>
+    <apex:selectList size="1">
+        <apex:selectOption itemLabel="--None--" itemValue="None"></apex:selectOption>
+    </apex:selectList>
+    </td>
+    <td><apex:inputText style="height:17px;"/></td>
+    <td></td>
+</tr>
+
+<tr>
+    <td></td>
+    <td></td>
+<td></td>
+<td><apex:commandbutton value="Search" action="{!SearchClick}" reRender="ConsumerSerachForm"/>
+<apex:commandbutton value="cancel" action="{!CancelClick}" reRender="ConsumerSerachForm"/>
+</td>
+
+</tr>
+
+
+
+
+</table>
+<br/>
+
+
+<apex:pageBlockTable id="PBTableConsumerSearch" value="{!contactList}" var="contactobj" rendered="{!showConsumerSearchResultFlag}">
+<apex:column headerValue="Action" width="6%">
+<apex:commandButton value="Create Case" action="{!CreateCaseClick}"/>
+</apex:column>
+
+<apex:column headerValue="Case Tracking #">
+<apex:outputField value="{!contactobj.Id}"/>
+</apex:column>
+
+<apex:column headerValue="FirstName">
+<apex:outputField value="{!contactobj.FirstName}"/>
+</apex:column>
+<apex:column headerValue="LastName">
+<apex:outputField value="{!contactobj.LastName}"/>
+</apex:column>
+<apex:column headerValue="Email">
+<apex:outputField value="{!contactobj.Email}"/>
+</apex:column>
+<apex:column headerValue="Fax">
+<apex:outputField value="{!contactobj.Fax}"/>
+</apex:column>
+<apex:column headerValue="Department">
+<apex:outputField value="{!contactobj.Fax}"/>
+</apex:column>
+<apex:column headerValue="Owner">
+<apex:outputField value="{!contactobj.Fax}"/>
+</apex:column>
+
+
+</apex:pageBlockTable>
+
+
+
+</apex:pageBlock>
+</apex:form>
+
+</apex:page>

@@ -1,0 +1,73 @@
+<apex:page controller="MyPagingController" tabStyle="Account">
+    <apex:sectionHeader title="Account List"></apex:sectionHeader>
+    <apex:form id="form">
+    
+    <apex:pageBlock title="Selected Account(s)" id="pageBlock">
+    <div style="position: relative;">
+    <apex:outputpanel >
+        <apex:actionstatus id="status">
+            <apex:facet name="start">
+                <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;
+                       height: 100%;opacity:0.65;width:100%;"> 
+                    <div class="waitingHolder" style="top: 150px; width: 91px;">
+                        <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                        <span class="waitingDescription">Loading...</span>
+                    </div>
+                </div>
+            </apex:facet>
+        </apex:actionstatus>
+    </apex:outputpanel>
+       
+       <table width="100%" border='0' cellspacing='0' cellpadding='0'>
+       <tr>
+            <th class='headerRow' scope="col"><apex:inputCheckbox /></th>  
+            <th class='headerRow' scope="col">Name</th>
+            <th class='headerRow' scope="col">Phone</th> 
+            <th class='headerRow' scope="col">Billing City</th>
+            <th class='headerRow' scope="col">Fax</th>
+            <th class='headerRow' scope="col">Website</th>
+       </tr>
+       <tr class='headerRow'>
+       
+        <td colspan="6">
+            <hr style="color:#E3DEB8;" size="1"/>
+        </td>
+        </tr>     
+       <apex:repeat value="{!accounts}" var="a" rendered="{!NOT(ISNULL(accounts))}" rows="{!PageSize}">
+       <tr>
+       <td><apex:inputCheckbox /></td>
+       <td>{!a.account.Name}</td>
+       <td>{!a.account.Phone}</td>
+       <td>{!a.account.BillingCity}</td>
+       <td>{!a.account.Fax}</td>
+       <td>{!a.account.Website}</td>
+       </tr>
+       <tr><td colspan="3">
+       <apex:pageBlockTable id="pbtable" value="{!a.contactList}" var="con" rendered="false">
+       <apex:column headerValue="Id" value="{!con.LastName}"/>
+       <apex:column headerValue="LastName" value="{!con.LastName}"/>
+       <apex:column headerValue="Phone" value="{!con.LastName}"/>
+       </apex:pageBlockTable>
+       </td></tr>
+       <tr><td colspan="14"><hr style="color:red;" size="1"/></td></tr>
+       </apex:repeat>
+       
+       </table>
+        <div align="right" style="display:{!IF(NOT(ISNULL(accounts)),'block','none')}">
+        <font size="1pt">Page #:&nbsp;<apex:outputLabel value="{!PageNumber}"/>&nbsp;out of&nbsp;<apex:outputLabel value="{!totalPageNumber}"/>&nbsp;&nbsp;&nbsp;&nbsp;</font>
+        <apex:commandlink style="text-decoration:none;" action="{!previousBtnClick}" reRender="pageBlock" status="status">
+        <apex:image url="{!$Resource.previous}" style="height:12px;verical-align:bottom;"/>
+        <apex:outputLabel >Previous</apex:outputLabel>
+        </apex:commandlink>
+        &nbsp;&nbsp;
+        <apex:commandlink style="text-decoration:none;" action="{!nextBtnClick}" reRender="pageBlock" status="status">
+        <apex:outputLabel >Next</apex:outputLabel>
+        <apex:image url="{!$Resource.Next}" style="height:12px;verical-align:bottom;"/>
+        </apex:commandlink>
+
+        
+        </div>
+       </div>     
+    </apex:pageBlock>
+    </apex:form>
+    </apex:page>

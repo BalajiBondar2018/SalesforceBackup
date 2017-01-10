@@ -1,0 +1,68 @@
+<apex:page standardController="case" extensions="CreateIssueExtension">
+<apex:form >
+<apex:pageBlock >
+<apex:pageBlockSection columns="1" title="Create Issue(s)" collapsible="false">
+    <apex:pageBlockTable value="{!issueList}" var="issueobj">
+        <apex:column headerValue="Case #">
+                <apex:outputField value="{!issueobj.casenumber}"/>
+            <apex:facet name="footer">
+                
+            </apex:facet>
+        </apex:column>
+        
+        <apex:column headerValue="Description">
+                <apex:inputTextarea value="{!issueobj.Description}" cols="100"/>
+            <apex:facet name="footer">
+                <apex:inputTextarea cols="100"/>
+            </apex:facet>
+        </apex:column>
+        <apex:column headerValue="Priority">
+                <apex:inputField value="{!issueobj.Priority}"/>
+            <apex:facet name="footer">
+                <apex:selectList multiselect="false" size="1">
+                    <apex:selectOption itemLabel="--Select--" itemValue="Select"></apex:selectOption>
+                    <apex:selectOption itemLabel="Low" itemValue="Low"></apex:selectOption>
+                    <apex:selectOption itemLabel="Medium" itemValue="Medium"></apex:selectOption>
+                    <apex:selectOption itemLabel="High" itemValue="High"></apex:selectOption>
+                </apex:selectList>
+            </apex:facet>
+        </apex:column>
+        <apex:column headerValue="Case Origin">
+                <apex:inputField value="{!issueobj.origin }" />
+            <apex:facet name="footer">
+                <apex:selectList multiselect="false" size="1">
+                    <apex:selectOption itemLabel="--Select--" itemValue="Select"></apex:selectOption>
+                    <apex:selectOption itemLabel="Phone" itemValue="Phone"></apex:selectOption>
+                    <apex:selectOption itemLabel="Email" itemValue="Email"></apex:selectOption>
+                    <apex:selectOption itemLabel="Web" itemValue="Web"></apex:selectOption>
+                </apex:selectList>
+            </apex:facet>
+        </apex:column>
+        <apex:column headerValue="Status">
+                <apex:inputField value="{!issueobj.Status}"/>
+            <apex:facet name="footer">
+                <apex:selectList multiselect="false" size="1">
+                    <apex:selectOption itemLabel="--Select--" itemValue="Select"></apex:selectOption>
+                    <apex:selectOption itemLabel="New" itemValue="New"></apex:selectOption>
+                    <apex:selectOption itemLabel="Working" itemValue="Working"></apex:selectOption>
+                    <apex:selectOption itemLabel="Escalated" itemValue="Escalated"></apex:selectOption>
+                </apex:selectList>
+            </apex:facet>
+        </apex:column>
+        <apex:column headerValue="Status">
+               <apex:outputPanel > 
+                    <apex:commandButton value="Edit"/>
+                    <apex:commandButton value="Cancel"/>
+                </apex:outputPanel>
+            <apex:facet name="footer">
+               <apex:outputPanel > 
+                    <apex:commandButton value="Add"/>
+                    <apex:commandButton value="Cancel"/>
+                </apex:outputPanel>
+            </apex:facet>
+        </apex:column>
+    </apex:pageBlockTable>
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

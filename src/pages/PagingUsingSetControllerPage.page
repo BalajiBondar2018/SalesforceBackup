@@ -1,0 +1,94 @@
+<apex:page controller="PagingUsingSetController" tabStyle="Case">
+<script>
+function checkAll(cb){   
+            var inputElem = document.getElementsByTagName("input");
+            for(var i=0; i<inputElem.length; i++)
+            {
+                if(inputElem[i].id.indexOf("checkedone")!= -1)
+                {
+                    if(inputElem[i].checked == false)
+                    {
+                        inputElem[i].checked = true;
+                        //initialCount++;
+                    }
+                }
+            }
+       }
+</script>
+
+<apex:form id="pagingform">
+    <apex:pageBlock title="Paging">
+ 
+      <apex:pageBlockButtons location="top">
+        <apex:commandButton action="{!cancel}" value="Cancel"/>
+      </apex:pageBlockButtons>
+      <apex:pageMessages />
+    
+     <apex:pageBlockSection title="Search Results -  Page #{!pageNumber}" columns="1" collapsible="false">
+        <apex:pageBlockTable value="{!accountwrapperList}" var="awObj" id="AccountPBTable">
+          <apex:column width="25px;">
+            <apex:facet name="header"> 
+            <apex:inputCheckbox onclick="checkAll(this); return false;"/>
+                       </apex:facet>
+            <apex:inputCheckbox value="{!awObj.checked}" id="checkedone" />
+          </apex:column>
+            <apex:column >
+                <apex:facet name="header">
+                    <apex:commandLink value="Id{!IF(sortField='Id',IF(sortDir='asc','1','2'),'')}" action="{!toggleSort}" rerender="AccountPBTable">
+                        <apex:param name="sortField" value="Id" assignTo="{!sortField}"/>
+                    </apex:commandLink>
+                </apex:facet>
+                <apex:outputField value="{!awObj.acc.Id}"/>
+            </apex:column>
+
+
+
+          <apex:column value="{!awObj.acc.Name}" headerValue="Name">
+          
+                    
+          </apex:column>
+          
+
+         
+         <apex:column >
+                <apex:facet name="header">
+                    <apex:commandLink value="Phone{!IF(sortField='Phone',IF(sortDir='asc','1','2'),'')}" action="{!toggleSort}"  reRender="AccountPBTable">
+                        <apex:param name="sortField" value="Phone" assignTo="{!sortField}"/>
+                    </apex:commandLink>
+                </apex:facet>
+                <apex:outputField value="{!awObj.acc.Phone}"/>
+            </apex:column>
+
+        <apex:column value="{!awObj.acc.Owner.Name}" headerValue="Owner Name" width="45px">
+    <apex:facet name="footer">
+                <apex:outputPanel style="verical-align:middle;">
+                <apex:commandLink value="First" action="{!first}" reRender="pagingform" style="text-decoration : none"/>
+                
+                
+                &nbsp;
+                <apex:commandLink action="{!previous}" reRender="pagingform"  rendered="{!hasPrevious}" style="text-decoration : none">
+                <apex:outputPanel style="verical-align:middle;">
+<apex:image url="{!$Resource.previous}" style="height:10px;"/>
+<apex:outputLabel >Previous</apex:outputLabel>
+</apex:outputPanel>
+                </apex:commandlink>&nbsp;&nbsp;
+                <apex:commandLink action="{!next}" reRender="pagingform"  rendered="{!hasNext}" style="text-decoration : none">
+                <apex:outputLabel >Next</apex:outputLabel>
+
+                <apex:image url="{!$Resource.Next}" style="height:10px;"/>
+                 </apex:commandlink>&nbsp;
+                <apex:commandLink action="{!last}" reRender="pagingform" style="text-decoration : none">Last</apex:commandlink>&nbsp;
+                </apex:outputPanel>
+          </apex:facet>
+
+ </apex:column>
+
+        </apex:pageBlockTable>
+      </apex:pageBlockSection>
+
+    </apex:pageBlock>
+ 
+   
+ 
+  </apex:form>
+</apex:page>

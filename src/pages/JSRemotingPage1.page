@@ -1,0 +1,119 @@
+<apex:page controller="testremotingcontroller">
+<!-- Jquery Min and Template Plugin include -->
+<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"/>
+<apex:includeScript value="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"/>
+
+<apex:sectionHeader title="Javascript Remoting & jQuery Templates !"/>
+
+<!-- 
+  Existing visualforce tags like pageBlock, pageBlockSection are always good to
+  get salesforce look and feel with lesser markup.
+-->
+<apex:pageBlock title="Accounts">
+    <!-- Render a Section to show Account Search box with button -->
+    <apex:pageBlockSection title="Search Accounts" columns="2">
+       <apex:pageBlockSectionItem >
+          Account Name :
+          <input type = "text" id = "accountNameToSearch" />
+          <button onclick="searchAccounts()">Get Account</button>
+       </apex:pageBlockSectionItem>       
+    </apex:pageBlockSection>
+    
+    <!-- 
+    Another section for showing the account search results as grid
+    -->
+    <apex:pageBlockSection title="Matching Accounts !" columns="1">
+    <!-- 
+    Created Empty table using the CSS styles of visualforce pageBlockTable 
+    This gives same look and feel. Thanks firebug/firefox for this. 
+    -->
+    <table cellspacing="0" cellpadding="0" border="0" id="searchResults" class="list ">
+       <colgroup span="2"></colgroup>
+       <thead class="rich-table-thead">
+          <tr class="headerRow ">
+              <th colspan="1" scope="col" class="headerRow">Id</th>
+              <th colspan="1" scope="col" class="headerRow"> Name</th>
+              <th colspan="1" scope="col" class="headerRow"> Phone</th>
+              <th colspan="1" scope="col" class="headerRow">Type</th>
+              <th colspan="1" scope="col" class="headerRow"> Number of Employees</th>                            
+          </tr>
+       </thead>
+  <!-- table body left empty for populating via row template using jquery -->
+       <tbody />
+    </table>
+    </apex:pageBlockSection>
+</apex:pageBlock>
+
+<!-- Create a named jquery template -->
+<script id="resultTableRowTemplate" type="text/x-jquery-tmpl">
+<tr onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" onmouseout="if (window.hiOff){hiOff(this);} " onmouseover="if (window.hiOn){hiOn(this);} " class="dataRow even  first">
+    <td class="dataCell">${Id}</td>
+    <td class="dataCell">${Name}</td>
+    <!-- Please Note: We created a input text field here for Phone -->
+    <td class="dataCell"><input type="text" value="${Phone}" /></td>
+    <td class="dataCell">${Type}</td>       
+    <td class="dataCell">${NumberOfEmployees}</td>
+</tr>          
+</script>
+
+
+<script type="text/javascript">
+// if you are inside some component
+// use jquery nonConflict
+// var t$ = jQuery.noConflict();
+
+function searchAccounts() {
+    var accountName = $('#accountNameToSearch').val();
+    // clear previous results, if any
+    $("#searchResults tbody").html('');
+    
+    // The Spring-11 gift from force.com. Javascript remoting fires here
+    // Please note "abhinav" if my org wide namespace prefix
+    // testremotingcontroller is the Apex controller
+    // searchAccounts is Apex Controller method demarcated with @RemoteAction annotation.
+    abhinav.testremotingcontroller.searchAccounts( accountName, function(result, event){          
+       if (event.status && event.result) {  
+         $.each(event.result, function () {              
+    // for each result, apply it to template and append generated markup to the results table body.
+              var row = $("#resultTableRowTemplate" ).tmpl(this);
+    // locate the Phone field and bind this account and blur handler to it
+    var phoneInputField = row.find('td input');
+    // bind the current records i.e. Account object with this cell 
+    // so that it can be located later on in blur event.
+    phoneInputField.data('account', this);
+    
+    // Watch for blur events on the phone field
+    phoneInputField.blur(
+       function () {
+     // fetch the binded Accout object from the phone input field
+     var orginalAcc = $(this).data('account');
+     // fire a Javascript Remoting update call only if, user changed the phone
+     if (orginalAcc.Phone != $(this).val()) 
+         updateAccount(orginalAcc, $(this).val());
+       }
+    );
+    // append the tempalte row markup to table above
+    row.appendTo( "#searchResults tbody" );
+            }
+         );          
+       } else {
+          alert(event.message);
+       }
+    }, {escape:true});
+}
+
+function updateAccount(acc, newPhoneVal) {
+    // Javascript Remoting to update Accout record 
+    abhinav.testremotingcontroller.updateAccount( acc.Id, newPhoneVal, function(result, event){          
+       if (event.status && event.result) {        
+     // alert user on update for now, to go for fancy one can do animations or 
+     // even stay silent ;)
+          alert('Account - '  + acc.Name + ' updated  !');
+       } else {
+          alert(event.message);
+       }
+    }, {escape:true});
+}
+</script>
+
+</apex:page>

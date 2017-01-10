@@ -1,0 +1,18 @@
+<apex:page standardController="Letter__c" extensions="AgentLetterExtension">
+<apex:sectionHeader title="WC-000003434" subtitle="Create PDF Letter"/>
+<apex:form id="LetterTemplate1Form">
+<apex:commandLink value="<< Back To WC-000003434"/>
+<apex:pageBlock >
+    <apex:pageBlockButtons location="bottom">
+        <apex:commandButton value="Previous" action="{!Previous7BtnClick}"/>
+        <apex:commandButton value="Save"/>
+        <apex:commandButton value="Next" disabled="true"/>
+    </apex:pageBlockButtons>
+    
+    <apex:pageBlockSection title="Letter Preview" columns="2">
+    
+    </apex:pageBlockSection>
+
+    </apex:pageBlock>
+ </apex:form>   
+</apex:page>

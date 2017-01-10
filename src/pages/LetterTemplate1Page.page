@@ -1,0 +1,58 @@
+<apex:page standardController="Letter__c" extensions="LetterTemplateExtension">
+<apex:sectionHeader title="Letter Template" subtitle="Create Letter Template"/>
+<apex:form id="LetterTemplate1Form">
+<apex:commandLink value="<< Back To Home"/>
+<apex:pageBlock >
+    <apex:pageBlockButtons location="bottom">
+        <apex:commandButton value="Previous" disabled="true"/>
+        <apex:commandButton value="Next" action="{!Next1BtnClick}"/>
+    </apex:pageBlockButtons>
+    
+    <apex:pageBlockSection title="Letter Information" columns="1">
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Letter Template Name</apex:outputLabel>
+        <apex:inputText style="width:500px;"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Friendly Name</apex:outputLabel>
+        <apex:inputText style="width:500px;"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Problem Category</apex:outputLabel>
+        <apex:selectList size="1">
+        <apex:selectOption itemLabel="--Select--" itemValue="select"></apex:selectOption>
+        <apex:selectOption itemLabel="Consumer is in the state of Rhode Island" itemValue="Consumer is in the state of Rhode Island"></apex:selectOption>
+        <apex:selectOption itemLabel="Letter Request - Debt Letter" itemValue="Letter Request - Debt Letter"></apex:selectOption>
+        <apex:selectOption itemLabel="Debt Inquiry" itemValue="Debt Inquiry"></apex:selectOption>
+        <apex:selectOption itemLabel="MA Documentation Request" itemValue="MA Documentation Request"></apex:selectOption>
+        <apex:selectOption itemLabel="Check copy/ECA Request" itemValue="Check copy/ECA Request"></apex:selectOption>
+        <apex:selectOption itemLabel="Payment History (CO, WI)" itemValue="Payment History (CO, WI)"></apex:selectOption>
+        <apex:selectOption itemLabel="Letter Request - Paid in Full (CO)" itemValue="Letter Request - Paid in Full (CO)"></apex:selectOption>
+        </apex:selectList>
+    </apex:pageBlockSectionItem>
+    
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >O/S Template Name</apex:outputLabel>
+        <apex:selectList size="1">
+        <apex:selectOption itemLabel="--Select--" itemValue="select"></apex:selectOption>
+        <apex:selectOption itemLabel="CHC_ Telecheck_template_1_Body_no_tracking" itemValue="CHC_ Telecheck_template_1_Body_no_tracking"></apex:selectOption>
+        <apex:selectOption itemLabel="CHC_ Telecheck_template_2_Body" itemValue="CHC_ Telecheck_template_2_Body"></apex:selectOption>
+        <apex:selectOption itemLabel="CHC_ Telecheck_template_3_Body_choice_body" itemValue="CHC_ Telecheck_template_3_Body_choice_body"></apex:selectOption>
+        <apex:selectOption itemLabel="CHC_ Telecheck_template_4_Body_table_body" itemValue="CHC_ Telecheck_template_4_Body_table_body"></apex:selectOption>
+        <apex:selectOption itemLabel="CHC_Telecheck_template_5_Body_choice_body_Table_body" itemValue="CHC_Telecheck_template_5_Body_choice_body_Table_body"></apex:selectOption>
+        <apex:selectOption itemLabel="CHC_ Telecheck_template_6_Body_Table_on_pg_twoCHC_template_legend" itemValue="CHC_ Telecheck_template_6_Body_Table_on_pg_twoCHC_template_legend"></apex:selectOption>
+        </apex:selectList>
+    </apex:pageBlockSectionItem>
+
+
+    
+    
+    
+    </apex:pageBlockSection>
+    
+    
+    
+</apex:pageBlock>
+</apex:form>
+</apex:page>

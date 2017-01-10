@@ -1,0 +1,8 @@
+<apex:page controller="StaticVarController" action="{!OnLoad}">
+<apex:form id="form">
+<apex:actionStatus id="updatestatus" startText="Updating..."/>
+<apex:commandButton value="Update" action="{!UpdateClick}" reRender="form" status="updatestatus"/>
+<apex:commandButton value="Cancel" action="{!CancelClick}" reRender="form" status="updatestatus"/>
+{!staticvar}
+</apex:form>
+</apex:page>

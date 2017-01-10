@@ -1,0 +1,228 @@
+<apex:component controller="MultiSheetExcelController">
+
+<apex:attribute name="datamodel" type="DataModel" assignTo="{!dModel}" description="All sheet data for excel sheet to generate data"/>
+<apex:attribute name="author" type="string" default="Aslam Bari" description="Author Info"/>{!xmlheader}
+
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+    xmlns:o="urn:schemas-microsoft-com:office:office"
+    xmlns:x="urn:schemas-microsoft-com:office:excel"
+    xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+    xmlns:html="http://www.w3.org/TR/REC-html40">
+    
+    <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+    <Author>Balaji Bondar</Author>
+    <LastAuthor>Balaji Bondar</LastAuthor>
+    <Created>2012-03-13T18:35:03Z</Created>
+    <LastSaved>2012-03-14T15:52:51Z</LastSaved>
+    <Version>14.00</Version>
+    </DocumentProperties>
+      
+  <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+  <Alignment ss:Vertical="Bottom"/>
+  <Borders/>
+  <Font/>
+  <Interior/>
+  <NumberFormat/>
+  <Protection/>
+  </Style>
+  
+  <Style ss:ID="s11">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000" ss:Bold="1"/>
+   <NumberFormat ss:Format="Short Date"/>
+   <Interior ss:Color="#ADADB8" ss:Pattern="Solid"/>
+  </Style>
+  
+  <Style ss:ID="s12">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <NumberFormat ss:Format="Short Date"/>
+  </Style>
+  
+  <Style ss:ID="s13">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000" ss:Bold="1"/>
+   <NumberFormat ss:Format="Short Date"/>
+   <Interior ss:Color="#ADADB8" ss:Pattern="Solid"/>
+  </Style>
+  
+  <Style ss:ID="s14">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <NumberFormat ss:Format="Short Date"/>
+  </Style>
+  
+   
+   <Style ss:ID="s21">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000" ss:Bold="1"/>
+   <NumberFormat ss:Format="Short Date"/>
+   <Interior ss:Color="#ADADB8" ss:Pattern="Solid"/>
+  </Style>
+  
+  <Style ss:ID="s22">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000"/>
+   </Style>
+  
+  
+  
+  </Styles>
+    <Worksheet ss:Name="Quote">
+        <Table ss:ExpandedColumnCount="50" ss:ExpandedRowCount="100" x:FullColumns="1" x:FullRows="1">
+            <Column ss:Index="2" ss:AutoFitWidth="0" ss:Width="100"/>
+            <Column ss:Index="3" ss:AutoFitWidth="0" ss:Width="150"/>
+            <Column ss:Index="4" ss:AutoFitWidth="0" ss:Width="150"/>
+            <Column ss:Index="5" ss:AutoFitWidth="0" ss:Width="150"/>
+            <Column ss:Index="6" ss:AutoFitWidth="0" ss:Width="100"/>
+            <Column ss:Index="7" ss:AutoFitWidth="0" ss:Width="30"/>
+            <Column ss:Index="8" ss:AutoFitWidth="0" ss:Width="50"/>
+            <Column ss:Index="9" ss:AutoFitWidth="0" ss:Width="100"/>
+            <Row ss:Index="2">
+                <Cell ss:Index="2" ss:StyleID="s11"><Data ss:Type="String">Quote Name</Data></Cell>
+                <Cell ss:MergeAcross="2" ss:StyleID="s12"><Data ss:Type="String">Reliance Fresh New Deal</Data></Cell>
+            </Row>
+            <Row>
+                <Cell ss:Index="2" ss:StyleID="s11"><Data ss:Type="String">Quote Type</Data></Cell>
+                <Cell ss:MergeAcross="2" ss:StyleID="s12"><Data ss:Type="String">Acqusition</Data></Cell>
+            </Row>
+            <Row>
+                <Cell ss:Index="2" ss:StyleID="s11"><Data ss:Type="String">Quote Effect From</Data></Cell>
+                <Cell ss:MergeAcross="2" ss:StyleID="s12"><Data ss:Type="DateTime">2012-02-13T00:00:00.000</Data></Cell>
+            </Row>
+            <Row>
+                <Cell ss:Index="2" ss:StyleID="s11"><Data ss:Type="String">Quote Effect To</Data></Cell>
+                <Cell ss:MergeAcross="2" ss:StyleID="s12"><Data ss:Type="DateTime">2012-03-30T00:00:00.000</Data></Cell>
+            </Row>
+        
+           <Row ss:Index="8">
+                <Cell ss:Index="2" ss:StyleID="s13"><Data ss:Type="String">Trade Direction</Data></Cell>
+                <Cell ss:StyleID="s13"><Data ss:Type="String">Commodity</Data></Cell>
+                <Cell ss:StyleID="s13"><Data ss:Type="String">Receipt Location</Data></Cell>
+                <Cell ss:StyleID="s13"><Data ss:Type="String">Delivery Location</Data></Cell>
+                <Cell ss:StyleID="s13"><Data ss:Type="String">Container Size/Type</Data></Cell>
+                <Cell ss:StyleID="s13"><Data ss:Type="String">Haz</Data></Cell>
+                <Cell ss:StyleID="s13"><Data ss:Type="String">Currency</Data></Cell>
+                <Cell ss:StyleID="s13"><Data ss:Type="String">BAS</Data></Cell>
+            </Row>
+            
+            <Row ss:Index="9">
+                <Cell ss:Index="2" ss:StyleID="s14"><Data ss:Type="String">S1W</Data></Cell>
+                <Cell ss:StyleID="s14"><Data ss:Type="String">CHEMICAL_RESINE__0016</Data></Cell>
+                <Cell ss:StyleID="s14"><Data ss:Type="String">Vigo</Data></Cell>
+                <Cell ss:StyleID="s14"><Data ss:Type="String">Vancouver</Data></Cell>
+                <Cell ss:StyleID="s14"><Data ss:Type="String">40 DRY</Data></Cell>
+                <Cell ss:StyleID="s14"><Data ss:Type="String">Y</Data></Cell>
+                <Cell ss:StyleID="s14"><Data ss:Type="String">USD</Data></Cell>
+                <Cell ss:StyleID="s14"><Data ss:Type="String">1245.20</Data></Cell>
+            </Row>
+            
+            <Row ss:Index="10">
+                <Cell ss:Index="2" ss:StyleID="s14"><Data ss:Type="String">E1W</Data></Cell>
+                <Cell ss:StyleID="s14"><Data ss:Type="String">TAXTILE_0012</Data></Cell>
+                <Cell ss:StyleID="s14"><Data ss:Type="String">Varna</Data></Cell>
+                <Cell ss:StyleID="s14"><Data ss:Type="String">Toronto</Data></Cell>
+                <Cell ss:StyleID="s14"><Data ss:Type="String">45 DRY</Data></Cell>
+                <Cell ss:StyleID="s14"><Data ss:Type="String"></Data></Cell>
+                <Cell ss:StyleID="s14"><Data ss:Type="String">GBP</Data></Cell>
+                <Cell ss:StyleID="s14"><Data ss:Type="String">1265.56</Data></Cell>
+            </Row>
+            <Row ss:Index="11">
+                <Cell ss:Index="2" ss:StyleID="s14"><Data ss:Type="String">N1W</Data></Cell>
+                <Cell ss:StyleID="s14"><Data ss:Type="String">FOODSTUF_0006</Data></Cell>
+                <Cell ss:StyleID="s14"><Data ss:Type="String">Agra</Data></Cell>
+                <Cell ss:StyleID="s14"><Data ss:Type="String">Toronto</Data></Cell>
+                <Cell ss:StyleID="s14"><Data ss:Type="String">20 DRY</Data></Cell>
+                <Cell ss:StyleID="s14"><Data ss:Type="String">Y</Data></Cell>
+                <Cell ss:StyleID="s14"><Data ss:Type="String">GBP</Data></Cell>
+                <Cell ss:StyleID="s14"><Data ss:Type="String">545.56</Data></Cell>
+            </Row>
+        
+        </Table>
+        
+      </Worksheet>
+    
+    <Worksheet ss:Name="Glossary">
+        <Table ss:ExpandedColumnCount="3" ss:ExpandedRowCount="10" x:FullColumns="1" x:FullRows="1">
+        <Column ss:Index="2" ss:AutoFitWidth="0" ss:Width="100"/>
+        <Column ss:Index="3" ss:AutoFitWidth="0" ss:Width="500"/>
+        <Row ss:Index="2">
+                <Cell ss:Index="2" ss:StyleID="s21"><Data ss:Type="String">Surcharge</Data></Cell>
+                <Cell ss:StyleID="s21"><Data ss:Type="String">Description</Data></Cell>
+        </Row>
+        <Row>
+            <Cell ss:Index="2" ss:StyleID="s22"><Data ss:Type="String">VAT</Data></Cell>
+            <Cell ss:StyleID="s22"><Data ss:Type="String">Value Added TAX</Data></Cell>
+        </Row>
+        <Row>
+            <Cell ss:Index="2" ss:StyleID="s22"><Data ss:Type="String">VAT</Data></Cell>
+            <Cell ss:StyleID="s22"><Data ss:Type="String">Value Added TAX</Data></Cell>
+        </Row>
+        <Row>
+            <Cell ss:Index="2" ss:StyleID="s22"><Data ss:Type="String">VAT</Data></Cell>
+            <Cell ss:StyleID="s22"><Data ss:Type="String">Value Added TAX</Data></Cell>
+        </Row>
+        <Row>
+            <Cell ss:Index="2" ss:StyleID="s22"><Data ss:Type="String">VAT</Data></Cell>
+            <Cell ss:StyleID="s22"><Data ss:Type="String">Value Added TAX</Data></Cell>
+        </Row>
+        <Row>
+            <Cell ss:Index="2" ss:StyleID="s22"><Data ss:Type="String">VAT</Data></Cell>
+            <Cell ss:StyleID="s22"><Data ss:Type="String">Value Added TAX</Data></Cell>
+        </Row>
+        <Row>
+            <Cell ss:Index="2" ss:StyleID="s22"><Data ss:Type="String">VAT</Data></Cell>
+            <Cell ss:StyleID="s22"><Data ss:Type="String">Value Added TAX</Data></Cell>
+        </Row>
+        </Table>
+        
+        <!--
+        <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+        <Print>
+        <ValidPrinterInfo/>
+        <HorizontalResolution>300</HorizontalResolution>
+        <VerticalResolution>300</VerticalResolution>
+        </Print>
+        <ProtectObjects>False</ProtectObjects>
+        <ProtectScenarios>False</ProtectScenarios>
+        </WorksheetOptions>
+        -->
+        </Worksheet>
+</Workbook>
+
+</apex:component>

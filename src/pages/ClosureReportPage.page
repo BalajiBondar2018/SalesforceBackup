@@ -1,0 +1,108 @@
+<apex:page tabStyle="ErrorLog__c" standardController="Case" extensions="ClosureReportExtension">
+  <apex:sectionHeader title="Closure Report" subtitle="Case# 324324234"/>
+  <apex:form id="closureReportForm">
+  <apex:commandLink value="<< back to case# 324324234"/>
+  <apex:pageBlock >
+  <apex:pageBlockButtons location="bottom">
+      <apex:commandButton action="{!SaveClick}" value="Save" reRender="closureReportForm" status="actionstatuspanel"/>
+      <apex:commandButton action="{!CancelClick}" value="Cancel"  reRender="closureReportForm" status="actionstatuspanel"/>
+  </apex:pageBlockButtons>
+  
+  <apex:pageBlockSection title="Letter Information" columns="1">
+  <apex:pageBlockTable value="{!letterClosureReportList}" var="letterClosureReportObj">
+          <!--
+          <apex:column headerValue="Action">
+            <apex:commandButton value="Generate Letter"/>
+              
+          </apex:column>
+          -->
+          <apex:column headerValue="Description" width="40%">
+              <apex:outputText value="{!letterClosureReportObj.Description__c}" style="{!if(letterClosureReportObj.Completed_On__c == Null,'color:red','color:black')}"/>
+              
+          </apex:column>
+           
+          <apex:column headerValue="Due Date" width="8%">
+              <apex:outputField value="{!letterClosureReportObj.Due_Date__c}"/>
+          </apex:column>
+          
+          <apex:column headerValue="Completed On" width="8%">
+          <c:noDateLink >
+              <apex:inputField value="{!letterClosureReportObj.Completed_On__c}"/>
+          </c:noDateLink>
+          </apex:column>
+          
+          <apex:column headerValue="Comment" width="23%">
+             <apex:inputField value="{!letterClosureReportObj.Comment__c}" style="width:550px;" />
+          </apex:column>
+           
+
+      </apex:pageBlockTable>
+  </apex:pageBlockSection>
+  
+   <apex:pageBlockSection title="Regulatory Information" columns="1">
+      <apex:pageBlockTable value="{!regulatoryClosureReportList }" var="regulatoryClosureReportObj" cellspacing="">
+          <apex:column headerValue="Description" width="40%" style="vertical-align:top">
+              <apex:outputText value="{!regulatoryClosureReportObj.Description__c}" style="{!if(regulatoryClosureReportObj.Completed_On__c == Null,'color:red','color:black')}"/>
+          </apex:column>
+            <apex:column headerValue="Due Date" width="8%">
+              <apex:outputField value="{!regulatoryClosureReportObj.Due_Date__c}"/>
+          </apex:column>
+          <apex:column headerValue="Completed On" width="8%">
+          <c:noDateLink >
+              <apex:inputField value="{!regulatoryClosureReportObj.Completed_On__c}"/>
+          </c:noDateLink>
+          </apex:column>
+          
+            <apex:column headerValue="Comment" width="30%">
+               <apex:inputField value="{!regulatoryClosureReportObj.Comment__c}" style="width:550px;"/>
+          </apex:column>
+      </apex:pageBlockTable> 
+  </apex:pageBlockSection>
+  
+  
+  
+  <apex:pageBlockSection title="Data Change Information" columns="1">
+    <apex:pageBlockTable value="{!dataChangeClosureReportList }" var="dataChangeClosureReportObj">
+          <apex:column headerValue="Description" width="40%">
+              <apex:outputField value="{!dataChangeClosureReportObj.Description__c}"/>
+              
+          </apex:column>
+           
+          <apex:column headerValue="Due Date" width="8%">
+              <apex:outputField value="{!dataChangeClosureReportObj.Due_Date__c}"/>
+          </apex:column>
+          
+          <apex:column headerValue="Completed On" width="8%">
+              <c:noDateLink >
+              <apex:inputField value="{!dataChangeClosureReportObj.Completed_On__c}"/>
+              </c:noDateLink>
+          </apex:column>
+          
+          <apex:column headerValue="Comment" width="30%">
+              <apex:inputField value="{!dataChangeClosureReportObj.Comment__c}" style="width:550px;"/>
+          </apex:column>
+   
+
+      </apex:pageBlockTable>
+  
+  </apex:pageBlockSection>
+  
+  </apex:pageBlock>
+  </apex:form>
+  
+  <apex:outputpanel >
+    <apex:actionstatus id="actionstatuspanel">
+        <apex:facet name="start">
+            <div class="waitingSearchDiv" id="el_loading" style="background-color: #DCD6D6;
+                   height: 100%;opacity:0.65;width:100%;"> 
+                <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+                    <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                    <span class="waitingDescription">Loading...</span>
+                </div>
+            </div>
+        </apex:facet>
+    </apex:actionstatus>
+  </apex:outputpanel>
+  
+  
+</apex:page>

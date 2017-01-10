@@ -1,0 +1,35 @@
+<apex:page sidebar="false" controller="FileUploader">
+   <apex:form >
+      <apex:sectionHeader title="Upload data from CSV file"/>
+      <apex:pagemessages />
+      <apex:pageBlock >
+             <center>
+              <apex:inputFile value="{!contentFile}" filename="{!nameFile}" /> <apex:commandButton action="{!ReadFile}" value="Upload File" id="theButton" style="width:70px;"/>
+              <br/> <br/> <font color="red"> Note: Please use the standard template to upload Accounts.</font>
+             </center>  
+      
+      
+      <apex:pageblocktable value="{!uploadedAccounts}" var="acc" rendered="{!NOT(ISNULL(uploadedAccounts))}">
+          <apex:column headerValue="Account Name">
+              <apex:outputField value="{!acc.Name}"/>
+          </apex:column>
+          <apex:column headerValue="Shipping Street">
+              <apex:outputField value="{!acc.ShippingStreet}"/>
+          </apex:column>
+          <apex:column headerValue="Shipping City">
+              <apex:outputField value="{!acc.ShippingCity}"/>
+          </apex:column>
+          <apex:column headerValue="Shipping State">
+              <apex:outputField value="{!acc.ShippingState}"/>
+          </apex:column>
+          <apex:column headerValue="Shipping Postal Code">
+              <apex:outputField value="{!acc.ShippingPostalCode}"/>
+          </apex:column>
+          <apex:column headerValue="Shipping Country">
+              <apex:outputField value="{!acc.ShippingCountry}"/>
+          </apex:column>
+      </apex:pageblocktable> 
+      
+      </apex:pageBlock>       
+   </apex:form>   
+</apex:page>

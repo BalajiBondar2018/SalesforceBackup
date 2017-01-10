@@ -1,0 +1,89 @@
+<apex:page standardController="Letter__c" extensions="LetterTemplateExtension">
+  <apex:sectionHeader title="Letter Template" subtitle="Create Letter Template"/>
+<apex:form id="LetterTemplate4Form">
+<apex:commandLink value="<< Back To Home"/>
+<apex:pageBlock >
+    <apex:pageBlockButtons location="bottom">
+        <apex:commandButton value="Previous" action="{!Previous4BtnClick}"/>
+        <apex:commandButton value="Next" action="{!Next4BtnClick}"/>
+    </apex:pageBlockButtons>
+    
+    <apex:pageBlockSection title="Letter Table Information" columns="2">
+    <apex:pageBlockSectionItem >
+        <apex:outputPanel >
+        <apex:outputLabel >Table Type</apex:outputLabel><br/>
+        </apex:outputPanel>
+        <apex:outputPanel >
+        <apex:selectList size="1" value="{!selectedTableType}">
+            <apex:actionSupport event="onchange" action="{!TableTypeChange}" reRender="LetterTemplate4Form"/>
+            <apex:selectOption itemLabel="--Select--" itemValue="select"></apex:selectOption>
+            <apex:selectOption itemLabel="Collection Table" itemValue="Date"/>
+            <apex:selectOption itemLabel="Payment Table" itemValue="Date"/>
+            <apex:selectOption itemLabel="ROC Table" itemValue="Date"/>
+            <apex:selectOption itemLabel="TSI customer Workcase" itemValue="Address Block"/>
+            <apex:selectOption itemLabel="TRS customer workcase" itemValue="Greeting"/>
+            <apex:selectOption itemLabel="--Create New--" itemValue="CreateNew"/>
+        </apex:selectList>
+        &nbsp;
+        <apex:inputText id="tableNameInputTextFlag" rendered="{!tableNameInputTextFlag}"/>
+        </apex:outputPanel>
+    </apex:pageBlockSectionItem>
+    </apex:pageBlockSection>
+    
+    <apex:pageBlockSection id="selectObjectAndFieldsPBSection" title="Select Object & Fields" columns="2" rendered="{!selectObjectAndFieldsPBSectionFlag}"> 
+     <apex:pageBlockSectionItem >
+        <apex:outputPanel >
+        <apex:outputLabel >Object</apex:outputLabel><br/>
+        </apex:outputPanel>
+        <apex:selectList size="1">
+            <apex:selectOption itemLabel="--Select--" itemValue="select"></apex:selectOption>
+            <apex:selectOption itemLabel="Workcase" itemValue="Date"/>
+            <apex:selectOption itemLabel="Collection" itemValue="Date"/>
+            <apex:selectOption itemLabel="Payment" itemValue="Date"/>
+            <apex:selectOption itemLabel="ROC" itemValue="Address Block"/>
+        </apex:selectList>
+    </apex:pageBlockSectionItem>
+    
+     <apex:pageBlockSectionItem >
+        <apex:outputPanel >
+        <apex:outputLabel >Field</apex:outputLabel><br/>
+        </apex:outputPanel>
+        <apex:selectList size="1">
+            <apex:actionSupport event="onchange" action="{!TableFieldChange}" reRender="LetterTemplate4Form"/>
+            <apex:selectOption itemLabel="--Select--" itemValue="select"></apex:selectOption>
+            <apex:selectOption itemLabel="First Name" itemValue="Date"/>
+            <apex:selectOption itemLabel="LastName" itemValue="Date"/>
+            <apex:selectOption itemLabel="Phone" itemValue="Date"/>
+            <apex:selectOption itemLabel="TCheck#" itemValue="Address Block"/>
+            <apex:selectOption itemLabel="Payee" itemValue="Greeting"/>
+            
+        </apex:selectList>
+    </apex:pageBlockSectionItem>
+    
+    </apex:pageBlockSection>
+    
+    <apex:pageBlockSection id="tablePreviewPBSection" title="Table Preview" columns="1" rendered="{!tablePreviewPBSectionFlag}"> 
+        <table border='1'>
+            <tr style="font-weight:bold;">
+                <td width='150px;'>First Name</td>
+                <td width='150px;'>Last Name</td>
+                <td width='150px;'>Check #</td>
+                <td width='150px;'>Check Date</td>
+                <td width='150px;'>Payee</td>
+                <td width='150px;'>Id Type 1</td>
+                <td width='150px;'>Id value 1</td>
+            </tr>
+            <tr>
+                <td width='150px;'>&nbsp;</td>
+                <td width='150px;'>&nbsp;</td>
+                <td width='150px;'>&nbsp;</td>
+                <td width='150px;'>&nbsp;</td>
+                <td width='150px;'>&nbsp;</td>
+                <td width='150px;'>&nbsp;</td>
+                <td width='150px;'>&nbsp;</td>
+            </tr>
+        </table> 
+    </apex:pageBlockSection>      
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

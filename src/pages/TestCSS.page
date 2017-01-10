@@ -1,0 +1,48 @@
+<apex:page standardController="Account" >
+  <apex:form >
+      <apex:pageBlock >
+      <apex:pageBlockSection >
+      <apex:pageBlockSectionItem >
+          <apex:outputLabel >First Name</apex:outputLabel>
+          <apex:outputPanel >
+              <apex:inputText style="color:#ED9121;font-weight:bold;"/>&nbsp;
+              <apex:image url="{!$Resource.UpdateIcon}"/>
+          </apex:outputPanel>
+      </apex:pageBlockSectionItem>
+      
+      <apex:pageBlockSectionItem >
+          <apex:outputLabel >Last Name</apex:outputLabel>
+              <apex:outputPanel >
+              <table>
+                  <tr>
+                      <td>
+                          <apex:inputfield value="{!Account.Name}" style="color:#ED9121;font-weight:bold;"/>
+                      </td>
+                      <td>
+                          <apex:image url="{!$Resource.UpdateIcon}"/>
+                      </td>
+                  </tr>
+              </table>
+              </apex:outputPanel> 
+          </apex:pageBlockSectionItem>
+      
+      <apex:pageBlockSectionItem >
+          <apex:outputLabel >Description</apex:outputLabel>
+          <apex:outputPanel >
+              <apex:inputTextarea />&nbsp;
+              <apex:image url="{!$Resource.UpdateIcon}"/>
+          </apex:outputPanel>
+      </apex:pageBlockSectionItem>
+      
+      <apex:pageBlockSectionItem >
+          <apex:outputLabel >Industry</apex:outputLabel>
+          <apex:outputPanel >
+              <apex:inputfield value="{!account.industry}"/>
+              &nbsp;
+              <apex:image url="{!$Resource.UpdateIcon}"/>
+          </apex:outputPanel>
+      </apex:pageBlockSectionItem>
+      </apex:pageBlockSection>
+      </apex:pageBlock>
+  </apex:form>
+</apex:page>
