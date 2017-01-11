@@ -1,4 +1,4 @@
-//This is updated comment 01112017
+//Bug Fix 01112017
 //Controller used for the AutoComplete Enhancement
 public with sharing class AComplete_Controller{
    //Attributes
