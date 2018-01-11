@@ -1,3 +1,4 @@
+<!-- updated v 3.0>
 <apex:page standardController="Account" extensions="AccountContactNestedPagingExtension">
 <apex:form id="form">
     <apex:pageBlock title="Account Contact">
