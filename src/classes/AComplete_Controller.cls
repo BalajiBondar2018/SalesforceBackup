@@ -1,4 +1,4 @@
-//Bug Fix 11012018 BalajiBondar Update
+//Bug Fix 11012018 BalajiBondar Update v 1.0
 //Controller used for the AutoComplete Enhancement
 public with sharing class AComplete_Controller{
    //Attributes
